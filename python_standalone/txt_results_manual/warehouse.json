@@ -1,0 +1,395 @@
+{
+    "jurisdiction": "Abu Dhabi",
+    "municipality": "Abu Dhabi City",
+    "chapter": {
+      "id": 10,
+      "title_ar": "الاشتراطات الخاصة بالمباني الصناعية في مدينة أبوظبي",
+      "title_en": "Special Requirements for Industrial Buildings in Abu Dhabi City"
+    },
+    "rules": [
+      {
+        "article_id": "057",
+        "title_ar": "الاستخدامات والمكونات بالقسيمة الصناعية في مدينة أبوظبي",
+        "title_en": "Uses and components (industrial plot) in Abu Dhabi City",
+        "checks": [
+          {
+            "rule_id": "AD-IND-057-01",
+            "type": "allowed_activities",
+            "description_en": "Permitted activities are limited to industrial zones as described (primary industrial activity, secondary complementary activity).",
+            "source_excerpt_ar": "تقتصر الأنشطة المسموح بها في القسائم الصناعية ...",
+            "severity": "info"
+          },
+          {
+            "rule_id": "AD-IND-057-02",
+            "type": "prohibited_use",
+            "description_en": "Workers accommodation is not allowed in industrial plots (Abu Dhabi City).",
+            "field": "has_worker_housing",
+            "operator": "==",
+            "value": false,
+            "severity": "fail"
+          }
+        ],
+        "citations": [":contentReference[oaicite:0]{index=0}"]
+      },
+      {
+        "article_id": "053",
+        "title_ar": "نسبة البناء والمساحات الطابقية بالقسيمة الصناعية في مدينة أبوظبي",
+        "title_en": "Building coverage & floor areas (industrial plot) in Abu Dhabi City",
+        "checks": [
+          {
+            "rule_id": "AD-IND-053-01",
+            "type": "coverage_ratio_max",
+            "description_en": "Total building coverage must not exceed 60% of the total plot area.",
+            "metric": "coverage_ratio",
+            "operator": "<=",
+            "value": 0.60,
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-053-02",
+            "type": "secondary_activity_area_ratio_max",
+            "description_en": "Secondary (complementary) activity area must not exceed 31% of the plot area.",
+            "metric": "secondary_activity_area_ratio",
+            "operator": "<=",
+            "value": 0.31,
+            "severity": "fail"
+          }
+        ],
+        "citations": [":contentReference[oaicite:1]{index=1}"]
+      },
+      {
+        "article_id": "054",
+        "title_ar": "خط البناء والارتدادات والبروزات بالقسيمة الصناعية في مدينة أبوظبي",
+        "title_en": "Building line, setbacks, projections (industrial plot) in Abu Dhabi City",
+        "checks": [
+          {
+            "rule_id": "AD-IND-054-01",
+            "type": "setback_front_condition",
+            "description_en": "If entrances are internal (not direct), building on plot boundary may be allowed without setback (as per clause).",
+            "severity": "info"
+          },
+          {
+            "rule_id": "AD-IND-054-02",
+            "type": "setback_front_min_when_direct_entrance",
+            "description_en": "If there is a direct entrance from the street side, setback from plot boundary must be at least 5 meters (as extracted).",
+            "metric": "front_setback_m",
+            "operator": ">=",
+            "value": 5.0,
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-054-03",
+            "type": "setback_side_adjacent_plot",
+            "description_en": "For the side facing an adjacent plot, setback is 2.01 m for all building types.",
+            "metric": "side_setback_adjacent_plot_m",
+            "operator": ">=",
+            "value": 2.01,
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-054-04",
+            "type": "fire_access_lane_required_if_long_side",
+            "description_en": "If any plot side length exceeds 41.11 m, a vehicle lane of at least 4.01 m width is required for civil defense access.",
+            "conditions": [
+              { "metric": "max_plot_side_length_m", "operator": ">", "value": 41.11 }
+            ],
+            "require": [
+              { "metric": "fire_access_lane_width_m", "operator": ">=", "value": 4.01 }
+            ],
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-054-05",
+            "type": "min_distance_between_separate_buildings",
+            "description_en": "When creating separate buildings inside the plot, minimum distance between buildings must be 2.0 m.",
+            "metric": "min_inter_building_distance_m",
+            "operator": ">=",
+            "value": 2.0,
+            "severity": "fail"
+          }
+        ],
+        "citations": [
+          ":contentReference[oaicite:2]{index=2}",
+          ":contentReference[oaicite:3]{index=3}",
+          ":contentReference[oaicite:4]{index=4}"
+        ]
+      },
+      {
+        "article_id": "055",
+        "title_ar": "عدد الطوابق والارتفاعات والمناسيب بالقسيمة الصناعية في مدينة أبوظبي",
+        "title_en": "Floors, heights, levels (industrial plot) in Abu Dhabi City",
+        "checks": [
+          {
+            "rule_id": "AD-IND-055-01",
+            "type": "min_ground_floor_level_above_road_midline",
+            "description_en": "Final ground floor level for workshops/offices/shops must be at least 1.40 m above the midline of the opposite road level.",
+            "metric": "ground_floor_level_above_road_midline_m",
+            "operator": ">=",
+            "value": 1.40,
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-055-02",
+            "type": "primary_use_max_height",
+            "description_en": "Primary use: maximum building height is 81.11 m (as extracted), measured from final workshop floor level to highest point.",
+            "metric": "primary_use_building_height_m",
+            "operator": "<=",
+            "value": 81.11,
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-055-03",
+            "type": "primary_use_mezzanine_ratio",
+            "description_en": "Primary use: mezzanine floor allowed up to 01% of ground floor area (as extracted) for admin/control offices or storage.",
+            "metric": "primary_use_mezzanine_ratio",
+            "operator": "<=",
+            "value": 0.01,
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-055-04",
+            "type": "primary_use_mezzanine_stair_location",
+            "description_en": "If mezzanine exists for primary use, stair must be accessed from inside the shed (as extracted).",
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-055-05",
+            "type": "secondary_use_floors_and_heights",
+            "description_en": "Secondary use: ground + first floor allowed. Ground floor height up to 6.11 m; no 'sadda' allowed. First floor (offices) height up to 3.11 m.",
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-055-06",
+            "type": "no_mezzanine_in_shops",
+            "description_en": "Mezzanine is prohibited in commercial shops (as extracted).",
+            "field": "has_shop_mezzanine",
+            "operator": "==",
+            "value": false,
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-055-07",
+            "type": "roof_services_guideline_reference",
+            "description_en": "Roof service covering must follow Abu Dhabi Urban Planning Council roof services guideline (reference rule).",
+            "severity": "info"
+          },
+          {
+            "rule_id": "AD-IND-055-08",
+            "type": "basement_allowed_for_pumps_and_tanks_only",
+            "description_en": "Basement inside plot allowed only for pump rooms and water tanks; minimum clear internal height 2.11 m; setback from plot boundary not less than 8.11 m (as extracted).",
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-055-09",
+            "type": "basement_roof_level_matches_sidewalk",
+            "description_en": "Basement top level must match the sidewalk level opposite the entrance (as extracted).",
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-055-10",
+            "type": "basement_requires_authority_approval",
+            "description_en": "Basement pump/tank room sizes and locations require approvals from relevant authorities (as extracted).",
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-055-11",
+            "type": "electrical_room_max_height_above_road_axis",
+            "description_en": "Electrical room permitted if its height does not exceed 4.11 m from road axis level (as extracted).",
+            "metric": "electrical_room_height_above_road_axis_m",
+            "operator": "<=",
+            "value": 4.11,
+            "severity": "fail"
+          }
+        ],
+        "citations": [
+          ":contentReference[oaicite:5]{index=5}",
+          ":contentReference[oaicite:6]{index=6}",
+          ":contentReference[oaicite:7]{index=7}"
+        ]
+      },
+      {
+        "article_id": "056",
+        "title_ar": "السلالم والدرج بالقسيمة الصناعية في مدينة أبوظبي",
+        "title_en": "Stairs (industrial plot) in Abu Dhabi City",
+        "checks": [
+          {
+            "rule_id": "AD-IND-056-01",
+            "type": "reference_article",
+            "description_en": "Stairs requirements refer to Article 41 of the guide (apply requirements of that article).",
+            "severity": "info"
+          }
+        ],
+        "citations": [":contentReference[oaicite:8]{index=8}"]
+      },
+      {
+        "article_id": "052",
+        "title_ar": "مساحات العناصر والأبعاد الداخلية بالقسيمة الصناعية في مدينة أبوظبي",
+        "title_en": "Internal element areas & minimum dimensions (industrial plot) in Abu Dhabi City",
+        "checks": [
+          {
+            "rule_id": "AD-IND-052-01",
+            "type": "shops_offices_ground_min_side",
+            "description_en": "Ground floor (shops/offices building): minimum smallest side is 4.11 m.",
+            "metric": "shops_offices_ground_min_side_m",
+            "operator": ">=",
+            "value": 4.11,
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-052-02",
+            "type": "shops_offices_ground_min_area",
+            "description_en": "Ground floor (shops/offices building): minimum area is 41 m2 (as extracted).",
+            "metric": "shops_offices_ground_min_area_m2",
+            "operator": ">=",
+            "value": 41.0,
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-052-03",
+            "type": "shops_offices_ground_prep_kitchen_min_side",
+            "description_en": "Preparation kitchen allowed: minimum smallest side 8.01 m; maximum area 4 m2 (as extracted).",
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-052-04",
+            "type": "shops_offices_ground_store_office_min_side",
+            "description_en": "Attached office/store allowed: minimum smallest side 3.11 m (as extracted).",
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-052-05",
+            "type": "shops_offices_first_min_side_and_area",
+            "description_en": "First floor (shops/offices building): offices minimum smallest side 3.11 m; minimum area 0m2 (as extracted text shows 0m2).",
+            "severity": "warn"
+          },
+          {
+            "rule_id": "AD-IND-052-06",
+            "type": "workshops_warehouses_sheds_min_side_and_area",
+            "description_en": "Sheds/warehouses/workshops: minimum smallest side 6.11 m; minimum area 21 m2 (as extracted).",
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-052-07",
+            "type": "inside_shed_office_and_bath",
+            "description_en": "Inside shed: one office + one bathroom allowed; office min smallest side 3.11 m; bathroom min smallest side 3.11 m; bathroom min area 6 m2 (as extracted).",
+            "severity": "fail"
+          }
+        ],
+        "citations": [
+          ":contentReference[oaicite:9]{index=9}",
+          ":contentReference[oaicite:10]{index=10}",
+          ":contentReference[oaicite:11]{index=11}"
+        ]
+      },
+      {
+        "article_id": "058",
+        "title_ar": "التهوية والإنارة الداخلية بالقسيمة الصناعية في مدينة أبوظبي",
+        "title_en": "Ventilation & internal lighting (industrial plot) in Abu Dhabi City",
+        "checks": [
+          {
+            "rule_id": "AD-IND-058-01",
+            "type": "mechanical_ventilation_requires_undertaking",
+            "description_en": "Mechanical ventilation is permitted only after submitting an undertaking by owner/consultant to provide and maintain systems per Abu Dhabi International codes (as extracted).",
+            "severity": "fail"
+          }
+        ],
+        "citations": [""]
+      },
+      {
+        "article_id": "059",
+        "title_ar": "الأسوار بالقسيمة الصناعية في مدينة أبوظبي",
+        "title_en": "Fences (industrial plot) in Abu Dhabi City",
+        "checks": [
+          {
+            "rule_id": "AD-IND-059-01",
+            "type": "fence_height_min_max",
+            "description_en": "Fence on plot boundary must be min 2.11 m and max 2.01 m (as extracted).",
+            "severity": "warn"
+          },
+          {
+            "rule_id": "AD-IND-059-02",
+            "type": "no_internal_fences_between_buildings",
+            "description_en": "Fences between buildings inside the plot are not permitted (as extracted).",
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-059-03",
+            "type": "front_fence_may_be_transparent_metal_with_solid_base",
+            "description_en": "Street-facing fences may be transparent steel structure, with solid portion not less than 8.11 m from road midline (as extracted).",
+            "severity": "info"
+          }
+        ],
+        "citations": [""]
+      },
+      {
+        "article_id": "060",
+        "title_ar": "مواقف السيارات بالقسائم التجارية في مدينة أبوظبي",
+        "title_en": "Parking (commercial plots) in Abu Dhabi City",
+        "checks": [
+          {
+            "rule_id": "AD-IND-060-PLACEHOLDER",
+            "type": "missing_text",
+            "description_en": "Article 060 exists in Chapter 10 index, but its clause text was not extractable from the available parsed pages. Add manually once you provide the article page screenshot or text.",
+            "severity": "info"
+          }
+        ],
+        "citations": [":contentReference[oaicite:14]{index=14}"]
+      },
+      {
+        "article_id": "061",
+        "title_ar": "مداخل السيارات بالقسيمة الصناعية في مدينة أبوظبي",
+        "title_en": "Vehicle entrances (industrial plot) in Abu Dhabi City",
+        "checks": [
+          {
+            "rule_id": "AD-IND-061-01",
+            "type": "min_vehicle_entrances_count",
+            "description_en": "Minimum number of vehicle entrances is 2 (as extracted).",
+            "metric": "vehicle_entrances_count",
+            "operator": ">=",
+            "value": 2,
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-061-02",
+            "type": "vehicle_entrance_width_range",
+            "description_en": "Vehicle entrance width must be between 4.01 m and 6.11 m (as extracted).",
+            "metric": "vehicle_entrance_width_m",
+            "operator": "between_inclusive",
+            "value": [4.01, 6.11],
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-061-03",
+            "type": "entrance_location_subject_to_traffic_study",
+            "description_en": "Entrance locations and design are subject to traffic study and municipality requirements (as extracted).",
+            "severity": "fail"
+          },
+          {
+            "rule_id": "AD-IND-061-04",
+            "type": "min_distance_between_entrances_by_plot_area",
+            "description_en": "Distance between entrances must be >= 80.11 m if plot area > 8111 m2; and >= 31.11 m if plot area <= 8111 m2 (as extracted).",
+            "severity": "warn"
+          }
+        ],
+        "citations": [":contentReference[oaicite:15]{index=15}"]
+      },
+      {
+        "article_id": "062",
+        "title_ar": "متطلبات إضافية",
+        "title_en": "Additional requirements (placeholder)",
+        "checks": [
+          {
+            "rule_id": "AD-IND-062-PLACEHOLDER",
+            "type": "missing_text",
+            "description_en": "Article 062 exists in the target range, but its clause text/rules are not provided yet. Add once available.",
+            "severity": "info"
+          }
+        ],
+        "citations": [""]
+      }
+    ],
+    "extraction_warnings": [
+      "Some numeric values appear with OCR/encoding artifacts (e.g., 4.11m, 81.11m). Kept as-is from extracted text.",
+      "Article 060 text not extracted; provided as placeholder."
+    ]
+  }

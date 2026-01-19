@@ -1,0 +1,135 @@
+{
+  "info": {
+    "name": "Architectural Schema Validator API",
+    "description": "API for validating DWG architectural schemas",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "health"]
+        },
+        "description": "Check if API server is running"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Configuration",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/config",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "config"]
+        },
+        "description": "Get validation rules and element requirements"
+      },
+      "response": []
+    },
+    {
+      "name": "Validate Schema",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"elements\": [\n    {\n      \"name\": \"main_hall\",\n      \"area\": 25,\n      \"width\": 4.2,\n      \"ventilation\": \"natural\"\n    },\n    {\n      \"name\": \"master_bedroom\",\n      \"area\": 16.5,\n      \"width\": 4,\n      \"ventilation\": \"natural\"\n    },\n    {\n      \"name\": \"additional_bedroom\",\n      \"area\": 14,\n      \"width\": 3.2,\n      \"ventilation\": \"natural\"\n    },\n    {\n      \"name\": \"kitchen\",\n      \"area\": 12,\n      \"width\": 3.5,\n      \"ventilation\": \"natural\"\n    },\n    {\n      \"name\": \"bathroom\",\n      \"area\": 6,\n      \"width\": 2.5,\n      \"ventilation\": \"mechanical\"\n    },\n    {\n      \"name\": \"toilet\",\n      \"area\": 3,\n      \"width\": 1.5,\n      \"ventilation\": \"mechanical\"\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/validate",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "validate"]
+        },
+        "description": "Validate schema with elements array. Returns simple response with schema_pass and element_results."
+      },
+      "response": []
+    },
+    {
+      "name": "Validate Schema (JSON Path)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"json_path\": \"C:\\\\Users\\\\HP\\\\Documents\\\\plan_cursor\\\\converted\\\\plan_elements.json\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/validate",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "validate"]
+        },
+        "description": "Validate schema using JSON file path"
+      },
+      "response": []
+    },
+    {
+      "name": "Validate Schema Full",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"elements\": [\n    {\n      \"name\": \"main_hall\",\n      \"area\": 25,\n      \"width\": 4.2,\n      \"ventilation\": \"natural\"\n    },\n    {\n      \"name\": \"master_bedroom\",\n      \"area\": 16.5,\n      \"width\": 4,\n      \"ventilation\": \"natural\"\n    },\n    {\n      \"name\": \"additional_bedroom\",\n      \"area\": 14,\n      \"width\": 3.2,\n      \"ventilation\": \"natural\"\n    },\n    {\n      \"name\": \"kitchen\",\n      \"area\": 12,\n      \"width\": 3.5,\n      \"ventilation\": \"natural\"\n    },\n    {\n      \"name\": \"bathroom\",\n      \"area\": 6,\n      \"width\": 2.5,\n      \"ventilation\": \"mechanical\"\n    },\n    {\n      \"name\": \"toilet\",\n      \"area\": 3,\n      \"width\": 1.5,\n      \"ventilation\": \"mechanical\"\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/validate-full",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "validate-full"]
+        },
+        "description": "Validate schema with full response including summary statistics"
+      },
+      "response": []
+    }
+  ]
+}
+

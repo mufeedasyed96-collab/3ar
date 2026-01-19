@@ -1,0 +1,437 @@
+{
+  "summary": {
+    "total_rules": 31,
+    "evaluated": 13,
+    "passed": 10,
+    "failed": 3,
+    "needs_input": 11,
+    "info_only": 7,
+    "errors": 0,
+    "extraction_rate": 41.94,
+    "compliance_rate": 76.92
+  },
+  "articles": [
+    {
+      "article_id": "053",
+      "title": "Building Coverage & Floor Areas",
+      "rules": [
+        {
+          "rule_id": "AD-IND-053-01",
+          "condition": "Total building coverage",
+          "actual_value": 0.5165,
+          "status": "PASS",
+          "message": "0.5165 <= 0.60 (ratio)",
+          "compliant": true,
+          "expected_value": 0.6,
+          "operator": "<=",
+          "unit": "ratio"
+        },
+        {
+          "rule_id": "AD-IND-053-02",
+          "condition": "Secondary (complementary) use area ratio",
+          "actual_value": 0.3964,
+          "status": "FAIL",
+          "message": "Violation: 0.3964 > 0.31 (ratio)",
+          "compliant": false,
+          "expected_value": 0.31,
+          "operator": "<=",
+          "unit": "ratio"
+        }
+      ],
+      "article_summary": {
+        "evaluated": 2,
+        "passed": 1,
+        "failed": 1,
+        "needs_input": 0,
+        "info_only": 0
+      }
+    },
+    {
+      "article_id": "054",
+      "title": "Building Line, Setbacks & Projections",
+      "rules": [
+        {
+          "rule_id": "AD-IND-054-01",
+          "condition": "Internal entrance only (reference condition)",
+          "actual_value": null,
+          "status": "INFO",
+          "message": "Informational clause only (no numeric check).",
+          "compliant": null
+        },
+        {
+          "rule_id": "AD-IND-054-02",
+          "condition": "Front setback when direct street entrance",
+          "actual_value": 6.0,
+          "status": "PASS",
+          "message": "6.0 >= 5.0 m",
+          "compliant": true,
+          "expected_value": 5.0,
+          "operator": ">=",
+          "unit": "m"
+        },
+        {
+          "rule_id": "AD-IND-054-03",
+          "condition": "Side setback (adjacent plot)",
+          "actual_value": 9.0,
+          "status": "PASS",
+          "message": "9.0 >= 2.01 m",
+          "compliant": true,
+          "expected_value": 2.01,
+          "operator": ">=",
+          "unit": "m"
+        },
+        {
+          "rule_id": "AD-IND-054-04",
+          "condition": "Fire access lane required if any plot side > 41.11 m",
+          "actual_value": null,
+          "status": "NEEDS_INPUT",
+          "message": "Missing: max_plot_side_length_m and/or fire_access_lane_width_m not extracted from DXF.",
+          "compliant": null
+        },
+        {
+          "rule_id": "AD-IND-054-05",
+          "condition": "Minimum distance between separate buildings",
+          "actual_value": null,
+          "status": "NEEDS_INPUT",
+          "message": "Building count / separate building footprints not confidently extracted; cannot compute min_inter_building_distance_m.",
+          "compliant": null
+        }
+      ],
+      "article_summary": {
+        "evaluated": 2,
+        "passed": 2,
+        "failed": 0,
+        "needs_input": 2,
+        "info_only": 1
+      }
+    },
+    {
+      "article_id": "055",
+      "title": "Floors, Heights & Levels",
+      "rules": [
+        {
+          "rule_id": "AD-IND-055-01",
+          "condition": "Ground floor above road midline",
+          "actual_value": 0.85,
+          "status": "FAIL",
+          "message": "Violation: 0.85 < 1.40 m",
+          "compliant": false,
+          "expected_value": 1.4,
+          "operator": ">=",
+          "unit": "m"
+        },
+        {
+          "rule_id": "AD-IND-055-02",
+          "condition": "Primary use max building height",
+          "actual_value": 30.0,
+          "status": "PASS",
+          "message": "30.0 <= 81.11 m",
+          "compliant": true,
+          "expected_value": 81.11,
+          "operator": "<=",
+          "unit": "m"
+        },
+        {
+          "rule_id": "AD-IND-055-03",
+          "condition": "Primary mezzanine ratio",
+          "actual_value": null,
+          "status": "NEEDS_INPUT",
+          "message": "Missing: mezzanine area and ground floor area (ratio cannot be computed).",
+          "compliant": null
+        },
+        {
+          "rule_id": "AD-IND-055-04",
+          "condition": "Primary mezzanine stair access from inside shed",
+          "actual_value": null,
+          "status": "NEEDS_INPUT",
+          "message": "Cannot confirm stair access location from DXF without stair block/layer semantics.",
+          "compliant": null
+        },
+        {
+          "rule_id": "AD-IND-055-05",
+          "condition": "Secondary use floors & heights",
+          "actual_value": null,
+          "status": "NEEDS_INPUT",
+          "message": "Floors/heights not reliably extracted (requires section/elevation or annotated heights).",
+          "compliant": null
+        },
+        {
+          "rule_id": "AD-IND-055-06",
+          "condition": "No mezzanine in shops",
+          "actual_value": false,
+          "status": "PASS",
+          "message": "has_shop_mezzanine == false",
+          "compliant": true,
+          "expected_value": false,
+          "operator": "==",
+          "unit": "bool"
+        },
+        {
+          "rule_id": "AD-IND-055-07",
+          "condition": "Roof services guideline reference",
+          "actual_value": null,
+          "status": "INFO",
+          "message": "Reference rule (guideline citation), no numeric validation.",
+          "compliant": null
+        },
+        {
+          "rule_id": "AD-IND-055-08",
+          "condition": "Basement allowed only for pumps/tanks with constraints",
+          "actual_value": false,
+          "status": "PASS",
+          "message": "No basement detected (rule satisfied by absence).",
+          "compliant": true,
+          "expected_value": "no basement OR compliant basement",
+          "operator": "policy",
+          "unit": "bool"
+        },
+        {
+          "rule_id": "AD-IND-055-09",
+          "condition": "Basement roof level matches sidewalk",
+          "actual_value": null,
+          "status": "NEEDS_INPUT",
+          "message": "Not applicable unless basement exists; basement existence not confirmed from DXF.",
+          "compliant": null
+        },
+        {
+          "rule_id": "AD-IND-055-10",
+          "condition": "Basement authority approvals",
+          "actual_value": null,
+          "status": "NEEDS_INPUT",
+          "message": "Requires manual approval evidence if basement exists.",
+          "compliant": null
+        },
+        {
+          "rule_id": "AD-IND-055-11",
+          "condition": "Electrical room height above road axis",
+          "actual_value": null,
+          "status": "NEEDS_INPUT",
+          "message": "Electrical room height/road axis not extracted; needs manual value or elevation data.",
+          "compliant": null
+        }
+      ],
+      "article_summary": {
+        "evaluated": 4,
+        "passed": 3,
+        "failed": 1,
+        "needs_input": 6,
+        "info_only": 1
+      }
+    },
+    {
+      "article_id": "056",
+      "title": "Stairs",
+      "rules": [
+        {
+          "rule_id": "AD-IND-056-01",
+          "condition": "Stairs requirements refer to Article 41",
+          "actual_value": null,
+          "status": "INFO",
+          "message": "Reference article; apply Article 41 checks separately.",
+          "compliant": null
+        }
+      ],
+      "article_summary": {
+        "evaluated": 0,
+        "passed": 0,
+        "failed": 0,
+        "needs_input": 0,
+        "info_only": 1
+      }
+    },
+    {
+      "article_id": "057",
+      "title": "Uses & Components",
+      "rules": [
+        {
+          "rule_id": "AD-IND-057-01",
+          "condition": "Allowed activities are limited to industrial zones (reference)",
+          "actual_value": null,
+          "status": "INFO",
+          "message": "Informational policy; validate via zoning/permit documents.",
+          "compliant": null
+        },
+        {
+          "rule_id": "AD-IND-057-02",
+          "condition": "Workers accommodation not allowed",
+          "actual_value": null,
+          "status": "NEEDS_INPUT",
+          "message": "Requires manual confirmation: has_worker_housing (true/false).",
+          "compliant": null
+        }
+      ],
+      "article_summary": {
+        "evaluated": 0,
+        "passed": 0,
+        "failed": 0,
+        "needs_input": 1,
+        "info_only": 1
+      }
+    },
+    {
+      "article_id": "058",
+      "title": "Ventilation & Lighting",
+      "rules": [
+        {
+          "rule_id": "AD-IND-058-01",
+          "condition": "Mechanical ventilation requires undertaking submission",
+          "actual_value": null,
+          "status": "NEEDS_INPUT",
+          "message": "Needs manual: mechanical_ventilation_used and undertaking submission evidence.",
+          "compliant": null
+        }
+      ],
+      "article_summary": {
+        "evaluated": 0,
+        "passed": 0,
+        "failed": 0,
+        "needs_input": 1,
+        "info_only": 0
+      }
+    },
+    {
+      "article_id": "059",
+      "title": "Fences",
+      "rules": [
+        {
+          "rule_id": "AD-IND-059-01",
+          "condition": "Fence height within allowed range",
+          "actual_value": null,
+          "status": "NEEDS_INPUT",
+          "message": "Fence height is not reliably extractable from plan DXF; requires specification/manual input.",
+          "compliant": null
+        },
+        {
+          "rule_id": "AD-IND-059-02",
+          "condition": "No internal fences between buildings",
+          "actual_value": true,
+          "status": "PASS",
+          "message": "No internal fence entities detected (based on available layers).",
+          "compliant": true,
+          "expected_value": true,
+          "operator": "==",
+          "unit": "bool"
+        },
+        {
+          "rule_id": "AD-IND-059-03",
+          "condition": "Front fence type (reference)",
+          "actual_value": null,
+          "status": "INFO",
+          "message": "Reference clause; validate via fence material/spec documents.",
+          "compliant": null
+        }
+      ],
+      "article_summary": {
+        "evaluated": 1,
+        "passed": 1,
+        "failed": 0,
+        "needs_input": 1,
+        "info_only": 1
+      }
+    },
+    {
+      "article_id": "060",
+      "title": "Parking",
+      "rules": [
+        {
+          "rule_id": "AD-IND-060-PLACEHOLDER",
+          "condition": "Parking provision (placeholder – article text missing)",
+          "actual_value": null,
+          "status": "INFO",
+          "message": "Article text not available; parking rules must be added manually.",
+          "compliant": null
+        }
+      ],
+      "article_summary": {
+        "evaluated": 0,
+        "passed": 0,
+        "failed": 0,
+        "needs_input": 0,
+        "info_only": 1
+      }
+    },
+    {
+      "article_id": "061",
+      "title": "Vehicle Entrances",
+      "rules": [
+        {
+          "rule_id": "AD-IND-061-01",
+          "condition": "Minimum number of vehicle entrances",
+          "actual_value": 2,
+          "status": "PASS",
+          "message": "2 >= 2",
+          "compliant": true,
+          "expected_value": 2,
+          "operator": ">=",
+          "unit": "count"
+        },
+        {
+          "rule_id": "AD-IND-061-02",
+          "condition": "Vehicle entrance width range",
+          "actual_value": 5.0,
+          "status": "PASS",
+          "message": "5.0 is within [4.01, 6.11] m",
+          "compliant": true,
+          "expected_value": [4.01, 6.11],
+          "operator": "between_inclusive",
+          "unit": "m"
+        },
+        {
+          "rule_id": "AD-IND-061-03",
+          "condition": "Entrance location/design subject to traffic study approval",
+          "actual_value": true,
+          "status": "PASS",
+          "message": "Traffic study approval provided (manual confirmation).",
+          "compliant": true,
+          "expected_value": true,
+          "operator": "==",
+          "unit": "bool"
+        },
+        {
+          "rule_id": "AD-IND-061-04",
+          "condition": "Minimum distance between entrances (plot area <= 8111 m2)",
+          "actual_value": 25.0,
+          "status": "FAIL",
+          "message": "Violation: 25.0 < 31.11 m",
+          "compliant": false,
+          "expected_value": 31.11,
+          "operator": ">=",
+          "unit": "m"
+        }
+      ],
+      "article_summary": {
+        "evaluated": 4,
+        "passed": 3,
+        "failed": 1,
+        "needs_input": 0,
+        "info_only": 0
+      }
+    },
+    {
+      "article_id": "062",
+      "title": "Additional Requirements",
+      "rules": [
+        {
+          "rule_id": "AD-IND-062-PLACEHOLDER",
+          "condition": "Article 062 rules not provided yet",
+          "actual_value": null,
+          "status": "INFO",
+          "message": "Placeholder: add Article 062 text/rules when available.",
+          "compliant": null
+        }
+      ],
+      "article_summary": {
+        "evaluated": 0,
+        "passed": 0,
+        "failed": 0,
+        "needs_input": 0,
+        "info_only": 1
+      }
+    }
+  ],
+  "calculation_notes": [
+    "compliance_rate = passed / (passed + failed)",
+    "NEEDS_INPUT and INFO rules are excluded from the compliance denominator.",
+    "extraction_rate = evaluated / total_rules"
+  ]
+}
