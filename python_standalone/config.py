@@ -379,6 +379,10 @@ ARTICLES = [
         "article_id": "7",
         "title_ar": "المسافات الفاصلة بين المباني",
         "title_en": "Separation Distances Between Buildings",
+        "keywords": {
+            "annex": ["annex", "outbuilding", "shed", "workshop", "storage", "ملحق"],
+            "corridor": ["corridor", "passage", "hallway", "ممر"]
+        },
         "rules": [
             {
                 "rule_id": "7.1",
@@ -410,6 +414,12 @@ ARTICLES = [
         "article_id": "8",
         "title_ar": "عدد الطوابق والارتفاعات والمناسيب",
         "title_en": "Number of Floors, Heights and Levels",
+        "keywords": {
+            "basement": ["basement", "sardab", "سرداب"],
+            "ground": ["ground", "0"],
+            "first": ["first", "1"],
+            "roof": ["roof", "surface", "سطح"]
+        },
         "rules": [
             {
                 "rule_id": "8.1",
@@ -519,6 +529,9 @@ ARTICLES = [
         "article_id": "9",
         "title_ar": "طابق السرداب",
         "title_en": "Basement Floor",
+        "keywords": {
+            "basement": ["basement", "sardab", "سرداب"]
+        },
         "rules": [
             {
                 "rule_id": "9.1",
@@ -725,6 +738,9 @@ ARTICLES = [
         "article_id": "12",
         "title_ar": "تهوية وإنارة المباني",
         "title_en": "Building Ventilation and Lighting",
+        "keywords": {
+            "living_spaces": ["main_hall", "master_bedroom", "additional_bedroom", "living_space_bedroom", "staff_bedroom"]
+        },
         "rules": [
             {
                 "rule_id": "12.1",
@@ -814,7 +830,12 @@ ARTICLES = [
     {
         "article_id": "14",
         "title_ar": "الأسوار",
+        "title_ar": "الأسوار",
         "title_en": "Fences",
+        "keywords": {
+            "fence": ["fence", "wall", "boundary", "سور", "جدار"],
+            "screen": ["screen", "satr", "ساتر", "privacy"]
+        },
         "rules": [
             {
                 "rule_id": "14.1",
@@ -863,6 +884,10 @@ ARTICLES = [
         "article_id": "15",
         "title_ar": "المداخل",
         "title_en": "Entrances",
+        "keywords": {
+            "vehicle_entrance": ["vehicle entrance", "car entrance", "garage entrance", "مدخل السيارات", "مدخل الكراج"],
+            "pedestrian_entrance": ["pedestrian entrance", "main entrance", "entrance", "مدخل", "مدخل الأفراد"]
+        },
         "rules": [
             {
                 "rule_id": "15.2a",
@@ -924,6 +949,9 @@ ARTICLES = [
         "article_id": "16",
         "title_ar": "مواقف السيارات",
         "title_en": "Car Parking",
+        "keywords": {
+            "parking": ["parking", "garage", "car", "vehicle", "موقف", "كراج", "سيارات"]
+        },
         "rules": [
             {
                 "rule_id": "16.2",
@@ -1088,6 +1116,9 @@ ARTICLES = [
         "article_id": "19",
         "title_ar": "الأجنحة السكنية بالفيلا الرئيسية",
         "title_en": "Residential Suites in Main Villa",
+        "keywords": {
+            "suite": ["suite", "جناح", "wing", "residential_suite"]
+        },
         "rules": [
             {
                 "rule_id": "19.1",

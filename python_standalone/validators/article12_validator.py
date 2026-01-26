@@ -10,7 +10,8 @@ def validate_article12(elements: List[Dict], article12_schema: Dict) -> List[Dic
     results = []
     
     # Identify living spaces
-    living_space_names = ['main_hall', 'master_bedroom', 'additional_bedroom', 'living_space_bedroom', 'staff_bedroom']
+    keywords = article12_schema.get('keywords', {})
+    living_space_names = keywords.get('living_spaces') or ['main_hall', 'master_bedroom', 'additional_bedroom', 'living_space_bedroom', 'staff_bedroom']
     living_spaces = [e for e in elements if e.get('name') in living_space_names]
     
     for rule in article12_schema.get('rules', []):
@@ -43,8 +44,8 @@ def validate_article12(elements: List[Dict], article12_schema: Dict) -> List[Dic
                 rule_result['details'] = {
                     'living_spaces_found': len(living_spaces),
                     'spaces_with_ventilation': len(spaces_with_vent),
-                    'min_glazed_percent': rule.get('min_glazed_percent', 8),
-                    'min_ventilation_percent': rule.get('min_ventilation_percent', 4),
+                    'min_glazed_percent': rule.get('min_glazed_percent'),
+                    'min_ventilation_percent': rule.get('min_ventilation_percent'),
                     'status': 'PASS' if rule_result['pass'] else 'FAIL',
                     'note': 'Glazed area and ventilation percentages require manual verification'
                 }
@@ -62,9 +63,9 @@ def validate_article12(elements: List[Dict], article12_schema: Dict) -> List[Dic
                 rule_result['pass'] = False
                 rule_result['details'] = {
                     'living_spaces_found': len(living_spaces),
-                    'required_per_living_space': rule.get('required_per_living_space', 1),
+                    'required_per_living_space': rule.get('required_per_living_space'),
                     'note': 'Escape opening validation requires opening geometry data',
-                    'status': 'UNKNOWN',
+                    'status': 'FAIL',
                     'error': 'Opening geometry not available'
                 }
         

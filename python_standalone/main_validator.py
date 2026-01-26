@@ -88,6 +88,16 @@ try:
 except ImportError:
     validate_article15 = None
 
+try:
+    from validators.article14_validator import validate_article14
+except ImportError:
+    validate_article14 = None
+
+try:
+    from validators.article16_validator import validate_article16
+except ImportError:
+    validate_article16 = None
+
 
 class SchemaValidator:
     """Main validator that orchestrates all article validations."""
@@ -277,9 +287,10 @@ class SchemaValidator:
                 print(f"Error validating Article 5: {e}", file=sys.stderr)
         
         # Article 6 - Setbacks and Projections
-        if validate_article6_geopandas:
+        article6_schema = self._get_article_schema("6")
+        if validate_article6_geopandas and article6_schema:
             try:
-                results_list = validate_article6_geopandas(elements, metadata)
+                results_list = validate_article6_geopandas(elements, metadata, article6_schema)
                 raw_results['6'] = results_list
             except Exception as e:
                 print(f"Error validating Article 6: {e}", file=sys.stderr)
@@ -312,9 +323,10 @@ class SchemaValidator:
                 print(f"Error validating Article 9: {e}", file=sys.stderr)
         
         # Article 10 - Roof Floor
-        if validate_article10_geopandas:
+        article10_schema = self._get_article_schema("10")
+        if validate_article10_geopandas and article10_schema:
             try:
-                results_list = validate_article10_geopandas(elements, metadata)
+                results_list = validate_article10_geopandas(elements, metadata, article10_schema)
                 raw_results['10'] = results_list
             except Exception as e:
                 print(f"Error validating Article 10: {e}", file=sys.stderr)
@@ -338,12 +350,22 @@ class SchemaValidator:
                 print(f"Error validating Article 12: {e}", file=sys.stderr)
         
         # Article 13 - Stairs
-        if validate_article13_geopandas:
+        article13_schema = self._get_article_schema("13")
+        if validate_article13_geopandas and article13_schema:
             try:
-                results_list = validate_article13_geopandas(elements, metadata)
+                results_list = validate_article13_geopandas(elements, metadata, article13_schema)
                 raw_results['13'] = results_list
             except Exception as e:
                 print(f"Error validating Article 13: {e}", file=sys.stderr)
+
+        # Article 14 - Fences
+        article14_schema = self._get_article_schema("14")
+        if validate_article14 and article14_schema:
+            try:
+                results_list = validate_article14(elements, article14_schema)
+                raw_results['14'] = results_list
+            except Exception as e:
+                print(f"Error validating Article 14: {e}", file=sys.stderr)
         
         # Article 15 - Entrances
         article15_schema = self._get_article_schema("15")
@@ -353,6 +375,15 @@ class SchemaValidator:
                 raw_results['15'] = results_list
             except Exception as e:
                 print(f"Error validating Article 15: {e}", file=sys.stderr)
+
+        # Article 16 - Car Parking
+        article16_schema = self._get_article_schema("16")
+        if validate_article16 and article16_schema:
+            try:
+                results_list = validate_article16(elements, article16_schema)
+                raw_results['16'] = results_list
+            except Exception as e:
+                print(f"Error validating Article 16: {e}", file=sys.stderr)
         
         # Article 18 - Building Design
         article18_schema = self._get_article_schema("18")
@@ -475,8 +506,8 @@ class SchemaValidator:
         article_18_results = _get_article_results("18")
         article_19_results = _get_article_results("19")
         article_20_results = _get_article_results("20")
-        # Article 14 is not validated in python_standalone currently; keep empty for compat.
-        article_14_results: List[Dict] = []
+        article_14_results = _get_article_results("14")
+        article_16_results = _get_article_results("16")
 
         # Article-level pass flags and rule counts
         a5 = _article_counts(article_5_results)
@@ -488,6 +519,8 @@ class SchemaValidator:
         a12 = _article_counts(article_12_results)
         a13 = _article_counts(article_13_results)
         a15 = _article_counts(article_15_results)
+        a14 = _article_counts(article_14_results)
+        a16 = _article_counts(article_16_results)
         a18 = _article_counts(article_18_results)
         a19 = _article_counts(article_19_results)
         a20 = _article_counts(article_20_results)
@@ -509,7 +542,10 @@ class SchemaValidator:
             and _article_pass(article_10_results)
             and _article_pass(article_12_results)
             and _article_pass(article_13_results)
+            and _article_pass(article_13_results)
+            and _article_pass(article_14_results)
             and _article_pass(article_15_results)
+            and _article_pass(article_16_results)
             and _article_pass(article_18_results)
             and _article_pass(article_19_results)
             and _article_pass(article_20_results)
@@ -534,7 +570,10 @@ class SchemaValidator:
                 "article_18_results": article_18_results,
                 "article_19_results": article_19_results,
                 "article_20_results": article_20_results,
+                "article_19_results": article_19_results,
+                "article_20_results": article_20_results,
                 "article_14_results": article_14_results,
+                "article_16_results": article_16_results,
                 "summary": {
                     "total_element_types": total_element_types,
                     "passed_element_types": passed_element_types,
@@ -595,10 +634,15 @@ class SchemaValidator:
                     "article_20_total_rules": a20["total"],
                     "article_20_passed_rules": a20["passed"],
                     "article_20_failed_rules": a20["failed"],
-                    "article_14_pass": True,
-                    "article_14_total_rules": 0,
-                    "article_14_passed_rules": 0,
-                    "article_14_failed_rules": 0,
+                    "article_20_failed_rules": a20["failed"],
+                    "article_14_pass": a14["failed"] == 0,
+                    "article_14_total_rules": a14["total"],
+                    "article_14_passed_rules": a14["passed"],
+                    "article_14_failed_rules": a14["failed"],
+                    "article_16_pass": a16["failed"] == 0,
+                    "article_16_total_rules": a16["total"],
+                    "article_16_passed_rules": a16["passed"],
+                    "article_16_failed_rules": a16["failed"],
                     "article_11_pass": failed_element_types == 0,
                 },
                 # Convenience top-level project metadata for frontend display

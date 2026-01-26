@@ -10,8 +10,9 @@ def validate_article15(elements: List[Dict], metadata: Dict, article15_schema: D
     results = []
     
     # Detect entrances
-    vehicle_keywords = ['vehicle entrance', 'car entrance', 'garage entrance', 'مدخل السيارات', 'مدخل الكراج']
-    pedestrian_keywords = ['pedestrian entrance', 'main entrance', 'entrance', 'مدخل', 'مدخل الأفراد']
+    keywords = article15_schema.get('keywords', {})
+    vehicle_keywords = keywords.get('vehicle_entrance') or ['vehicle entrance', 'car entrance', 'garage entrance', 'مدخل السيارات', 'مدخل الكراج']
+    pedestrian_keywords = keywords.get('pedestrian_entrance') or ['pedestrian entrance', 'main entrance', 'entrance', 'مدخل', 'مدخل الأفراد']
     
     vehicle_entrances = [
         e for e in elements
@@ -42,18 +43,18 @@ def validate_article15(elements: List[Dict], metadata: Dict, article15_schema: D
         if rule_type == 'entrance':
             if rule.get('element') == 'vehicle_entrance':
                 # Rule 15.2a: Max 2 vehicle entrances, min 6m apart
-                max_count = rule.get('max_count', 2)
+                max_count = rule.get('max_count')
                 rule_result['pass'] = len(vehicle_entrances) <= max_count
                 rule_result['details'] = {
                     'vehicle_entrance_count': len(vehicle_entrances),
                     'max_allowed': max_count,
-                    'min_separation_m': rule.get('min_separation_m', 6.0),
+                    'min_separation_m': rule.get('min_separation_m'),
                     'note': 'Separation distance requires spatial analysis',
                     'status': 'PASS' if rule_result['pass'] else 'FAIL'
                 }
             elif rule.get('element') == 'pedestrian_entrance':
                 # Rule 15.3a: Max 2 pedestrian entrances
-                max_count = rule.get('max_count', 2)
+                max_count = rule.get('max_count')
                 rule_result['pass'] = len(pedestrian_entrances) <= max_count
                 rule_result['details'] = {
                     'pedestrian_entrance_count': len(pedestrian_entrances),
@@ -64,8 +65,8 @@ def validate_article15(elements: List[Dict], metadata: Dict, article15_schema: D
         elif rule_type == 'dimension':
             if rule.get('element') == 'vehicle_entrance':
                 # Rule 15.2b: Vehicle entrance width 3-6m
-                min_width = rule.get('min_width_m', 3.0)
-                max_width = rule.get('max_width_m', 6.0)
+                min_width = rule.get('min_width_m')
+                max_width = rule.get('max_width_m')
                 failed = [
                     e for e in vehicle_entrances
                     if (e.get('width', 0) or 0) < min_width or (e.get('width', 0) or 0) > max_width
@@ -80,8 +81,8 @@ def validate_article15(elements: List[Dict], metadata: Dict, article15_schema: D
                 }
             elif rule.get('element') == 'pedestrian_entrance':
                 # Rule 15.3e: Pedestrian entrance width 1-2m
-                min_width = rule.get('min_width_m', 1.0)
-                max_width = rule.get('max_width_m', 2.0)
+                min_width = rule.get('min_width_m')
+                max_width = rule.get('max_width_m')
                 failed = [
                     e for e in pedestrian_entrances
                     if (e.get('width', 0) or 0) < min_width or (e.get('width', 0) or 0) > max_width
@@ -97,10 +98,11 @@ def validate_article15(elements: List[Dict], metadata: Dict, article15_schema: D
         
         elif rule_type == 'restriction':
             # Rule 15.4: Doors must not open outside plot
-            rule_result['pass'] = True  # Requires spatial analysis
+            rule_result['pass'] = False
             rule_result['details'] = {
                 'note': 'Door swing validation requires spatial analysis',
-                'status': 'UNKNOWN'
+                'status': 'FAIL',
+                'error': 'Spatial analysis not implemented'
             }
         
         results.append(rule_result)

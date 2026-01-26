@@ -93,6 +93,7 @@ def validate_article5(elements: List[Dict], metadata: Dict, article5_schema: Dic
                     rule_result['pass'] = False
                     rule_result['details'] = {
                         'error': 'Plot area missing or invalid',
+                        'status': 'FAIL',
                         'plot_area_m2': plot_area,
                         'building_footprint_area_m2': building_footprint,
                         'building_coverage_percent': None
@@ -101,12 +102,13 @@ def validate_article5(elements: List[Dict], metadata: Dict, article5_schema: Dic
                     rule_result['pass'] = False
                     rule_result['details'] = {
                         'error': 'No building footprint found',
+                        'status': 'FAIL',
                         'plot_area_m2': plot_area,
                         'building_footprint_area_m2': 0,
                         'building_coverage_percent': 0
                     }
                 else:
-                    max_value = rule.get('max_value', 70)
+                    max_value = rule.get('max_value')
                     rule_result['pass'] = building_coverage_percent <= max_value
                     rule_result['details'] = {
                         'plot_area_m2': round(plot_area, 2),
@@ -123,12 +125,13 @@ def validate_article5(elements: List[Dict], metadata: Dict, article5_schema: Dic
                     rule_result['pass'] = False
                     rule_result['details'] = {
                         'error': 'Plot area missing or invalid',
+                        'status': 'FAIL',
                         'plot_area_m2': plot_area,
                         'open_area_m2': None,
                         'open_area_percent': None
                     }
                 else:
-                    min_value = rule.get('min_value', 30)
+                    min_value = rule.get('min_value')
                     rule_result['pass'] = open_area_percent >= min_value if open_area_percent else False
                     rule_result['details'] = {
                         'plot_area_m2': round(plot_area, 2),
@@ -141,11 +144,12 @@ def validate_article5(elements: List[Dict], metadata: Dict, article5_schema: Dic
                     
             elif rule.get('element') == 'lightweight_coverage_of_open_area':
                 # Rule 5.3: Lightweight coverage max 50% of open area
-                rule_result['pass'] = True  # Cannot validate without lightweight coverage data
+                rule_result['pass'] = False
                 rule_result['details'] = {
                     'note': 'Lightweight coverage validation requires manual verification',
-                    'max_percent': rule.get('max_value', 50),
-                    'status': 'UNKNOWN'
+                    'max_percent': rule.get('max_value'),
+                    'status': 'FAIL',
+                    'error': 'Lightweight coverage data missing'
                 }
         
         elif rule_type == 'area':
@@ -155,7 +159,7 @@ def validate_article5(elements: List[Dict], metadata: Dict, article5_schema: Dic
             
             for constraint in constraints:
                 element_type = constraint.get('element')
-                min_value = constraint.get('min_value', 0)
+                min_value = constraint.get('min_value')
                 
                 if element_type == 'villa_total_floor_area':
                     if total_building_area < min_value:

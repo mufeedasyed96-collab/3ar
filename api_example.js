@@ -12,7 +12,7 @@ const axios = require('axios');
 const FormData = require('form-data');
 
 const app = express();
-const PORT = process.env.PORT || 7225;
+const PORT = process.env.PORT || 8225;
 
 // CORS Middleware - Allow requests from frontend
 app.use((req, res, next) => {

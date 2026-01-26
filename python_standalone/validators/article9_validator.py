@@ -5,14 +5,16 @@ Article 9 Validator - Basement Floor
 from typing import Dict, List
 
 
-def detect_basement(elements: List[Dict]) -> Dict:
+def detect_basement(elements: List[Dict], keywords: Dict = None) -> Dict:
     """Detect basement elements."""
-    basement_keywords = ['basement', 'sardab', 'سرداب', 'sardab']
+    kw = keywords or {}
+    basement_kw = kw.get('basement') or ['basement', 'sardab', 'سرداب', 'sardab']
+    
     basement_elements = [e for e in elements if any(
         kw in str(e.get('name', '')).lower() or 
         kw in str(e.get('floor', '')).lower() or
         kw in str(e.get('original_label', '')).lower()
-        for kw in basement_keywords
+        for kw in basement_kw
     )]
     
     return {
@@ -25,7 +27,8 @@ def detect_basement(elements: List[Dict]) -> Dict:
 def validate_article9(elements: List[Dict], metadata: Dict, article9_schema: Dict) -> List[Dict]:
     """Validate Article 9 rules."""
     results = []
-    basement_info = detect_basement(elements)
+    basement_keywords = article9_schema.get('keywords', {})
+    basement_info = detect_basement(elements, basement_keywords)
     
     for rule in article9_schema.get('rules', []):
         rule_id = rule.get('rule_id')
@@ -50,7 +53,7 @@ def validate_article9(elements: List[Dict], metadata: Dict, article9_schema: Dic
             }
         elif rule_type == 'basement':
             if rule_id == '9.1':
-                max_basements = rule.get('max_basements', 1)
+                max_basements = rule.get('max_basements')
                 rule_result['pass'] = basement_info['count'] <= max_basements
                 rule_result['details'] = {
                     'basement_count': basement_info['count'],
@@ -61,17 +64,18 @@ def validate_article9(elements: List[Dict], metadata: Dict, article9_schema: Dic
                 rule_result['pass'] = False
                 rule_result['details'] = {
                     'note': 'Basement extension validation requires spatial analysis',
-                    'status': 'UNKNOWN',
+                    'status': 'FAIL',
                     'error': 'Spatial analysis not implemented'
                 }
         elif rule_type == 'use':
             # Rule 9.4: Permitted uses
             permitted = rule.get('permitted_uses', [])
-            rule_result['pass'] = True  # Simplified - would need use detection
+            rule_result['pass'] = False
             rule_result['details'] = {
                 'permitted_uses': permitted,
                 'note': 'Use validation requires element classification',
-                'status': 'UNKNOWN'
+                'status': 'FAIL',
+                'error': 'Element classification not available'
             }
         
         results.append(rule_result)

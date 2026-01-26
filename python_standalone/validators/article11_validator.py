@@ -70,8 +70,8 @@ def validate_article11(elements: List[Dict], article11_schema: Dict) -> List[Dic
             issues = []
             area = el.get('area', 0) or 0
             width = el.get('width', 0) or 0
-            min_area = basic.get('min_area_m2', 0)
-            min_width = basic.get('min_width_m', 0)
+            min_area = basic.get('min_area_m2')
+            min_width = basic.get('min_width_m')
             
             if min_area and area < min_area:
                 issues.append(f"Area {area:.2f} m² < {min_area} m²")

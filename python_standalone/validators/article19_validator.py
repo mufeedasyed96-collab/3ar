@@ -43,7 +43,8 @@ def validate_article19(elements: List[Dict], article19_schema: Dict) -> List[Dic
             suites = []
             
             # Look for suite-related elements
-            suite_keywords = ["suite", "جناح", "wing", "residential_suite"]
+            keywords = article19_schema.get('keywords', {})
+            suite_keywords = keywords.get('suite') or ["suite", "جناح", "wing", "residential_suite"]
             for e in elements:
                 name = (e.get("name", "") or "").lower()
                 label = (e.get("original_label", "") or "").lower()
@@ -92,7 +93,8 @@ def validate_article19(elements: List[Dict], article19_schema: Dict) -> List[Dic
         elif rule_type == "composition":
             # Rule 19.2: Suite max: 3 rooms, 1 living space, bathrooms. Pantry kitchen only if no other on same floor
             # First, check if any suites are detected
-            suite_keywords = ["suite", "جناح", "wing", "residential_suite"]
+            keywords = article19_schema.get('keywords', {})
+            suite_keywords = keywords.get('suite') or ["suite", "جناح", "wing", "residential_suite"]
             
             # Identify suites
             suite_elements = {}
@@ -144,9 +146,9 @@ def validate_article19(elements: List[Dict], article19_schema: Dict) -> List[Dic
                                      (e.get("original_label", "") and ("pantry" in e.get("original_label", "").lower() or "تحضيري" in e.get("original_label", "")))]
                     
                     suite_violations = []
-                    if len(rooms) > rule.get("max_rooms", 3):
+                    if len(rooms) > rule.get("max_rooms"):
                         suite_violations.append(f"Too many rooms: {len(rooms)} > {rule.get('max_rooms')}")
-                    if len(living_spaces) > rule.get("max_living_spaces", 1):
+                    if len(living_spaces) > rule.get("max_living_spaces"):
                         suite_violations.append(f"Too many living spaces: {len(living_spaces)} > {rule.get('max_living_spaces')}")
                     if len(pantry_kitchens) > 1:
                         suite_violations.append(f"Too many pantry kitchens: {len(pantry_kitchens)} > 1")

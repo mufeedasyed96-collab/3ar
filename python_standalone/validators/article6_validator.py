@@ -25,16 +25,9 @@ except Exception as e:
         file=sys.stderr,
     )
 
-# Rule constants
-SETBACK_STREET_M = 2.0
-SETBACK_OTHER_M = 1.5
-CANOPY_MAX_PROJECTION_M = 2.0
-CANOPY_MIN_SOFFIT_M = 4.5
-PROJECTION_STAIRS_MAX_M = 0.305
-PROJECTION_AESTHETIC_MAX_M = 0.305
-PROJECTION_AESTHETIC_ABOVE_MAX_M = 0.3
-TOL = 0.02  # tolerance in meters
+# Rule constants (Moved to schema)
 SCALE_MM_TO_M = 0.001  # DXF mm → meters
+
 
 
 def _unit_scale_to_m(metadata: Dict) -> float:
@@ -255,7 +248,17 @@ def identify_street_edge(plot_gdf: gpd.GeoDataFrame) -> Tuple[LineString, List[L
     return street_edge, other_edges
 
 
-def validate_article6_geopandas(elements: List[Dict], metadata: Dict) -> List[Dict]:
+def _get_rule(schema: Dict, rule_id: str) -> Optional[Dict]:
+    """Helper to find rule by ID in schema."""
+    if not schema or 'rules' not in schema:
+        return None
+    for r in schema['rules']:
+        if r.get('rule_id') == rule_id:
+            return r
+    return None
+
+
+def validate_article6_geopandas(elements: List[Dict], metadata: Dict, article_schema: Dict) -> List[Dict]:
     """
     Validate Article 6 rules using GeoPandas for accurate geometry calculations.
     
@@ -428,9 +431,22 @@ def validate_article6_geopandas(elements: List[Dict], metadata: Dict) -> List[Di
         "details": {}
     }
     
+    # Extract dynamic parameters from schema
+    r61 = _get_rule(article_schema, "6.1")
+    setback_street = 2.0
+    setback_other = 1.5
+    
+    if r61 and 'constraints' in r61:
+        for c in r61['constraints']:
+            if c.get('boundary_type') == 'street_facing':
+                setback_street = float(c.get('min_setback_m', 2.0))
+            elif c.get('boundary_type') == 'other_boundaries':
+                setback_other = float(c.get('min_setback_m', 1.5))
+
     if plot_gdf.empty or building_gdf.empty:
         rule_6_1["details"] = {
             "note": "FAIL: Setback validation requires plot boundary and building footprint vertices.",
+            "status": "FAIL",
             "available_data": {
                 "plot_vertices_available": not plot_gdf.empty,
                 "building_vertices_available": not building_gdf.empty,
@@ -457,28 +473,30 @@ def validate_article6_geopandas(elements: List[Dict], metadata: Dict) -> List[Di
                 rule_6_1["pass"] = False
                 rule_6_1["details"] = {
                     "note": "FAIL: Cannot calculate setback distances - missing geometry data.",
+                    "status": "FAIL",
                     "street_setback_available": street_dist is not None,
                     "other_setback_available": other_dist is not None,
                     "error": "Distance calculation failed due to missing geometry"
                 }
             else:
-                # Check against requirements
-                street_pass = street_dist >= (SETBACK_STREET_M - TOL)
-                other_pass = other_dist >= (SETBACK_OTHER_M - TOL)
+                # Check against requirements (using dynamic schema values)
+                street_pass = street_dist >= (setback_street - TOL)
+                other_pass = other_dist >= (setback_other - TOL)
                 
                 rule_6_1["pass"] = street_pass and other_pass
                 rule_6_1["details"] = {
                     "street_setback_m": round(street_dist, 3),
                     "other_setback_m": round(other_dist, 3),
-                    "required_street_setback_m": SETBACK_STREET_M,
-                    "required_other_setback_m": SETBACK_OTHER_M,
+                    "required_street_setback_m": setback_street,
+                    "required_other_setback_m": setback_other,
                     "street_pass": street_pass,
                     "other_pass": other_pass,
-                    "note": f"Street setback: {street_dist:.3f}m (required: {SETBACK_STREET_M}m), Other setback: {other_dist:.3f}m (required: {SETBACK_OTHER_M}m)"
+                    "note": f"Street setback: {street_dist:.3f}m (required: {setback_street}m), Other setback: {other_dist:.3f}m (required: {setback_other}m)"
                 }
         else:
             rule_6_1["details"] = {
                 "note": "FAIL: Cannot identify street edge from plot boundary.",
+                "status": "FAIL",
                 "error": "Street edge identification failed"
             }
     
@@ -564,32 +582,49 @@ def validate_article6_geopandas(elements: List[Dict], metadata: Dict) -> List[Di
             rule["pass"] = False
             rule["details"] = {
                 "note": "FAIL: Projection validation requires plot and building geometry.",
+                "status": "FAIL",
                 "error": "Missing geometry for projection check."
             }
     else:
         # Calculate building projection
         max_projection = calculate_projection_distance(building_gdf, plot_gdf)
         
-        # Rule 6.3: Canopy projection (assuming building has canopy elements)
-        rule_6_3["pass"] = max_projection <= (CANOPY_MAX_PROJECTION_M + TOL)
+        # Rule 6.3: Canopy projection parameters
+        r63 = _get_rule(article_schema, "6.3")
+        canopy_max_proj = float(r63.get('max_projection_m', 2.0)) if r63 else 2.0
+        
+        # Rule 6.3: Canopy projection
+        rule_6_3["pass"] = max_projection <= (canopy_max_proj + TOL)
         rule_6_3["details"] = {
             "max_projection_m": round(max_projection, 3),
-            "max_allowed_m": CANOPY_MAX_PROJECTION_M,
-            "note": f"Max projection: {max_projection:.3f}m (allowed: {CANOPY_MAX_PROJECTION_M}m)"
+            "max_allowed_m": canopy_max_proj,
+            "note": f"Max projection: {max_projection:.3f}m (allowed: {canopy_max_proj}m)"
         }
         
         # Rule 6.4 & 6.5: Stairs and aesthetic projections
-        # Note: Height-based rules require elevation data, which we don't have in 2D DXF
-        # For now, we validate projection distance only
+        # Extract params
+        r64 = _get_rule(article_schema, "6.4")
+        stairs_max = 0.305
+        aesthetic_max = 0.305
+        if r64 and 'exceptions' in r64:
+            for ex in r64['exceptions']:
+                if ex.get('element') == 'stairs':
+                    stairs_max = float(ex.get('max_projection_cm', 30.5)) / 100.0
+                elif ex.get('element') == 'aesthetic_elements':
+                    aesthetic_max = float(ex.get('max_projection_cm', 30.5)) / 100.0
+
+        r65 = _get_rule(article_schema, "6.5")
+        aesthetic_above_max = float(r65.get('max_aesthetic_projection_cm', 30)) / 100.0 if r65 else 0.3
+
         rule_6_4["details"] = {
             "max_projection_m": round(max_projection, 3),
-            "max_allowed_m": PROJECTION_STAIRS_MAX_M,
+            "max_allowed_m": round(stairs_max, 3),
             "note": "Height-based validation requires elevation data (not available in 2D DXF)"
         }
         
         rule_6_5["details"] = {
             "max_projection_m": round(max_projection, 3),
-            "max_allowed_m": PROJECTION_AESTHETIC_ABOVE_MAX_M,
+            "max_allowed_m": round(aesthetic_above_max, 3),
             "note": "Height-based validation requires elevation data (not available in 2D DXF)"
         }
     
@@ -621,8 +656,14 @@ def main():
         elements = input_data.get('elements', [])
         metadata = input_data.get('metadata', {})
         
+        # Schema (mock fetch for standalone main, or pass Empty)
+        # In real app, main_validator calls this with actual schema.
+        # For CLI standalone for this file, we can default or fetch from config
+        from config import get_article
+        article_schema = get_article("6") or {}
+        
         # Validate Article 6
-        results = validate_article6_geopandas(elements, metadata)
+        results = validate_article6_geopandas(elements, metadata, article_schema)
         
         # Clean results for JSON serialization (replace Infinity/NaN with None)
         def clean_for_json(obj):

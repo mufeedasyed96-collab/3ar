@@ -84,7 +84,7 @@ def validate_article20(elements: List[Dict], article20_schema: Dict, metadata: D
                     percent = (total_area / villa_ground_area_m2) * 100 if villa_ground_area_m2 > 0 else 0
                     
                     violations = []
-                    if percent > rule.get("max_percent_of_villa_ground_floor", 70):
+                    if percent > rule.get("max_percent_of_villa_ground_floor"):
                         violations.append(f"Total annex area {percent:.2f}% exceeds {rule.get('max_percent_of_villa_ground_floor')}% of villa ground floor")
                     
                     if rule.get("internal_connection_prohibited"):
@@ -136,7 +136,7 @@ def validate_article20(elements: List[Dict], article20_schema: Dict, metadata: D
                     for annex in hospitality_annexes:
                         area = annex.get("area", 0) or 0
                         percent = (area / villa_ground_area_m2) * 100 if villa_ground_area_m2 > 0 else 0
-                        if percent > rule.get("max_percent_of_villa_ground_floor", 50):
+                        if percent > rule.get("max_percent_of_villa_ground_floor"):
                             violations.append(f"Hospitality annex '{annex.get('original_label', annex.get('name', 'Unknown'))}' area {percent:.2f}% exceeds {rule.get('max_percent_of_villa_ground_floor')}%")
                     
                     ruleResult["pass"] = len(violations) == 0
@@ -183,11 +183,11 @@ def validate_article20(elements: List[Dict], article20_schema: Dict, metadata: D
                         area = annex.get("area", 0) or 0
                         percent = (area / villa_ground_area_m2) * 100 if villa_ground_area_m2 > 0 else 0
                         
-                        if percent > rule.get("max_percent_of_villa_ground_floor", 70):
+                        if percent > rule.get("max_percent_of_villa_ground_floor"):
                             # Check majlis requirements
                             majlis_area = annex.get("majlis_area_m2", 0) or 0
-                            min_majlis_area = majlis_req.get("min_area_m2", 70)
-                            min_percent_annex = majlis_req.get("or_min_percent_of_annex", 70)
+                            min_majlis_area = majlis_req.get("min_area_m2")
+                            min_percent_annex = majlis_req.get("or_min_percent_of_annex")
                             required_majlis = max(min_majlis_area, min_percent_annex / 100 * area)
                             
                             if majlis_area < required_majlis:
@@ -195,7 +195,7 @@ def validate_article20(elements: List[Dict], article20_schema: Dict, metadata: D
                             
                             # Check pantry max 10% of majlis
                             pantry_area = annex.get("pantry_area_m2", 0) or 0
-                            if pantry_area > (rule.get("pantry_max_percent_of_majlis", 10) / 100 * majlis_area):
+                            if pantry_area > (rule.get("pantry_max_percent_of_majlis") / 100 * majlis_area):
                                 violations.append(f"Hospitality annex '{annex.get('original_label', annex.get('name', 'Unknown'))}' pantry exceeds {rule.get('pantry_max_percent_of_majlis')}% of majlis")
                     
                     ruleResult["pass"] = len(violations) == 0
@@ -240,7 +240,7 @@ def validate_article20(elements: List[Dict], article20_schema: Dict, metadata: D
                     for annex in service_annexes:
                         area = annex.get("area", 0) or 0
                         percent = (area / villa_ground_area_m2) * 100 if villa_ground_area_m2 > 0 else 0
-                        if percent > rule.get("max_percent_of_villa_ground_floor", 50):
+                        if percent > rule.get("max_percent_of_villa_ground_floor"):
                             violations.append(f"Service annex '{annex.get('original_label', annex.get('name', 'Unknown'))}' area {percent:.2f}% exceeds {rule.get('max_percent_of_villa_ground_floor')}%")
                     
                     ruleResult["pass"] = len(violations) == 0
@@ -285,12 +285,12 @@ def validate_article20(elements: List[Dict], article20_schema: Dict, metadata: D
                         area = annex.get("area", 0) or 0
                         percent = (area / villa_ground_area_m2) * 100 if villa_ground_area_m2 > 0 else 0
                         
-                        if percent > rule.get("max_percent_of_villa_ground_floor", 20):
+                        if percent > rule.get("max_percent_of_villa_ground_floor"):
                             violations.append(f"Sports annex '{annex.get('original_label', annex.get('name', 'Unknown'))}' area {percent:.2f}% exceeds {rule.get('max_percent_of_villa_ground_floor')}%")
                         
                         # Check gym area min 70% of annex
                         gym_area = annex.get("gym_area_m2", 0) or 0
-                        min_gym_area = rule.get("gym_min_percent_of_annex", 70) / 100 * area
+                        min_gym_area = rule.get("gym_min_percent_of_annex") / 100 * area
                         if gym_area < min_gym_area:
                             violations.append(f"Sports annex '{annex.get('original_label', annex.get('name', 'Unknown'))}' gym area {gym_area:.2f} m² below required {min_gym_area:.2f} m² (70% of annex)")
                     
@@ -321,10 +321,10 @@ def validate_article20(elements: List[Dict], article20_schema: Dict, metadata: D
                     
                     if majlis_area > 0:
                         pantry_percent = (pantry_area / majlis_area) * 100
-                        if pantry_percent > rule.get("max_percent_of_majlis", 15):
+                        if pantry_percent > rule.get("max_percent_of_majlis"):
                             violations.append(f"Hospitality annex '{annex.get('original_label', annex.get('name', 'Unknown'))}' pantry {pantry_percent:.2f}% exceeds {rule.get('max_percent_of_majlis')}% of majlis")
                     
-                    if pantry_width > 0 and pantry_width < rule.get("min_dimension_m", 2.0):
+                    if pantry_width > 0 and pantry_width < rule.get("min_dimension_m"):
                         violations.append(f"Hospitality annex '{annex.get('original_label', annex.get('name', 'Unknown'))}' pantry width {pantry_width:.2f} m below minimum {rule.get('min_dimension_m')} m")
                 
                 ruleResult["pass"] = len(violations) == 0
@@ -353,7 +353,7 @@ def validate_article20(elements: List[Dict], article20_schema: Dict, metadata: D
                 violations = []
                 for annex in annexes:
                     height = annex.get("height_m", 0) or 0
-                    max_height = rule.get("max_height_m", 6.0)
+                    max_height = rule.get("max_height_m")
                     
                     # Check hospitality annex bonus
                     is_hospitality = "hospitality" in (annex.get("name", "") or "").lower() or "ضيافة" in (annex.get("original_label", "") or "")
@@ -362,10 +362,10 @@ def validate_article20(elements: List[Dict], article20_schema: Dict, metadata: D
                     if is_hospitality and is_outside_setback:
                         bonus = rule.get("hospitality_annex_bonus", {})
                         length = annex.get("length_m", 0) or 0
-                        if length > bonus.get("length_threshold_m", 8.0):
-                            extra_length = length - bonus.get("length_threshold_m", 8.0)
-                            bonus_height = (extra_length / bonus.get("per_length_m", 2.0)) * bonus.get("height_bonus_m", 0.5)
-                            max_height = min(bonus.get("max_total_height_m", 8.0), max_height + bonus_height)
+                        if length > bonus.get("length_threshold_m"):
+                            extra_length = length - bonus.get("length_threshold_m")
+                            bonus_height = (extra_length / bonus.get("per_length_m")) * bonus.get("height_bonus_m")
+                            max_height = min(bonus.get("max_total_height_m"), max_height + bonus_height)
                     
                     if height > max_height:
                         violations.append(f"Annex '{annex.get('original_label', annex.get('name', 'Unknown'))}' height {height:.2f} m exceeds max {max_height:.2f} m")
@@ -391,12 +391,12 @@ def validate_article20(elements: List[Dict], article20_schema: Dict, metadata: D
                 violations = []
                 for annex in annexes:
                     internal_height = annex.get("internal_height_m", 0) or 0
-                    min_height = rule.get("min_height_m", 3.0)
+                    min_height = rule.get("min_height_m")
                     
                     # Check if service space
                     is_service = "service" in (annex.get("name", "") or "").lower() or "خدمات" in (annex.get("original_label", "") or "")
                     if is_service:
-                        min_height = rule.get("service_spaces_min_height_m", 2.7)
+                        min_height = rule.get("service_spaces_min_height_m")
                     
                     if internal_height > 0 and internal_height < min_height:
                         violations.append(f"Annex '{annex.get('original_label', annex.get('name', 'Unknown'))}' internal height {internal_height:.2f} m below minimum {min_height:.2f} m")
@@ -451,9 +451,9 @@ def validate_article20(elements: List[Dict], article20_schema: Dict, metadata: D
                         second_majlis_area = annex.get("second_majlis_area_m2", 0) or 0
                         
                         if second_majlis_area > 0:
-                            if majlis_area < second_majlis_rule.get("condition", {}).get("main_majlis_min_60_sqm", 60):
+                            if majlis_area < second_majlis_rule.get("condition", {}).get("main_majlis_min_60_sqm"):
                                 violations.append(f"Hospitality annex '{annex.get('original_label', annex.get('name', 'Unknown'))}' second majlis present but main majlis {majlis_area:.2f} m² below required 60 m²")
-                            if second_majlis_area > second_majlis_rule.get("max_area_m2", 30):
+                            if second_majlis_area > second_majlis_rule.get("max_area_m2"):
                                 violations.append(f"Hospitality annex '{annex.get('original_label', annex.get('name', 'Unknown'))}' second majlis {second_majlis_area:.2f} m² exceeds max {second_majlis_rule.get('max_area_m2')} m²")
                     
                     ruleResult["pass"] = len(violations) == 0

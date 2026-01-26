@@ -89,7 +89,7 @@ def validate_article18(elements: List[Dict], article18_schema: Dict) -> List[Dic
                     main_kitchens = [main_kitchens_sorted[0]]
 
                 main_kitchen_count = len(main_kitchens)
-                max_allowed = rule.get("main_kitchen_max", 1)
+                max_allowed = rule.get("main_kitchen_max")
 
                 # Check specialized kitchens area constraints
                 violations = []
@@ -98,7 +98,7 @@ def validate_article18(elements: List[Dict], article18_schema: Dict) -> List[Dic
 
                 for sk in specialized_kitchens:
                     area = sk.get("area", 0) or 0
-                    max_area = rule.get("specialized_kitchen_max_area_m2", 9)
+                    max_area = rule.get("specialized_kitchen_max_area_m2")
                     if area > max_area:
                         violations.append(f"Specialized kitchen too large: {area:.2f} m² > {max_area} m²")
 
@@ -134,11 +134,11 @@ def validate_article18(elements: List[Dict], article18_schema: Dict) -> List[Dic
                 
                 violations = []
                 for floor, kitchens in floors.items():
-                    if len(kitchens) > rule.get("max_per_floor", 1):
+                    if len(kitchens) > rule.get("max_per_floor"):
                         violations.append(f"Too many pantry kitchens on floor {floor}: {len(kitchens)} > {rule.get('max_per_floor')}")
                     for k in kitchens:
                         area = k.get("area", 0) or 0
-                        if area > rule.get("max_area_m2", 6):
+                        if area > rule.get("max_area_m2"):
                             violations.append(f"Pantry kitchen on floor {floor} too large: {area:.2f} m² > {rule.get('max_area_m2')} m²")
                 
                 ruleResult["pass"] = len(violations) == 0
@@ -237,7 +237,7 @@ def validate_article18(elements: List[Dict], article18_schema: Dict) -> List[Dic
             for ent in entrances:
                 width = ent.get("width", 0) or 0
                 # Convert to meters if needed (assuming width is already in meters from DXF extractor)
-                if width < rule.get("min_width_m", 0):
+                if width < rule.get("min_width_m"):
                     violations.append(f"Entrance width too small: {width:.2f} m < {rule.get('min_width_m')} m")
                 # Check if opens to living space (requires spatial analysis)
                 if rule.get("opens_to") and not ent.get("opens_to"):
@@ -270,7 +270,7 @@ def validate_article18(elements: List[Dict], article18_schema: Dict) -> List[Dic
                 for door in doors:
                     width = door.get("width", 0) or 0
                     width_cm = width * 100  # Convert meters to cm
-                    if width_cm < rule.get("min_width_cm", 0):
+                    if width_cm < rule.get("min_width_cm"):
                         violations.append(f"Door width too small: {width_cm:.1f} cm < {rule.get('min_width_cm')} cm")
                 
                 ruleResult["pass"] = len(violations) == 0
@@ -295,7 +295,7 @@ def validate_article18(elements: List[Dict], article18_schema: Dict) -> List[Dic
                 for corr in corridors:
                     width = corr.get("width", 0) or 0
                     width_cm = width * 100  # Convert meters to cm
-                    if width_cm < rule.get("min_width_cm", 0):
+                    if width_cm < rule.get("min_width_cm"):
                         violations.append(f"Corridor width too small: {width_cm:.1f} cm < {rule.get('min_width_cm')} cm")
                 
                 ruleResult["pass"] = len(violations) == 0
@@ -323,8 +323,8 @@ def validate_article18(elements: List[Dict], article18_schema: Dict) -> List[Dic
                 width = hall.get("width", 0) or 0
                 
                 # Check if extension area exceeds exemption
-                if area > rule.get("exemption_max_area_m2", 0):
-                    if width < rule.get("connecting_hall_min_dimension_m", 0):
+                if area > rule.get("exemption_max_area_m2"):
+                    if width < rule.get("connecting_hall_min_dimension_m"):
                         violations.append(f"Connecting hall width too small for extension > {rule.get('exemption_max_area_m2')} m²: {width:.2f} m < {rule.get('connecting_hall_min_dimension_m')} m")
             
             ruleResult["pass"] = len(violations) == 0

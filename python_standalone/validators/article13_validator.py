@@ -32,19 +32,8 @@ except Exception:
 # ---------------------------
 # Rule constants
 # ---------------------------
-MIN_STAIRS = 1
-MAX_STAIRS = 2
-MIN_SEPARATION_IF_TWO_M = 15.0
-MIN_CLEAR_WIDTH_M = 1.2
-MAX_TOTAL_WIDTH_M = 1.5
-MIN_RISER_CM = 10.0
-MAX_RISER_CM = 18.0
-MIN_TREAD_CM = 28.0
-MAX_NOSING_CM = 3.2
-MAX_SINGLE_FLIGHT_RISE_M = 3.65
-MIN_HEADROOM_UNDER_FLIGHT_M = 2.05
-MIN_HANDRAIL_HEIGHT_CM = 86.5
-MAX_HANDRAIL_HEIGHT_CM = 96.5
+# Rule constants (Moved to schema)
+SCALE_MM_TO_M = 0.001  # If your extractor outputs mm. If not sure, make this configurable via metadata.
 
 SCALE_MM_TO_M = 0.001  # If your extractor outputs mm. If not sure, make this configurable via metadata.
 
@@ -125,7 +114,9 @@ def get_scale_factor_from_metadata(metadata: Dict) -> float:
         return 0.001
     if unit in ("cm", "centimeter", "centimeters"):
         return 0.01
-    return SCALE_MM_TO_M
+    if unit in ("cm", "centimeter", "centimeters"):
+        return 0.01
+    return 0.001  # Default to mm if unknown
 
 
 # ---------------------------
@@ -190,7 +181,19 @@ def estimate_step_dims(stair: Dict) -> Dict:
         "headroom_m": None,  # cannot be derived from plan
     }
 
-    z_values = stair.get("z_values") or []
+    z_values_raw = stair.get("z_values") or []
+    # Clean z_values: ensure they are numbers
+    z_values = []
+    for z in z_values_raw:
+        if isinstance(z, (int, float)):
+            z_values.append(float(z))
+        elif isinstance(z, str):
+            try:
+                z_values.append(float(z))
+            except ValueError:
+                pass
+        # Ignore dicts or other types to prevent TypeError
+
     if len(z_values) >= 2:
         zmin, zmax = float(min(z_values)), float(max(z_values))
         rise = zmax - zmin
@@ -209,14 +212,26 @@ def estimate_step_dims(stair: Dict) -> Dict:
 # ---------------------------
 # Validation
 # ---------------------------
-def validate_article13_geopandas(elements: List[Dict], metadata: Dict) -> List[Dict]:
+# ---------------------------
+# Validation
+# ---------------------------
+def _get_rule(schema: Dict, rule_id: str) -> Optional[Dict]:
+    """Helper to find rule by ID in schema."""
+    if not schema or 'rules' not in schema:
+        return None
+    for r in schema['rules']:
+        if r.get('rule_id') == rule_id:
+            return r
+    return None
+
+def validate_article13_geopandas(elements: List[Dict], metadata: Dict, article_schema: Dict) -> List[Dict]:
     if not SHAPELY_AVAILABLE:
         return [
             {
                 "rule_id": "13.0",
-                "pass": None,
+                "pass": False,
                 "details": {
-                    "status": "NOT_CHECKED",
+                    "status": "FAIL",
                     "rule_type": "dependency",
                     "reason": "Shapely not available for Article 13",
                     "error": str(_SHAPELY_IMPORT_ERROR) if _SHAPELY_IMPORT_ERROR else None,
@@ -259,19 +274,25 @@ def validate_article13_geopandas(elements: List[Dict], metadata: Dict) -> List[D
         "details": {},
     }
 
-    if stair_count < MIN_STAIRS:
+    # Extract params from schema
+    r13_1 = _get_rule(article_schema, "13.1")
+    min_stairs = int(r13_1.get('min_stairs', 1)) if r13_1 else 1
+    max_stairs = int(r13_1.get('max_stairs', 2)) if r13_1 else 2
+    min_sep = float(r13_1.get('min_separation_if_two_m', 15.0)) if r13_1 else 15.0
+
+    if stair_count < min_stairs:
         rule_13_1["pass"] = False
         rule_13_1["details"] = {
             "stair_count": stair_count,
-            "min_required": MIN_STAIRS,
-            "reason": f"FAIL: Only {stair_count} stair(s) detected. Minimum {MIN_STAIRS} stair required.",
+            "min_required": min_stairs,
+            "reason": f"FAIL: Only {stair_count} stair(s) detected. Minimum {min_stairs} stair required.",
         }
-    elif stair_count > MAX_STAIRS:
+    elif stair_count > max_stairs:
         rule_13_1["pass"] = False
         rule_13_1["details"] = {
             "stair_count": stair_count,
-            "max_allowed": MAX_STAIRS,
-            "reason": f"FAIL: {stair_count} stairs detected. Maximum {MAX_STAIRS} stairs allowed.",
+            "max_allowed": max_stairs,
+            "reason": f"FAIL: {stair_count} stairs detected. Maximum {max_stairs} stairs allowed.",
         }
     elif stair_count == 2:
         dist = distance_between_polygons(stairs[0]["polygon"], stairs[1]["polygon"])
@@ -280,18 +301,19 @@ def validate_article13_geopandas(elements: List[Dict], metadata: Dict) -> List[D
             rule_13_1["details"] = {
                 "stair_count": stair_count,
                 "separation_distance_m": None,
-                "min_required_separation_m": MIN_SEPARATION_IF_TWO_M,
+                "min_required_separation_m": min_sep,
                 "reason": "FAIL: Could not compute separation distance.",
+                "status": "FAIL"
             }
         else:
-            ok = dist >= MIN_SEPARATION_IF_TWO_M
+            ok = dist >= min_sep
             rule_13_1["pass"] = ok
             rule_13_1["details"] = {
                 "stair_count": stair_count,
                 "separation_distance_m": round(dist, 2),
-                "min_required_separation_m": MIN_SEPARATION_IF_TWO_M,
+                "min_required_separation_m": min_sep,
                 "reason": f"{'PASS' if ok else 'FAIL'}: Separation {dist:.2f}m "
-                          f"{'meets' if ok else 'below'} minimum {MIN_SEPARATION_IF_TWO_M}m",
+                          f"{'meets' if ok else 'below'} minimum {min_sep}m",
             }
     else:
         rule_13_1["pass"] = True
@@ -313,27 +335,32 @@ def validate_article13_geopandas(elements: List[Dict], metadata: Dict) -> List[D
         "details": {},
     }
 
+    # Extract params from schema
+    r13_3 = _get_rule(article_schema, "13.3")
+    min_clear_width = float(r13_3.get('min_clear_width_m', 1.2)) if r13_3 else 1.2
+    max_total_width = float(r13_3.get('max_total_width_m', 1.5)) if r13_3 else 1.5
+
     if stair_count == 0:
         rule_13_3["pass"] = False
-        rule_13_3["details"] = {"stair_count": 0, "reason": "FAIL: No stairs detected."}
+        rule_13_3["details"] = {"stair_count": 0, "status": "FAIL", "reason": "FAIL: No stairs detected."}
     else:
         violations = []
         widths = []
         for i, st in enumerate(stairs, start=1):
             w = float(st.get("width_m") or 0.0)
             widths.append(round(w, 2))
-            if w < MIN_CLEAR_WIDTH_M:
-                violations.append(f"Stair {i}: width {w:.2f}m below {MIN_CLEAR_WIDTH_M}m")
-            elif w > MAX_TOTAL_WIDTH_M:
-                violations.append(f"Stair {i}: width {w:.2f}m above {MAX_TOTAL_WIDTH_M}m")
+            if w < min_clear_width:
+                violations.append(f"Stair {i}: width {w:.2f}m below {min_clear_width}m")
+            elif w > max_total_width:
+                violations.append(f"Stair {i}: width {w:.2f}m above {max_total_width}m")
 
         ok = len(violations) == 0
         rule_13_3["pass"] = ok
         rule_13_3["details"] = {
             "stair_count": stair_count,
             "stair_widths_m": widths,
-            "min_clear_width_m": MIN_CLEAR_WIDTH_M,
-            "max_total_width_m": MAX_TOTAL_WIDTH_M,
+            "min_clear_width_m": min_clear_width,
+            "max_total_width_m": max_total_width,
             "violations": violations,
             "reason": "PASS: Widths compliant." if ok else "FAIL: " + "; ".join(violations),
         }
@@ -351,16 +378,36 @@ def validate_article13_geopandas(elements: List[Dict], metadata: Dict) -> List[D
         "details": {},
     }
 
+    # Extract params from schema
+    r13_4 = _get_rule(article_schema, "13.4")
+    min_riser = 10.0
+    max_riser = 18.0
+    min_tread = 28.0
+    if r13_4:
+        if 'riser' in r13_4:
+            min_riser = float(r13_4['riser'].get('min_cm', 10.0))
+            max_riser = float(r13_4['riser'].get('max_cm', 18.0))
+        min_tread = float(r13_4.get('tread_min_cm', 28.0))
+
     if stair_count == 0:
         rule_13_4["pass"] = False
-        rule_13_4["details"] = {"stair_count": 0, "reason": "FAIL: No stairs detected."}
+        rule_13_4["details"] = {"stair_count": 0, "status": "FAIL", "reason": "FAIL: No stairs detected."}
     else:
-        # If no z-values anywhere -> UNKNOWN, not FAIL
-        any_z = any(len(st.get("z_values") or []) >= 2 for st in stairs)
+        # If no z-values anywhere -> FAIL, not UNKNOWN
+        # We need to clean z_values check as well
+        any_z = False
+        for st in stairs:
+            raw_z = st.get("z_values") or []
+            valid_z = [z for z in raw_z if isinstance(z, (int, float)) or (isinstance(z, str) and z.replace('.','',1).isdigit())]
+            if len(valid_z) >= 2:
+                any_z = True
+                break
+        
         if not any_z:
             rule_13_4["pass"] = False
             rule_13_4["details"] = {
-                "status": "UNKNOWN",
+                "status": "FAIL",
+                "error": "Elevation data missing",
                 "reason": "2D plan lacks elevation/Z data; cannot validate riser/tread/nosing reliably.",
             }
         else:
@@ -373,13 +420,13 @@ def validate_article13_geopandas(elements: List[Dict], metadata: Dict) -> List[D
                 t = dims["tread_cm"]
 
                 if r is not None:
-                    if r < MIN_RISER_CM:
-                        violations.append(f"Stair {i}: riser {r:.1f}cm below {MIN_RISER_CM}cm")
-                    elif r > MAX_RISER_CM:
-                        violations.append(f"Stair {i}: riser {r:.1f}cm above {MAX_RISER_CM}cm")
+                    if r < min_riser:
+                        violations.append(f"Stair {i}: riser {r:.1f}cm below {min_riser}cm")
+                    elif r > max_riser:
+                        violations.append(f"Stair {i}: riser {r:.1f}cm above {max_riser}cm")
 
-                if t is not None and t < MIN_TREAD_CM:
-                    violations.append(f"Stair {i}: tread {t:.1f}cm below {MIN_TREAD_CM}cm")
+                if t is not None and t < min_tread:
+                    violations.append(f"Stair {i}: tread {t:.1f}cm below {min_tread}cm")
 
                 # nosing requires step detail geometry -> UNKNOWN
             ok = len(violations) == 0
@@ -405,15 +452,28 @@ def validate_article13_geopandas(elements: List[Dict], metadata: Dict) -> List[D
         "details": {},
     }
 
+    # Extract params from schema
+    r13_5 = _get_rule(article_schema, "13.5")
+    max_vert_rise = float(r13_5.get('max_vertical_rise_m', 3.65)) if r13_5 else 3.65
+
     if stair_count == 0:
         rule_13_5["pass"] = False
-        rule_13_5["details"] = {"stair_count": 0, "reason": "FAIL: No stairs detected."}
+        rule_13_5["details"] = {"stair_count": 0, "status": "FAIL", "reason": "FAIL: No stairs detected."}
     else:
-        any_z = any(len(st.get("z_values") or []) >= 2 for st in stairs)
+        # Same check for Z
+        any_z = False
+        for st in stairs:
+            raw_z = st.get("z_values") or []
+            valid_z = [z for z in raw_z if isinstance(z, (int, float)) or (isinstance(z, str) and z.replace('.','',1).isdigit())]
+            if len(valid_z) >= 2:
+                any_z = True
+                break
+
         if not any_z:
             rule_13_5["pass"] = False
             rule_13_5["details"] = {
-                "status": "UNKNOWN",
+                "status": "FAIL",
+                "error": "Elevation data missing",
                 "reason": "2D plan lacks elevation/Z data; cannot validate vertical rise/headroom reliably.",
             }
         else:
@@ -423,8 +483,8 @@ def validate_article13_geopandas(elements: List[Dict], metadata: Dict) -> List[D
                 dims = estimate_step_dims(st)
                 rise = dims["vertical_rise_m"]
                 rises.append(None if rise is None else round(float(rise), 2))
-                if rise is not None and rise > MAX_SINGLE_FLIGHT_RISE_M:
-                    violations.append(f"Stair {i}: rise {rise:.2f}m above {MAX_SINGLE_FLIGHT_RISE_M}m")
+                if rise is not None and rise > max_vert_rise:
+                    violations.append(f"Stair {i}: rise {rise:.2f}m above {max_vert_rise}m")
             ok = len(violations) == 0
             rule_13_5["pass"] = ok
             rule_13_5["details"] = {
@@ -448,9 +508,14 @@ def validate_article13_geopandas(elements: List[Dict], metadata: Dict) -> List[D
         "details": {},
     }
 
+    # Extract params from schema
+    r13_6 = _get_rule(article_schema, "13.6")
+    min_handrail = float(r13_6.get('min_height_cm', 86.5)) if r13_6 else 86.5
+    max_handrail = float(r13_6.get('max_height_cm', 96.5)) if r13_6 else 96.5
+
     if stair_count == 0:
         rule_13_6["pass"] = False
-        rule_13_6["details"] = {"stair_count": 0, "reason": "FAIL: No stairs detected."}
+        rule_13_6["details"] = {"stair_count": 0, "status": "FAIL", "reason": "FAIL: No stairs detected."}
     else:
         heights = []
         missing = []
@@ -463,15 +528,16 @@ def validate_article13_geopandas(elements: List[Dict], metadata: Dict) -> List[D
             else:
                 h = float(h)
                 heights.append(round(h, 1))
-                if h < MIN_HANDRAIL_HEIGHT_CM:
-                    violations.append(f"Stair {i}: handrail {h:.1f}cm below {MIN_HANDRAIL_HEIGHT_CM}cm")
-                elif h > MAX_HANDRAIL_HEIGHT_CM:
-                    violations.append(f"Stair {i}: handrail {h:.1f}cm above {MAX_HANDRAIL_HEIGHT_CM}cm")
+                if h < min_handrail:
+                    violations.append(f"Stair {i}: handrail {h:.1f}cm below {min_handrail}cm")
+                elif h > max_handrail:
+                    violations.append(f"Stair {i}: handrail {h:.1f}cm above {max_handrail}cm")
 
         if missing and not violations:
             rule_13_6["pass"] = False
             rule_13_6["details"] = {
-                "status": "UNKNOWN",
+                "status": "FAIL",
+                "error": "Handrail height data missing",
                 "handrail_heights_cm": heights,
                 "missing_for_stairs": missing,
                 "reason": "Handrail height not present in extracted data; cannot validate from 2D plan.",
@@ -503,7 +569,11 @@ def main() -> None:
         elements = input_data.get("elements", [])
         metadata = input_data.get("metadata", {})
 
-        results = validate_article13_geopandas(elements, metadata)
+        # Schema (mock fetch for standalone main)
+        from config import get_article
+        article_schema = get_article("13") or {}
+        
+        results = validate_article13_geopandas(elements, metadata, article_schema)
 
         # stdout MUST be pure JSON (Node parses this)
         print(json.dumps(results, ensure_ascii=False, indent=2))

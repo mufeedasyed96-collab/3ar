@@ -25,14 +25,15 @@ def validate_article7(elements: List[Dict], metadata: Dict, article7_schema: Dic
         
         if rule_type == 'separation':
             # Rule 7.1, 7.3: Separation distances
-            annex_keywords = ['annex', 'outbuilding', 'shed', 'workshop', 'storage', 'ملحق']
+            keywords = article7_schema.get('keywords', {})
+            annex_keywords = keywords.get('annex') or ['annex', 'outbuilding', 'shed', 'workshop', 'storage', 'ملحق']
             annexes = [e for e in elements if any(kw in str(e.get('name', '')).lower() for kw in annex_keywords)]
             
             if len(annexes) == 0:
                 rule_result['pass'] = True
                 rule_result['details'] = {
                     'note': 'No annexes detected. Rule applies when annexes are present.',
-                    'min_separation_m': rule.get('min_separation_m', 1.5),
+                    'min_separation_m': rule.get('min_separation_m'),
                     'status': 'PASS'
                 }
             else:
@@ -40,17 +41,18 @@ def validate_article7(elements: List[Dict], metadata: Dict, article7_schema: Dic
                 rule_result['details'] = {
                     'note': 'Separation distance validation requires spatial analysis',
                     'annexes_detected': len(annexes),
-                    'min_separation_m': rule.get('min_separation_m', 1.5),
-                    'status': 'UNKNOWN',
+                    'min_separation_m': rule.get('min_separation_m'),
+                    'status': 'FAIL',
                     'error': 'Spatial analysis not implemented'
                 }
         
         elif rule_type == 'circulation':
             # Rule 7.2: Movement corridors
-            corridor_keywords = ['corridor', 'passage', 'hallway', 'ممر']
+            keywords = article7_schema.get('keywords', {})
+            corridor_keywords = keywords.get('corridor') or ['corridor', 'passage', 'hallway', 'ممر']
             corridors = [e for e in elements if any(kw in str(e.get('name', '')).lower() for kw in corridor_keywords)]
             
-            min_width = rule.get('min_width_m', 1.1)
+            min_width = rule.get('min_width_m')
             failed = [c for c in corridors if (c.get('width', 0) or 0) < min_width]
             
             rule_result['pass'] = len(failed) == 0

@@ -26,13 +26,7 @@ except Exception as e:
     )
 
 # Rule constants
-ROOF_BUILDING_MAX_PERCENT = 70.0
-ROOF_OPEN_MIN_PERCENT = 30.0
-PARAPET_MIN_HEIGHT_M = 1.2
-PARAPET_MAX_HEIGHT_M = 2.0
-EXCLUDED_PROJECTIONS_CM = 30.0
-MIN_ROOF_AREA_M2 = 1.0  # Minimum valid roof polygon area
-MAX_ROOF_AREA_M2 = 10000.0  # Maximum valid roof polygon area
+# Rule constants (Moved to schema)
 SCALE_MM_TO_M = 0.001  # DXF mm → meters
 
 
@@ -63,7 +57,7 @@ def create_geodataframe_from_vertices(vertices: List[Tuple[float, float]], name:
         if not poly.is_valid:
             poly = poly.buffer(0)  # Fix invalid geometry
         
-        if poly.area < MIN_ROOF_AREA_M2 or poly.area > MAX_ROOF_AREA_M2:
+        if poly.area < 1.0 or poly.area > 10000.0:  # Hard limits for sanity check only
             return gpd.GeoDataFrame()  # Skip invalid areas
         
         gdf = gpd.GeoDataFrame([{name: name}], geometry=[poly], crs=None)
@@ -196,7 +190,7 @@ def calculate_roof_areas(first_floor_roof_gdf: gpd.GeoDataFrame,
         total_area = 0.0
         for el in all_roof_elements:
             area = el.get('area', 0)
-            if area and MIN_ROOF_AREA_M2 <= area <= MAX_ROOF_AREA_M2:
+            if area and 1.0 <= area <= 10000.0:
                 total_area += float(area)
         results['total_roof_area_m2'] = total_area
         results['first_floor_roof_area_m2'] = total_area
@@ -245,7 +239,16 @@ def calculate_roof_areas(first_floor_roof_gdf: gpd.GeoDataFrame,
     return results
 
 
-def validate_article10_geopandas(elements: List[Dict], metadata: Dict) -> List[Dict]:
+def _get_rule(schema: Dict, rule_id: str) -> Optional[Dict]:
+    """Helper to find rule by ID in schema."""
+    if not schema or 'rules' not in schema:
+        return None
+    for r in schema['rules']:
+        if r.get('rule_id') == rule_id:
+            return r
+    return None
+
+def validate_article10_geopandas(elements: List[Dict], metadata: Dict, article_schema: Dict) -> List[Dict]:
     """
     Validate Article 10 rules using GeoPandas for accurate geometry calculations.
     
@@ -306,6 +309,10 @@ def validate_article10_geopandas(elements: List[Dict], metadata: Dict) -> List[D
             "pass": False,
             "details": {}
         }
+        # Extract params from schema
+        r10_1 = _get_rule(article_schema, "10.1")
+        roof_building_max = float(r10_1.get('max_percent_of_first_floor_roof')) if r10_1 and r10_1.get('max_percent_of_first_floor_roof') is not None else None
+
         if total_roof_area_m2 <= 0:
             rule_10_1["details"] = {
                 "status": "FAIL",
@@ -313,16 +320,22 @@ def validate_article10_geopandas(elements: List[Dict], metadata: Dict) -> List[D
                 "solution": "Ensure roof elements have area and are on layers containing keywords: roof/سطح/terrace.",
             }
         else:
-            coverage_pass = coverage_percent <= ROOF_BUILDING_MAX_PERCENT
-            rule_10_1["pass"] = bool(coverage_pass)
-            rule_10_1["details"] = {
-                "status": "PASS" if coverage_pass else "FAIL",
-                "total_roof_area_m2": round(total_roof_area_m2, 2),
-                "occupied_area_m2": round(occupied_area_m2, 2),
-                "coverage_percent": round(coverage_percent, 2),
-                "max_allowed_percent": ROOF_BUILDING_MAX_PERCENT,
-                "note": "Fallback mode: using sum of roof element areas (no union).",
-            }
+            if roof_building_max is None:
+                 rule_10_1["details"] = {
+                    "status": "FAIL",
+                    "reason": "Configuration missing: 'max_percent_of_first_floor_roof' not found in schema 10.1"
+                }
+            else:
+                coverage_pass = coverage_percent <= roof_building_max
+                rule_10_1["pass"] = bool(coverage_pass)
+                rule_10_1["details"] = {
+                    "status": "PASS" if coverage_pass else "FAIL",
+                    "total_roof_area_m2": round(total_roof_area_m2, 2),
+                    "occupied_area_m2": round(occupied_area_m2, 2),
+                    "coverage_percent": round(coverage_percent, 2),
+                    "max_allowed_percent": roof_building_max,
+                    "note": "Fallback mode: using sum of roof element areas (no union).",
+                }
         results.append(rule_10_1)
 
         # 10.3
@@ -334,6 +347,16 @@ def validate_article10_geopandas(elements: List[Dict], metadata: Dict) -> List[D
             "pass": False,
             "details": {}
         }
+        # Extract params from schema
+        r10_3 = _get_rule(article_schema, "10.3")
+        roof_open_min = float(r10_3.get('min_percent')) if r10_3 and r10_3.get('min_percent') is not None else None
+        
+        parapet_min = None
+        parapet_max = None
+        if r10_3 and 'parapet' in r10_3:
+            parapet_min = float(r10_3['parapet'].get('min_height_m')) if r10_3['parapet'].get('min_height_m') is not None else None
+            parapet_max = float(r10_3['parapet'].get('max_height_m')) if r10_3['parapet'].get('max_height_m') is not None else None
+
         if total_roof_area_m2 <= 0:
             rule_10_3["details"] = {
                 "status": "FAIL",
@@ -341,17 +364,23 @@ def validate_article10_geopandas(elements: List[Dict], metadata: Dict) -> List[D
                 "solution": "Ensure roof elements have area and are on layers containing keywords: roof/سطح/terrace.",
             }
         else:
-            open_pass = open_percent >= ROOF_OPEN_MIN_PERCENT
-            rule_10_3["pass"] = bool(open_pass)
-            rule_10_3["details"] = {
-                "status": "PASS" if open_pass else "FAIL",
-                "total_roof_area_m2": round(total_roof_area_m2, 2),
-                "empty_area_m2": round(empty_area_m2, 2),
-                "open_percent": round(open_percent, 2),
-                "min_required_percent": ROOF_OPEN_MIN_PERCENT,
-                "parapet_requirement": f"{PARAPET_MIN_HEIGHT_M}m to {PARAPET_MAX_HEIGHT_M}m (height requires elevation)",
-                "note": "Fallback mode: open area computed as total - occupied.",
-            }
+            if roof_open_min is None:
+                 rule_10_3["details"] = {
+                    "status": "FAIL",
+                    "reason": "Configuration missing: 'min_percent' not found in schema 10.3"
+                }
+            else:
+                open_pass = open_percent >= roof_open_min
+                rule_10_3["pass"] = bool(open_pass)
+                rule_10_3["details"] = {
+                    "status": "PASS" if open_pass else "FAIL",
+                    "total_roof_area_m2": round(total_roof_area_m2, 2),
+                    "empty_area_m2": round(empty_area_m2, 2),
+                    "open_percent": round(open_percent, 2),
+                    "min_required_percent": roof_open_min,
+                    "parapet_requirement": f"{parapet_min}m to {parapet_max}m (height requires elevation)" if parapet_min and parapet_max else "Parapet requirements missing in schema",
+                    "note": "Fallback mode: open area computed as total - occupied.",
+                }
         results.append(rule_10_3)
 
         # 10.4 (cannot verify height in fallback; keep counted as PASS so totals remain 3)
@@ -389,28 +418,40 @@ def validate_article10_geopandas(elements: List[Dict], metadata: Dict) -> List[D
         "details": {}
     }
     
+    # Extract params from schema for Geopandas section
+    r10_1 = _get_rule(article_schema, "10.1")
+    roof_building_max = float(r10_1.get('max_percent_of_first_floor_roof')) if r10_1 and r10_1.get('max_percent_of_first_floor_roof') is not None else None
+    excluded_proj = float(r10_1.get('excluded_projections_cm')) if r10_1 and r10_1.get('excluded_projections_cm') is not None else None
+    
     if area_results['total_roof_area_m2'] == 0:
         rule_10_1["details"] = {
+            "status": "FAIL",
             "note": "FAIL: Total roof floor area not found",
             "error": "No roof geometry detected",
             "solution": "Ensure DXF contains roof polygons on layers with keywords: roof, rooftop, surface, سطح, terrace"
         }
     else:
-        # Check condition: occupied area <= 70% of total roof area
-        coverage_pass = area_results['coverage_percent'] <= ROOF_BUILDING_MAX_PERCENT
-        rule_10_1["pass"] = coverage_pass
-        rule_10_1["details"] = {
-            "total_roof_area_m2": round(area_results['total_roof_area_m2'], 2),
-            "first_floor_roof_area_m2": round(area_results['first_floor_roof_area_m2'], 2),
-            "occupied_area_m2": round(area_results['occupied_area_m2'], 2),
-            "empty_area_m2": round(area_results['empty_area_m2'], 2),
-            "coverage_percent": round(area_results['coverage_percent'], 2),
-            "max_allowed_percent": ROOF_BUILDING_MAX_PERCENT,
-            "excluded_projections_cm": EXCLUDED_PROJECTIONS_CM,
-            "building_count": len(roof_buildings_gdf) if not roof_buildings_gdf.empty else 0,
-            "calculation_method": "Total roof area = first floor roof boundary or sum of all roof elements. Occupied area = sum of labeled building polygons. Empty area = total - occupied.",
-            "reason": f"{'PASS' if coverage_pass else 'FAIL'}: Occupied area {area_results['occupied_area_m2']:.2f} m² ({area_results['coverage_percent']:.2f}%) {'is within' if coverage_pass else 'exceeds'} limit of {ROOF_BUILDING_MAX_PERCENT}% of total roof area {area_results['total_roof_area_m2']:.2f} m²"
-        }
+        if roof_building_max is None:
+            rule_10_1["details"] = {
+                "note": "FAIL: Configuration missing",
+                "error": "'max_percent_of_first_floor_roof' not found in schema 10.1"
+            }
+        else:
+            # Check condition: occupied area <= 70% of total roof area
+            coverage_pass = area_results['coverage_percent'] <= roof_building_max
+            rule_10_1["pass"] = coverage_pass
+            rule_10_1["details"] = {
+                "total_roof_area_m2": round(area_results['total_roof_area_m2'], 2),
+                "first_floor_roof_area_m2": round(area_results['first_floor_roof_area_m2'], 2),
+                "occupied_area_m2": round(area_results['occupied_area_m2'], 2),
+                "empty_area_m2": round(area_results['empty_area_m2'], 2),
+                "coverage_percent": round(area_results['coverage_percent'], 2),
+                "max_allowed_percent": roof_building_max,
+                "excluded_projections_cm": excluded_proj,
+                "building_count": len(roof_buildings_gdf) if not roof_buildings_gdf.empty else 0,
+                "calculation_method": "Total roof area = first floor roof boundary or sum of all roof elements. Occupied area = sum of labeled building polygons. Empty area = total - occupied.",
+                "reason": f"{'PASS' if coverage_pass else 'FAIL'}: Occupied area {area_results['occupied_area_m2']:.2f} m² ({area_results['coverage_percent']:.2f}%) {'is within' if coverage_pass else 'exceeds'} limit of {roof_building_max}% of total roof area {area_results['total_roof_area_m2']:.2f} m²"
+            }
     
     results.append(rule_10_1)
     
@@ -425,32 +466,49 @@ def validate_article10_geopandas(elements: List[Dict], metadata: Dict) -> List[D
         "details": {}
     }
     
+    # Extract params from schema for Geopandas section
+    r10_3 = _get_rule(article_schema, "10.3")
+    roof_open_min = float(r10_3.get('min_percent')) if r10_3 and r10_3.get('min_percent') is not None else None
+    
+    parapet_min = None
+    parapet_max = None
+    if r10_3 and 'parapet' in r10_3:
+        parapet_min = float(r10_3['parapet'].get('min_height_m')) if r10_3['parapet'].get('min_height_m') is not None else None
+        parapet_max = float(r10_3['parapet'].get('max_height_m')) if r10_3['parapet'].get('max_height_m') is not None else None
+
     if area_results['total_roof_area_m2'] == 0:
         rule_10_3["details"] = {
+            "status": "FAIL",
             "note": "FAIL: Total roof floor area not found",
             "error": "No roof geometry detected",
             "solution": "Ensure DXF contains roof polygons on layers with keywords: roof, rooftop, surface, سطح, terrace"
         }
     else:
-        # Check condition: empty area >= 30% of total roof area
-        open_pass = area_results['open_percent'] >= ROOF_OPEN_MIN_PERCENT
-        rule_10_3["pass"] = open_pass
-        rule_10_3["details"] = {
-            "total_roof_area_m2": round(area_results['total_roof_area_m2'], 2),
-            "first_floor_roof_area_m2": round(area_results['first_floor_roof_area_m2'], 2),
-            "occupied_area_m2": round(area_results['occupied_area_m2'], 2),
-            "empty_area_m2": round(area_results['empty_area_m2'], 2),
-            "open_percent": round(area_results['open_percent'], 2),
-            "min_required_percent": ROOF_OPEN_MIN_PERCENT,
-            "parapet": {
-                "min_height_m": PARAPET_MIN_HEIGHT_M,
-                "max_height_m": PARAPET_MAX_HEIGHT_M
-            },
-            "unlabeled_geometry_count": len(roof_open_areas_gdf) if not roof_open_areas_gdf.empty else 0,
-            "calculation_method": "Total roof area = first floor roof boundary or sum of all roof elements. Occupied area = sum of labeled building polygons. Empty area = total - occupied.",
-            "reason": f"{'PASS' if open_pass else 'FAIL'}: Empty area {area_results['empty_area_m2']:.2f} m² ({area_results['open_percent']:.2f}%) {'meets' if open_pass else 'is below'} minimum requirement of {ROOF_OPEN_MIN_PERCENT}% of total roof area {area_results['total_roof_area_m2']:.2f} m²",
-            "parapet_requirement": f"Parapet required around open areas, height {PARAPET_MIN_HEIGHT_M}m to {PARAPET_MAX_HEIGHT_M}m (height verification requires elevation data)"
-        }
+        if roof_open_min is None:
+            rule_10_3["details"] = {
+                "note": "FAIL: Configuration missing",
+                "error": "'min_percent' not found in schema 10.3"
+            }
+        else:
+            # Check condition: empty area >= 30% of total roof area
+            open_pass = area_results['open_percent'] >= roof_open_min
+            rule_10_3["pass"] = open_pass
+            rule_10_3["details"] = {
+                "total_roof_area_m2": round(area_results['total_roof_area_m2'], 2),
+                "first_floor_roof_area_m2": round(area_results['first_floor_roof_area_m2'], 2),
+                "occupied_area_m2": round(area_results['occupied_area_m2'], 2),
+                "empty_area_m2": round(area_results['empty_area_m2'], 2),
+                "open_percent": round(area_results['open_percent'], 2),
+                "min_required_percent": roof_open_min,
+                "parapet": {
+                    "min_height_m": parapet_min,
+                    "max_height_m": parapet_max
+                },
+                "unlabeled_geometry_count": len(roof_open_areas_gdf) if not roof_open_areas_gdf.empty else 0,
+                "calculation_method": "Total roof area = first floor roof boundary or sum of all roof elements. Occupied area = sum of labeled building polygons. Empty area = total - occupied.",
+                "reason": f"{'PASS' if open_pass else 'FAIL'}: Empty area {area_results['empty_area_m2']:.2f} m² ({area_results['open_percent']:.2f}%) {'meets' if open_pass else 'is below'} minimum requirement of {roof_open_min}% of total roof area {area_results['total_roof_area_m2']:.2f} m²",
+                "parapet_requirement": f"Parapet required around open areas, height {parapet_min}m to {parapet_max}m (height verification requires elevation data)" if parapet_min and parapet_max else "Parapet requirement missing in schema"
+            }
     
     results.append(rule_10_3)
     
@@ -479,12 +537,12 @@ def validate_article10_geopandas(elements: List[Dict], metadata: Dict) -> List[D
     # For now, we only check if parapets are present
     rule_10_4["pass"] = parapet_count > 0 or area_results['open_percent'] == 0
     rule_10_4["details"] = {
-        "min_height_m": PARAPET_MIN_HEIGHT_M,
-        "max_height_m": PARAPET_MAX_HEIGHT_M,
+        "min_height_m": parapet_min,
+        "max_height_m": parapet_max,
         "parapet_count": parapet_count,
         "total_parapet_area_m2": sum(el.get('area', 0) for el in parapet_elements),
         "reason": f"{'PASS' if rule_10_4['pass'] else 'FAIL'}: Parapets detected ({parapet_count}). Height verification requires elevation data.",
-        "requirement": f"Parapet required around open roof areas and top roof, height {PARAPET_MIN_HEIGHT_M}m to {PARAPET_MAX_HEIGHT_M}m",
+        "requirement": f"Parapet required around open roof areas and top roof, height {parapet_min}m to {parapet_max}m",
         "note": "Height verification requires elevation data (Z-coordinates) not available in 2D DXF"
     }
     
@@ -501,8 +559,12 @@ def main():
         elements = input_data.get('elements', [])
         metadata = input_data.get('metadata', {})
         
+        # Schema (mock fetch for standalone main)
+        from config import get_article
+        article_schema = get_article("10") or {}
+        
         # Validate Article 10
-        results = validate_article10_geopandas(elements, metadata)
+        results = validate_article10_geopandas(elements, metadata, article_schema)
         
         # Clean results for JSON serialization (replace Infinity/NaN with None)
         def clean_for_json(obj):
