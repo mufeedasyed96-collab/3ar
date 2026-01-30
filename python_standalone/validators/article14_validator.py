@@ -38,10 +38,11 @@ def validate_article14(elements: List[Dict], article14_schema: Dict) -> List[Dic
                 
                 # Check based on detection first
                 if not fences:
-                    rule_result['pass'] = True # If no fences, rules technically pass or N/A. Let's say pass with note.
+                    rule_result['pass'] = False
                     rule_result['details'] = {
                         'note': 'No fence elements detected',
-                        'status': 'PASS'
+                        'status': 'FAIL',
+                        'error': 'Fence is mandatory but not detected'
                     }
                 else:
                     # If fences exist, we can't fully validate dimensions without specific attributes
@@ -93,8 +94,12 @@ def validate_article14(elements: List[Dict], article14_schema: Dict) -> List[Dic
         elif rule_type == 'safety':
             # Rule 14.4: Solid fence
              if not fences:
-                rule_result['pass'] = True
-                rule_result['details'] = {'status': 'PASS'}
+                rule_result['pass'] = False
+                rule_result['details'] = {
+                    'note': 'No fence elements detected',
+                    'status': 'FAIL',
+                    'error': 'Fence is mandatory but not detected'
+                }
              else:
                 rule_result['pass'] = False
                 rule_result['details'] = {

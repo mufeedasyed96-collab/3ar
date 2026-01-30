@@ -44,57 +44,95 @@ def validate_article15(elements: List[Dict], metadata: Dict, article15_schema: D
             if rule.get('element') == 'vehicle_entrance':
                 # Rule 15.2a: Max 2 vehicle entrances, min 6m apart
                 max_count = rule.get('max_count')
-                rule_result['pass'] = len(vehicle_entrances) <= max_count
-                rule_result['details'] = {
-                    'vehicle_entrance_count': len(vehicle_entrances),
-                    'max_allowed': max_count,
-                    'min_separation_m': rule.get('min_separation_m'),
-                    'note': 'Separation distance requires spatial analysis',
-                    'status': 'PASS' if rule_result['pass'] else 'FAIL'
-                }
+                count = len(vehicle_entrances)
+                if count == 0:
+                    rule_result['pass'] = False
+                    rule_result['details'] = {
+                        'vehicle_entrance_count': 0,
+                        'error': 'No vehicle entrances detected',
+                        'status': 'FAIL'
+                    }
+                else:
+                    rule_result['pass'] = count <= max_count
+                    rule_result['details'] = {
+                        'vehicle_entrance_count': count,
+                        'max_allowed': max_count,
+                        'min_separation_m': rule.get('min_separation_m'),
+                        'note': 'Separation distance requires spatial analysis',
+                        'status': 'PASS' if rule_result['pass'] else 'FAIL'
+                    }
+
             elif rule.get('element') == 'pedestrian_entrance':
                 # Rule 15.3a: Max 2 pedestrian entrances
                 max_count = rule.get('max_count')
-                rule_result['pass'] = len(pedestrian_entrances) <= max_count
-                rule_result['details'] = {
-                    'pedestrian_entrance_count': len(pedestrian_entrances),
-                    'max_allowed': max_count,
-                    'status': 'PASS' if rule_result['pass'] else 'FAIL'
-                }
+                count = len(pedestrian_entrances)
+                if count == 0:
+                    rule_result['pass'] = False
+                    rule_result['details'] = {
+                        'pedestrian_entrance_count': 0,
+                        'error': 'No pedestrian entrances detected',
+                        'status': 'FAIL'
+                    }
+                else:
+                    rule_result['pass'] = count <= max_count
+                    rule_result['details'] = {
+                        'pedestrian_entrance_count': count,
+                        'max_allowed': max_count,
+                        'status': 'PASS' if rule_result['pass'] else 'FAIL'
+                    }
         
         elif rule_type == 'dimension':
             if rule.get('element') == 'vehicle_entrance':
                 # Rule 15.2b: Vehicle entrance width 3-6m
                 min_width = rule.get('min_width_m')
                 max_width = rule.get('max_width_m')
-                failed = [
-                    e for e in vehicle_entrances
-                    if (e.get('width', 0) or 0) < min_width or (e.get('width', 0) or 0) > max_width
-                ]
-                rule_result['pass'] = len(failed) == 0
-                rule_result['details'] = {
-                    'vehicle_entrance_count': len(vehicle_entrances),
-                    'failed_count': len(failed),
-                    'min_width_m': min_width,
-                    'max_width_m': max_width,
-                    'status': 'PASS' if rule_result['pass'] else 'FAIL'
-                }
+                
+                if not vehicle_entrances:
+                    rule_result['pass'] = False
+                    rule_result['details'] = {
+                        'vehicle_entrance_count': 0,
+                        'status': 'FAIL',
+                        'error': 'No vehicle entrances to validate dimensions'
+                    }
+                else:
+                    failed = [
+                        e for e in vehicle_entrances
+                        if (e.get('width', 0) or 0) < min_width or (e.get('width', 0) or 0) > max_width
+                    ]
+                    rule_result['pass'] = len(failed) == 0
+                    rule_result['details'] = {
+                        'vehicle_entrance_count': len(vehicle_entrances),
+                        'failed_count': len(failed),
+                        'min_width_m': min_width,
+                        'max_width_m': max_width,
+                        'status': 'PASS' if rule_result['pass'] else 'FAIL'
+                    }
+
             elif rule.get('element') == 'pedestrian_entrance':
                 # Rule 15.3e: Pedestrian entrance width 1-2m
                 min_width = rule.get('min_width_m')
                 max_width = rule.get('max_width_m')
-                failed = [
-                    e for e in pedestrian_entrances
-                    if (e.get('width', 0) or 0) < min_width or (e.get('width', 0) or 0) > max_width
-                ]
-                rule_result['pass'] = len(failed) == 0
-                rule_result['details'] = {
-                    'pedestrian_entrance_count': len(pedestrian_entrances),
-                    'failed_count': len(failed),
-                    'min_width_m': min_width,
-                    'max_width_m': max_width,
-                    'status': 'PASS' if rule_result['pass'] else 'FAIL'
-                }
+                
+                if not pedestrian_entrances:
+                    rule_result['pass'] = False
+                    rule_result['details'] = {
+                        'pedestrian_entrance_count': 0,
+                        'status': 'FAIL',
+                        'error': 'No pedestrian entrances to validate dimensions'
+                    }
+                else:
+                    failed = [
+                        e for e in pedestrian_entrances
+                        if (e.get('width', 0) or 0) < min_width or (e.get('width', 0) or 0) > max_width
+                    ]
+                    rule_result['pass'] = len(failed) == 0
+                    rule_result['details'] = {
+                        'pedestrian_entrance_count': len(pedestrian_entrances),
+                        'failed_count': len(failed),
+                        'min_width_m': min_width,
+                        'max_width_m': max_width,
+                        'status': 'PASS' if rule_result['pass'] else 'FAIL'
+                    }
         
         elif rule_type == 'restriction':
             # Rule 15.4: Doors must not open outside plot

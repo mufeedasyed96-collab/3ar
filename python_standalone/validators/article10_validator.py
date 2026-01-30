@@ -390,10 +390,11 @@ def validate_article10_geopandas(elements: List[Dict], metadata: Dict, article_s
                 "rule_id": "10.4",
                 "rule_type": "safety",
                 "description_en": "Parapet required around open roof areas and top roof, height 1.2-2.0m",
-                "pass": True,
+                "pass": False,
                 "details": {
-                    "status": "PASS",
-                    "note": "Height verification requires elevation data; marked PASS in fallback mode to avoid NOT_CHECKED.",
+                    "status": "FAIL",
+                    "note": "Height verification requires elevation data; marked FAIL as data is missing.",
+                    "error": "Missing elevation data for parapet check"
                 },
             }
         )

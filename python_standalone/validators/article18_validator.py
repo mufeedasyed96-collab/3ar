@@ -93,7 +93,9 @@ def validate_article18(elements: List[Dict], article18_schema: Dict) -> List[Dic
 
                 # Check specialized kitchens area constraints
                 violations = []
-                if main_kitchen_count > max_allowed:
+                if main_kitchen_count == 0:
+                     violations.append("No main kitchen detected. At least one main kitchen is required.")
+                elif main_kitchen_count > max_allowed:
                     violations.append(f"Too many main kitchens: {main_kitchen_count} > {max_allowed}")
 
                 for sk in specialized_kitchens:
@@ -114,7 +116,7 @@ def validate_article18(elements: List[Dict], article18_schema: Dict) -> List[Dic
                     "violations": violations,
                     "rule_type": "kitchen",
                     "status": "PASS" if not violations else "FAIL",
-                    "reason": "PASS: Main kitchen count within limit, specialized kitchens within area limits" if not violations else f"FAIL: {'; '.join(violations)}"
+                    "reason": "PASS: Kitchen requirements met" if not violations else f"FAIL: {'; '.join(violations)}"
                 }
                 
             elif element_name == "pantry_kitchen":

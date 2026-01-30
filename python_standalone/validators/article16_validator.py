@@ -31,10 +31,11 @@ def validate_article16(elements: List[Dict], article16_schema: Dict) -> List[Dic
         if rule_type == 'safety':
             # Rule 16.2: Separation from play areas
             if not parking_elements:
-                rule_result['pass'] = True
+                rule_result['pass'] = False
                 rule_result['details'] = {
                     'note': 'No parking elements detected',
-                    'status': 'PASS'
+                    'status': 'FAIL',
+                    'error': 'Minimum 2 parking spaces required (Rule 16.1), none found.'
                 }
             else:
                 rule_result['pass'] = False

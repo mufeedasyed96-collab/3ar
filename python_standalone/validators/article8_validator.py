@@ -63,7 +63,10 @@ def validate_article8(elements: List[Dict], metadata: Dict, article8_schema: Dic
                 issues.append(f"First: {floor_counts['first']} > {max_floors.get('first')}")
             if floor_counts['roof'] > max_floors.get('roof'):
                 issues.append(f"Roof: {floor_counts['roof']} > {max_floors.get('roof')}")
-            if total_above > max_floors.get('total_above_ground'):
+            
+            if total_above == 0:
+                 issues.append("No above-ground floors detected (Ground, First, or Roof). Total floors must be > 0.")
+            elif total_above > max_floors.get('total_above_ground'):
                 issues.append(f"Total above-ground: {total_above} > {max_floors.get('total_above_ground')}")
             
             rule_result['pass'] = len(issues) == 0

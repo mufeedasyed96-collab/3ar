@@ -28,6 +28,13 @@ except Exception as e:
 # Rule constants (Moved to schema)
 SCALE_MM_TO_M = 0.001  # DXF mm → meters
 
+# Article 6 validation constants
+SETBACK_STREET_M = 2.0  # Minimum setback from street boundary
+SETBACK_OTHER_M = 1.5   # Minimum setback from other boundaries
+CANOPY_MAX_PROJECTION_M = 2.0  # Maximum canopy projection outside plot
+TOL = 0.01  # Tolerance for floating point comparisons (1cm)
+
+
 
 
 def _unit_scale_to_m(metadata: Dict) -> float:
@@ -357,17 +364,20 @@ def validate_article6_geopandas(elements: List[Dict], metadata: Dict, article_sc
         )
 
         # Rule 6.4/6.5 are height-dependent; we can only validate projection magnitude.
+        # When data is missing, mark as FAIL instead of PASS
+        has_data = bool(plot_pts and bldg_pts)
         results.append(
             {
                 "article_id": "6",
                 "rule_id": "6.4",
                 "rule_type": "projection",
                 "description_en": "Extensions below 2.45m pavement level limited (stairs/aesthetic)",
-                "pass": True,
+                "pass": has_data,
                 "details": {
-                    "status": "PASS",
-                    "note": "Height-based validation requires elevation data. Marked PASS for demo continuity (no GeoPandas).",
-                    "max_projection_m": round(max_proj, 3),
+                    "status": "PASS" if has_data else "FAIL",
+                    "note": "Height-based validation requires elevation data." if has_data else "Missing plot/building vertices - cannot validate.",
+                    "max_projection_m": round(max_proj, 3) if has_data else None,
+                    "error": None if has_data else "Setback validation requires plot boundary and building footprint vertices.",
                 },
             }
         )
@@ -377,11 +387,12 @@ def validate_article6_geopandas(elements: List[Dict], metadata: Dict, article_sc
                 "rule_id": "6.5",
                 "rule_type": "projection",
                 "description_en": "Extensions above 2.45m: aesthetic elements max 30cm or entrance canopies",
-                "pass": True,
+                "pass": has_data,
                 "details": {
-                    "status": "PASS",
-                    "note": "Height-based validation requires elevation data. Marked PASS for demo continuity (no GeoPandas).",
-                    "max_projection_m": round(max_proj, 3),
+                    "status": "PASS" if has_data else "FAIL",
+                    "note": "Height-based validation requires elevation data." if has_data else "Missing plot/building vertices - cannot validate.",
+                    "max_projection_m": round(max_proj, 3) if has_data else None,
+                    "error": None if has_data else "Setback validation requires plot boundary and building footprint vertices.",
                 },
             }
         )
@@ -393,10 +404,11 @@ def validate_article6_geopandas(elements: List[Dict], metadata: Dict, article_sc
                 "rule_id": "6.6",
                 "rule_type": "restriction",
                 "description_en": "No projections into neighbor boundaries including foundations/fence columns",
-                "pass": True,
+                "pass": has_data,
                 "details": {
-                    "status": "PASS",
-                    "note": "Not fully classifiable without semantic layer mapping; marked PASS to avoid NOT_CHECKED (demo mode).",
+                    "status": "PASS" if has_data else "FAIL",
+                    "note": "Not fully classifiable without semantic layer mapping." if has_data else "Missing plot/building vertices - cannot validate.",
+                    "error": None if has_data else "Setback validation requires plot boundary and building footprint vertices.",
                 },
             }
         )
@@ -637,10 +649,11 @@ def validate_article6_geopandas(elements: List[Dict], metadata: Dict, article_sc
         "rule_type": "restriction",
         "description_en": "No projections into neighbor boundaries including foundations/fence columns",
         "description_ar": "لا يسمح بعمل أي بروز في حدود الجار",
-        "pass": True,
+        "pass": False,
         "details": {
-            "status": "PASS",
-            "note": "Requires semantic identification of neighbor boundary projections; treated as PASS to keep rule counts consistent."
+            "status": "FAIL",
+            "note": "Requires semantic identification of neighbor boundary projections.",
+            "error": "Semantic boundary data missing"
         }
     }
     results.append(rule_6_6)
