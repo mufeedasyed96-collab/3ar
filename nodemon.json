@@ -1,7 +1,9 @@
 {
   "watch": [
-    "api_example.js",
-    "python_standalone/**/*.py"
+    "index.js",
+    "routes/**/*.js",
+    "services/**/*.js",
+    "python-core/**/*.py"
   ],
   "ext": "js,json",
   "ignore": [
@@ -11,10 +13,9 @@
     "*.log",
     ".git/**"
   ],
-  "exec": "node api_example.js",
+  "exec": "node",
   "env": {
     "NODE_ENV": "development"
   },
   "delay": 1000
 }
-

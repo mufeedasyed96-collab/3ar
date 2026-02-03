@@ -1,0 +1,135 @@
+👤 Owner: AHMAD SHIKH AL GHANNAMEH
+📍 Region: Riyadh City
+🏷️ Plot: 81
+🗺️ Sector: LOCATION
+🏢 Consultant: None
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🟡 Status: Requires Review
+🟢 Risk Level: High
+
+📊 Compliance Rate: 71%
+
+📈 Inspection Statistics:
+• Total Items: 76
+• ✅ Compliant: 54
+• ❌ Non-Compliant: 14
+• ⚠️ Not Available: 8
+
+📐 Basic Data (2/4)
+━━━━━━━━━━━━━━━━━━━━
+
+🏗️ Areas (m²):
+• Plot: 306.0
+• Ground Floor: 190.2 ❌ (≥140)
+• First Floor: 0.0
+• Roof: 0.0
+• Total: 190.2 ❌ (≥200)
+
+📊 Building Ratios:
+
+• Coverage: 62.2% ✅ (≤70%)
+
+• Open Area: 37.8% ✅ (≥30%)
+
+🏠 Annexes:
+
+• Utilities: 18.6
+
+📏 Setbacks (m):
+• Front: 5.0 ✅ (≥2.0)
+• Rear: 3.0 ✅ (≥1.5)
+• Left: 1.5 ✅ (≥1.5)
+• Right: 1.5 ✅ (≥1.5)
+
+📐 Elevations (m):
+• Total: N/A ✅ (≤18)
+• Ground Floor: N/A ✅ (≥3.0)
+• First Floor: N/A ✅ (≥3.0)
+• Level: 0.45 ✅ (0.45-2.0)
+• Extensions: 4.05 ✅ (≤6)
+• Wall: 3 ✅ (2-4)
+
+📍 Levels:
+• Ground Floor: +0.45
+• First Floor: +4.72
+• Roof: +8.67
+• Edge: +N/A
+
+🔧 Technical Details (3/4)
+━━━━━━━━━━━━━━━━━━━
+
+🪜 Stairs:
+• Width: 1.40m ✅ (≥1.0)
+• Riser: 17cm ✅ (10-18)
+• Tread: 30cm ✅ (≥28)
+• Handrail: 90cm ❌ (86.5-96.5)
+• Number of Steps: N/A
+
+🚪 Doors:
+• Main: 2m ✅ (≥1.2)
+• Interior: 1m ✅ (≥0.815)
+• Bathrooms: 0.8m ✅ (≥0.7)
+
+🚶 Corridors:
+• Internal: 1.2m ✅ (≥0.915)
+• Lobby: 2.5m ✅ (≥1.2)
+
+🚗 Entrances:
+• Car Entrances: 2 ✅ (≤2)
+• Car Entrance Width: 3.5m ✅ (3-6)
+• Pedestrian Entrances: 1 ✅ (≤3)
+
+🪟 Windows and Ventilation:
+• 8% Ventilation Rate for All Rooms: ✅ Achieved
+
+🚿 Bathroom Ventilation:
+• Windows: ✅ All
+• Exhaust Fans: ✅ Available
+
+🏠 Main Rooms:
+No valid rooms detected with sufficient area.
+
+
+📝 Results and Recommendations (4/4)
+━━━━━━━━━━━━━━━━━━━
+
+🟡 Warnings:
+1. Minimum villa floor area 200 sqm, minimum ground floor area 140 sqm
+
+Total floor area 190.21 m² < 200 m²
+
+2. Setback from street minimum 2m, from other boundaries minimum 1.5m
+
+FAIL: Cannot calculate setback distances - missing geometry data.
+
+3. Annexes permitted on plot boundary without setback
+
+Found 22 annex(es), 21 violation(s)
+
+4. Parapet required around open roof areas and top roof, height 1.2-2.0m
+
+FAIL: Parapets detected (0). Height verification requires elevation data.
+
+5. Each living space on all floors must have at least one emergency escape opening
+
+Escape opening validation requires opening geometry data
+
+6. Emergency escape opening min clear height 0.61m, min width 0.51m
+
+Escape opening validation requires opening geometry data
+
+7. Step riser 10-18cm, tread min 28cm, nosing max 3.2cm
+
+2D plan lacks elevation/Z data; cannot validate riser/tread/nosing reliably.
+
+8. Single stair flight max vertical rise 3.65m, min headroom under flight 2.05m
+
+2D plan lacks elevation/Z data; cannot validate vertical rise/headroom reliably.
+
+9. Pool fence required to prevent unaccompanied child access
+
+FAIL: Pool detected but no pool fence found
+
+⚡ Recommendation: Please verify all non-compliant items against the Abu Dhabi Private Housing Guide v2.0.

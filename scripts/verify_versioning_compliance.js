@@ -17,7 +17,7 @@ const path = require('path');
 const { MongoClient } = require('mongodb');
 require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
-const API_URL = 'http://localhost:8277/api';
+const API_URL = 'http://localhost:8289/api';
 const TEST_PROJECT_ID = 'TEST_PROJ_' + Date.now();
 const MONGO_URI = process.env.mongodb_url || 'mongodb://localhost:27017';
 

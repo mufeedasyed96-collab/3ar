@@ -1,0 +1,19 @@
+{
+  "min_length_m": 0.40,
+  "max_length_m": 20.0,
+  "min_column_height_m": 2.5,
+  "allowed_angles_deg": [0, 90, 45, -45],
+  "angle_tolerance_deg": 5.0,
+  "min_connections_per_member": 1,
+  "connectivity_ratio_min": 0.90,
+  "max_isolated_ratio": 0.10,
+  "min_parallel_spacing_m": 0.15,
+  "parallel_spacing_variance_pct": 15,
+  "max_cantilever_m": 3.0,
+  "orthogonal_ratio_min": 0.85,
+  "length_mode_coverage_min": 0.70,
+  "repetition_ratio_min": 0.65,
+  "passes_required": 5,
+  "confidence_threshold": 0.75,
+  "min_members_for_validation": 3
+}

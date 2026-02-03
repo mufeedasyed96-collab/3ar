@@ -2,14 +2,14 @@
   "name": "dwg-schema-validator",
   "version": "1.0.0",
   "description": "Backend system for validating DWG architectural schemas with Python + Node.js",
-  "main": "api_example.js",
+  "main": "index.js",
   "scripts": {
-    "validate": "python_standalone\\venv\\Scripts\\python.exe python_standalone\\cli_validate_json.py",
-    "api": "node api_example.js",
-    "api:dev": "nodemon api_example.js",
-    "dev": "nodemon api_example.js",
-    "test": "python_standalone\\venv\\Scripts\\python.exe python_standalone\\tools\\test_sample_elements.py",
-    "validate:dxf": "python_standalone\\venv\\Scripts\\python.exe python_standalone\\cli_validate_json.py --dxf"
+    "validate": "python-core\\venv\\Scripts\\python.exe python-core\\cli_validate_json.py",
+    "api": "node index.js",
+    "api:dev": "nodemon index.js",
+    "dev": "nodemon index.js",
+    "test": "python-core\\venv\\Scripts\\python.exe python-core\\tools\\test_sample_elements.py",
+    "validate:dxf": "python-core\\venv\\Scripts\\python.exe python-core\\cli_validate_json.py --dxf"
   },
   "keywords": [
     "dwg",
@@ -28,7 +28,13 @@
     "form-data": "^4.0.5",
     "jsonwebtoken": "^9.0.3",
     "mongodb": "^7.0.0",
-    "multer": "^2.0.2"
+    "multer": "^2.0.2",
+    "pdfkit": "^0.17.2",
+    "pino": "^10.3.0",
+    "pino-http": "^11.0.0",
+    "puppeteer": "^24.36.1",
+    "qrcode": "^1.5.4",
+    "uuid": "^13.0.0"
   },
   "engines": {
     "node": ">=14.0.0"
