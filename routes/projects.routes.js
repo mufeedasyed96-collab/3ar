@@ -12,6 +12,20 @@ const { checkProjectLock } = require("../middleware/lock.middleware");
  * Helpers
  * ----------------------------- */
 
+const PREFIX_MAP = {
+    VIL: ["villa", "all_villa", "alfalah_villa", "yas_villa"],
+    RES: ["resort"],
+    COM: ["commercial", "warehouse", "shopping_mall", "office_building"],
+    INF: ["infrastructure", "roads_bridges", "utilities", "drainage"],
+};
+
+function getPrefix(projectType) {
+    for (const [prefix, types] of Object.entries(PREFIX_MAP)) {
+        if (types.includes(projectType)) return prefix;
+    }
+    return "OTH";
+}
+
 function col(name) {
     const db = getDb();
     if (!db) throw new Error("Database connection failed");
@@ -22,7 +36,8 @@ function col(name) {
  * Resolve a project by:
  * - Mongo ObjectId _id
  * - string _id (applicationId stored as _id string)
- * - applicationId field
+ * - applicationNo field (prefixed)
+ * - applicationId field (legacy raw)
  *
  * Always scopes to createdBy userId (officer)
  */
@@ -34,15 +49,20 @@ async function resolveProject(projectsCollection, id, userId) {
         query = {
             $or: [
                 { _id: new MongoObjectId(id) }, // if id is ObjectId-like
-                { _id: id },                    // string _id
-                { applicationId: id },          // applicationId field
+                { _id: id },                    // string _id (legacy or custom)
+                { applicationNo: id },          // new prefixed field
+                { applicationId: id },          // legacy field
             ],
             createdBy: userId,
         };
     } catch {
         // not a valid ObjectId string
         query = {
-            $or: [{ _id: id }, { applicationId: id }],
+            $or: [
+                { _id: id },
+                { applicationNo: id },
+                { applicationId: id }
+            ],
             createdBy: userId,
         };
     }
@@ -63,6 +83,17 @@ function safeIso(d) {
  * IMPORTANT ROUTE ORDER
  * Put "nested" routes BEFORE "/:id"
  * ----------------------------- */
+
+/**
+ * GET /api/projects/format-application-no
+ * Helper to preview formatted number
+ */
+router.get("/format-application-no", authMiddleware, (req, res) => {
+    const { projectType, raw } = req.query;
+    if (!projectType || !raw) return res.status(400).json({ error: "Missing projectType or raw number" });
+    const prefix = getPrefix(projectType);
+    return res.json({ applicationNo: `${prefix}-${raw}` });
+});
 
 /**
  * GET /api/projects/:projectId/discipline-status
@@ -442,6 +473,7 @@ router.post(
 
             const pdfData = {
                 certificateNumber: certNum,
+                applicationNo: project.applicationNo || project.applicationId || "N/A",
                 generatedAt: new Date().toLocaleDateString("en-GB"),
                 ownerNameEn: clientData.nameEn || project.ownerName || "Unknown Owner",
                 ownerNameAr: clientData.nameAr || project.ownerName || "Unknown Owner",
@@ -452,8 +484,8 @@ router.post(
                 officerName: req.user.email || "Municipality Officer",
                 projectName: project.title || "Project Villa Plan",
                 projectType: project.projectType || "Architectural Plan",
-                qrCodeUrl,
-                stats: valResult?.summary || { total_rules: 0, passed_rules: 0, failed_rules: 0 },
+                verifyUrl, // Passed for local QR generation
+                stats: req.body.stats || valResult?.summary || { total_rules: 0, passed_rules: 0, failed_rules: 0 },
                 structuralResult,
                 fireSafetyResult,
                 architecturalResults: valResult || null
@@ -509,17 +541,17 @@ router.post(
  * POST /api/projects
  * Create a new project
  *
- * If applicationId already exists (stored as _id string), update it and increment version.
+ * If applicationId already exists (stored as _id or applicationNo), update it and increment version.
  */
 router.post("/", authMiddleware, async (req, res) => {
-    const {
+    let {
         projectType,
         ownerName,
         consultantName,
         plotNo,
         zone,
         city,
-        applicationId,
+        applicationId, // raw numeric string from frontend
     } = req.body;
 
     const createdBy = req.user.userId;
@@ -529,94 +561,121 @@ router.post("/", authMiddleware, async (req, res) => {
         const projects = col("projects");
         const clientMetadataCollection = col("client_metadata");
 
-        const appId = applicationId ? String(applicationId).trim() : null;
+        const rawAppId = applicationId ? String(applicationId).trim() : null;
+        let applicationNo = null;
+
+        if (rawAppId) {
+            // Validation: must be numeric
+            if (!/^\d+$/.test(rawAppId)) {
+                return res.status(400).json({ error: "Application number must contain digits only." });
+            }
+            // Generate Prefixed ID
+            const prefix = getPrefix(projectType);
+            applicationNo = `${prefix}-${rawAppId}`;
+        }
 
         // Resolve owner name from metadata if exists
         let resolvedOwnerName = ownerName || "";
-        if (appId) {
-            const clientMeta = await clientMetadataCollection.findOne({ applicationId: appId });
+        if (rawAppId) {
+            const clientMeta = await clientMetadataCollection.findOne({ applicationId: rawAppId });
             const clientName = clientMeta?.passport?.full_name || clientMeta?.emiratesId?.full_name || null;
             if (clientName) resolvedOwnerName = clientName;
         }
 
-        // If applicationId exists as _id, update it as new version
-        if (appId) {
-            const existing = await projects.findOne({ _id: appId, createdBy });
+        // 1. Check if we should update an existing project (by applicationNo or _id)
+        let existing = null;
+        if (applicationNo) {
+            existing = await projects.findOne({
+                $or: [{ applicationNo: applicationNo }, { _id: applicationNo }],
+                createdBy
+            });
+        }
 
-            if (existing) {
-                const nextVersion = (existing.version || 1) + 1;
+        if (existing) {
+            const nextVersion = (existing.version || 1) + 1;
 
-                await projects.updateOne(
-                    { _id: appId, createdBy },
-                    {
-                        $set: {
-                            projectType,
-                            ownerName: resolvedOwnerName,
-                            consultantName,
-                            plotNo,
-                            zone,
-                            city,
-                            version: nextVersion,
-                            updatedAt: new Date(),
-                        },
-                        $push: {
-                            statusHistory: {
-                                status: "Updated",
-                                changedBy: createdBy,
-                                changedByEmail: createdByEmail,
-                                changedAt: new Date(),
-                                reason: `Project updated with new version ${nextVersion}`,
-                            },
-                        },
-                    }
-                );
-
-                const updatedProject = await projects.findOne({ _id: appId, createdBy });
-
-                return res.status(200).json({
-                    id: appId,
-                    message: "Project updated successfully",
-                    project: {
-                        id: appId,
-                        ...updatedProject,
-                        current_version_number: updatedProject.version || 1,
-                        createdAt: safeIso(updatedProject.createdAt),
-                        updatedAt: safeIso(updatedProject.updatedAt),
+            await projects.updateOne(
+                { _id: existing._id },
+                {
+                    $set: {
+                        projectType,
+                        ownerName: resolvedOwnerName,
+                        consultantName,
+                        plotNo,
+                        zone,
+                        city,
+                        version: nextVersion,
+                        updatedAt: new Date(),
                     },
+                    $push: {
+                        statusHistory: {
+                            status: "Updated",
+                            changedBy: createdBy,
+                            changedByEmail: createdByEmail,
+                            changedAt: new Date(),
+                            reason: `Project updated with new version ${nextVersion}`,
+                        },
+                    },
+                }
+            );
+
+            const updatedProject = await projects.findOne({ _id: existing._id });
+
+            return res.status(200).json({
+                id: updatedProject._id.toString(),
+                message: "Project updated successfully",
+                project: {
+                    id: updatedProject._id.toString(),
+                    ...updatedProject,
+                    current_version_number: updatedProject.version || 1,
+                    createdAt: safeIso(updatedProject.createdAt),
+                    updatedAt: safeIso(updatedProject.updatedAt),
+                },
+            });
+        }
+
+        // 2. Uniqueness check for NEW project (prevent VIL-1000 duplicated by someone else or another type)
+        if (applicationNo) {
+            const conflict = await projects.findOne({ applicationNo });
+            if (conflict) {
+                return res.status(409).json({
+                    error: `Application number already exists: ${applicationNo}`,
+                    code: "APP_NO_CONFLICT"
                 });
             }
         }
 
-        // New project
-        const newId = appId ? appId : new ObjectId().toString();
+        // 3. New project
+        const newId = applicationNo ? applicationNo : new ObjectId().toString();
 
         const doc = {
             _id: newId,
+            applicationNoRaw: rawAppId,
+            applicationNo: applicationNo,
+            applicationId: rawAppId, // legacy compat
             projectType,
             ownerName: resolvedOwnerName,
             consultantName,
             plotNo,
             zone,
             city,
-            applicationId: appId || null,
             version: 1,
-            status: "New",
-            statusHistory: [
-                {
-                    status: "New",
-                    changedBy: createdBy,
-                    changedByEmail: createdByEmail,
-                    changedAt: new Date(),
-                    reason: "Project created",
-                },
-            ],
+            status: "OPEN",
             createdBy,
             createdByEmail,
             createdAt: new Date(),
-            updatedAt: null,
+            updatedAt: new Date(),
+            statusHistory: [
+                {
+                    status: "Created",
+                    changedBy: createdBy,
+                    changedByEmail: createdByEmail,
+                    changedAt: new Date(),
+                },
+            ],
         };
 
-        await projects.insertOne(doc);
+        const result = await projects.insertOne(doc);
 
         return res.status(201).json({
             id: newId,
@@ -626,6 +685,7 @@ router.post("/", authMiddleware, async (req, res) => {
                 ...doc,
                 current_version_number: 1,
                 createdAt: safeIso(doc.createdAt),
+                updatedAt: safeIso(doc.updatedAt),
             },
         });
     } catch (err) {

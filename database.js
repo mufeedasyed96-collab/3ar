@@ -37,6 +37,10 @@ async function connectToDatabase() {
         const versions = db.collection('project_versions');
         await versions.createIndex({ project_id: 1, version_number: 1 }, { unique: true });
 
+        // Projects: Unique application number (prefixed)
+        const projects = db.collection('projects');
+        await projects.createIndex({ applicationNo: 1 }, { unique: true, sparse: true });
+
         return db;
     } catch (error) {
         console.error('[MongoDB] Connection error:', error);
