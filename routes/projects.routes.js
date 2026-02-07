@@ -17,6 +17,7 @@ const PREFIX_MAP = {
     RES: ["resort"],
     COM: ["commercial", "warehouse", "shopping_mall", "office_building"],
     INF: ["infrastructure", "roads_bridges", "utilities", "drainage"],
+    FRM: ["farm"],
 };
 
 function getPrefix(projectType) {

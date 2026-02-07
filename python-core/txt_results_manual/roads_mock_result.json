@@ -1,0 +1,281 @@
+{
+    "module": "roads_and_access",
+    "schema_version": "1.0",
+    "project_id": "INF-1000",
+    "overall_pass": false,
+    "summary": {
+        "articles_checked": 7,
+        "rules_checked": 21,
+        "rules_passed": 15,
+        "rules_failed": 6
+    },
+    "articles": [
+        {
+            "article_id": "R1",
+            "title_en": "Roadway and Lane Geometry",
+            "article_pass": false,
+            "rule_results": [
+                {
+                    "rule_id": "R1.1",
+                    "description_en": "Minimum lane width for internal access roads",
+                    "status": "pass",
+                    "required": {
+                        "min_width_m": 3.0
+                    },
+                    "measured": {
+                        "min_lane_width_m": 3.25
+                    },
+                    "checked_elements": 4
+                },
+                {
+                    "rule_id": "R1.2",
+                    "description_en": "Minimum lane width for local residential streets",
+                    "status": "fail",
+                    "required": {
+                        "min_width_m": 3.25
+                    },
+                    "measured": {
+                        "min_lane_width_m": 3.0
+                    },
+                    "violations": [
+                        {
+                            "element_id": "lane_L3",
+                            "measured_width_m": 3.0,
+                            "deficit_m": 0.25,
+                            "location": "STA 1+120 to 1+180"
+                        }
+                    ]
+                },
+                {
+                    "rule_id": "R1.3",
+                    "description_en": "Minimum shoulder width where provided",
+                    "status": "pass",
+                    "required": {
+                        "min_width_m": 1.0
+                    },
+                    "measured": {
+                        "min_shoulder_width_m": 1.2
+                    }
+                }
+            ]
+        },
+        {
+            "article_id": "R2",
+            "title_en": "Fire and Emergency Access Roads",
+            "article_pass": false,
+            "rule_results": [
+                {
+                    "rule_id": "R2.1",
+                    "description_en": "Minimum clear width for fire access roads",
+                    "status": "pass",
+                    "required": {
+                        "min_clear_width_m": 6.0
+                    },
+                    "measured": {
+                        "min_clear_width_m": 6.5
+                    }
+                },
+                {
+                    "rule_id": "R2.2",
+                    "description_en": "Minimum vertical clearance for fire access",
+                    "status": "fail",
+                    "required": {
+                        "min_height_m": 4.5
+                    },
+                    "measured": {
+                        "min_height_m": 4.2
+                    },
+                    "violations": [
+                        {
+                            "element_id": "tree_canopy_02",
+                            "measured_height_m": 4.2,
+                            "deficit_m": 0.3,
+                            "location": "Fire access road – west side"
+                        }
+                    ]
+                },
+                {
+                    "rule_id": "R2.3",
+                    "description_en": "Maximum distance from fire access road to building entrance",
+                    "status": "fail",
+                    "required": {
+                        "max_distance_m": 45
+                    },
+                    "measured": {
+                        "max_distance_m": 52
+                    },
+                    "violations": [
+                        {
+                            "building_id": "B-03",
+                            "measured_distance_m": 52,
+                            "excess_m": 7
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "article_id": "R3",
+            "title_en": "Turning Radius and Manoeuvring",
+            "article_pass": false,
+            "rule_results": [
+                {
+                    "rule_id": "R3.1",
+                    "description_en": "Minimum inner turning radius for fire appliances",
+                    "status": "pass",
+                    "required": {
+                        "min_radius_m": 9.0
+                    },
+                    "measured": {
+                        "min_inner_radius_m": 9.5
+                    }
+                },
+                {
+                    "rule_id": "R3.2",
+                    "description_en": "Minimum outer turning radius for fire appliances",
+                    "status": "pass",
+                    "required": {
+                        "min_radius_m": 12.0
+                    },
+                    "measured": {
+                        "min_outer_radius_m": 12.8
+                    }
+                },
+                {
+                    "rule_id": "R3.3",
+                    "description_en": "Dead-end road maximum length without turning head",
+                    "status": "fail",
+                    "required": {
+                        "max_length_m": 60
+                    },
+                    "measured": {
+                        "dead_end_length_m": 75
+                    },
+                    "violations": [
+                        {
+                            "road_id": "DE-01",
+                            "measured_length_m": 75,
+                            "excess_m": 15
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "article_id": "R4",
+            "title_en": "Driveways and Vehicle Entrances",
+            "article_pass": true,
+            "rule_results": [
+                {
+                    "rule_id": "R4.1",
+                    "description_en": "Minimum driveway width for single vehicle access",
+                    "status": "pass",
+                    "measured": {
+                        "min_width_m": 3.2
+                    }
+                },
+                {
+                    "rule_id": "R4.2",
+                    "description_en": "Minimum driveway width for two-way vehicle access",
+                    "status": "pass",
+                    "measured": {
+                        "min_width_m": 6.4
+                    }
+                },
+                {
+                    "rule_id": "R4.3",
+                    "description_en": "Maximum driveway slope",
+                    "status": "pass",
+                    "measured": {
+                        "max_slope_percent": 12
+                    }
+                }
+            ]
+        },
+        {
+            "article_id": "R5",
+            "title_en": "Sidewalks and Pedestrian Facilities",
+            "article_pass": true,
+            "rule_results": [
+                {
+                    "rule_id": "R5.1",
+                    "description_en": "Minimum sidewalk clear width",
+                    "status": "pass",
+                    "measured": {
+                        "min_clear_width_m": 2.0
+                    }
+                },
+                {
+                    "rule_id": "R5.2",
+                    "description_en": "Minimum pedestrian headroom clearance",
+                    "status": "pass",
+                    "measured": {
+                        "min_height_m": 2.6
+                    }
+                },
+                {
+                    "rule_id": "R5.3",
+                    "description_en": "Maximum sidewalk cross slope",
+                    "status": "pass",
+                    "measured": {
+                        "max_cross_slope_percent": 1.5
+                    }
+                }
+            ]
+        },
+        {
+            "article_id": "R6",
+            "title_en": "Parking Geometry",
+            "article_pass": true,
+            "rule_results": [
+                {
+                    "rule_id": "R6.1",
+                    "description_en": "Standard perpendicular parking stall width",
+                    "status": "pass",
+                    "measured": {
+                        "min_width_m": 2.7
+                    }
+                },
+                {
+                    "rule_id": "R6.2",
+                    "description_en": "Standard perpendicular parking stall length",
+                    "status": "pass",
+                    "measured": {
+                        "min_length_m": 5.6
+                    }
+                },
+                {
+                    "rule_id": "R6.3",
+                    "description_en": "Minimum aisle width for two-way parking aisles",
+                    "status": "pass",
+                    "measured": {
+                        "min_aisle_width_m": 6.2
+                    }
+                }
+            ]
+        },
+        {
+            "article_id": "R7",
+            "title_en": "Road Slopes and Drainage",
+            "article_pass": true,
+            "rule_results": [
+                {
+                    "rule_id": "R7.1",
+                    "description_en": "Maximum longitudinal slope for internal roads",
+                    "status": "pass",
+                    "measured": {
+                        "max_slope_percent": 6.5
+                    }
+                },
+                {
+                    "rule_id": "R7.2",
+                    "description_en": "Minimum road drainage cross fall",
+                    "status": "pass",
+                    "measured": {
+                        "min_cross_fall_percent": 2.2
+                    }
+                }
+            ]
+        }
+    ]
+}

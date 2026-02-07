@@ -3,6 +3,18 @@ Configuration module for architectural schema validation rules
 All Articles: 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 18, 19, 20
 """
 
+try:
+    from .road_config import ROAD_ARTICLES
+except ImportError:
+    # Handle case where road_config might not be in the same package during stand-alone execution
+    import sys
+    import os
+    sys.path.append(os.path.dirname(__file__))
+    try:
+        from road_config import ROAD_ARTICLES
+    except ImportError:
+        ROAD_ARTICLES = []
+
 ARTICLES = [
   {
     "article_id": "1",
@@ -1237,9 +1249,10 @@ ARTICLES = [
                 "element": "sports_annex",
                 "max_percent_of_villa_ground_floor": 20,
                 "gym_min_percent_of_annex": 70
-            },
-
-            {
+            }
+        ]
+    },
+    {
       "article_id": "21",
       "title_ar": "القسائم ذات المساحات الصغيرة وذات المساحات الكبيرة والقصور",
       "title_en": "Small Plots, Large Plots and Palaces",
@@ -1254,10 +1267,9 @@ ARTICLES = [
         }
       ]
     }
-
-        ]
-    }
 ]
+
+ARTICLES.extend(ROAD_ARTICLES)
 
 
 def get_article(article_id: str) -> dict:
