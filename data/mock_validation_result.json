@@ -1,0 +1,78 @@
+{
+    "summary": {
+        "schema_pass": true,
+        "total_checks": 45,
+        "passed_checks": 42,
+        "failed_checks": 3,
+        "warning_checks": 5,
+        "critical_errors": 0,
+        "score": 93.3
+    },
+    "schema_pass": true,
+    "article_1_results": [
+        {
+            "id": "1.1",
+            "status": "pass",
+            "description": "Building Official term defined",
+            "value": "Present"
+        },
+        {
+            "id": "1.2",
+            "status": "pass",
+            "description": "Building Code term defined",
+            "value": "Present"
+        }
+    ],
+    "article_2_results": [
+        {
+            "id": "2.1",
+            "status": "pass",
+            "description": "Residential Use Only",
+            "value": "Confirmed"
+        }
+    ],
+    "article_3_results": [
+        {
+            "id": "3.1",
+            "status": "pass",
+            "description": "Permitted Components",
+            "value": "Villa, Majlis, Service Block"
+        }
+    ],
+    "article_4_results": [
+        {
+            "id": "4.1",
+            "status": "pass",
+            "description": "Single Villa Per Plot",
+            "value": "1 Villa Detected"
+        }
+    ],
+    "article_5_results": [
+        {
+            "id": "5.1",
+            "status": "pass",
+            "description": "Building Coverage Max 70%",
+            "value": "65%"
+        },
+        {
+            "id": "5.2",
+            "status": "pass",
+            "description": "Open Area Min 30%",
+            "value": "35%"
+        }
+    ],
+    "article_6_results": [
+        {
+            "id": "6.1",
+            "status": "pass",
+            "description": "Front Setback Min 2.0m",
+            "value": "2.1m"
+        },
+        {
+            "id": "6.1",
+            "status": "fail",
+            "description": "Side Setback Min 1.5m",
+            "value": "1.2m (Violation)"
+        }
+    ]
+}

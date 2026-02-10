@@ -1,6 +1,7 @@
 /**
  * Validation Controller
  * Handles DWG/PDF validation and compliance checking
+ * [DECOUPLED MODE] Python and ODA dependencies removed. Uses mock data.
  */
 
 const fs = require("fs");
@@ -12,8 +13,8 @@ const FormData = require("form-data");
 
 const { getDb } = require("../database");
 const { validateFile } = require("../utils/file-validation.util");
-const { spawnPython, spawnPythonJson, ODA_PATH } = require("../utils/python.util");
 const { sanitizeName } = require("../config/multer.config");
+const { get_all_articles } = require("../config/validation_rules");
 
 // Streaming SHA256 (memory efficient)
 async function sha256File(filePath) {
@@ -89,82 +90,30 @@ async function pdfCompliance(req, res) {
 }
 
 /**
- * Validate JSON - from elements or json_path
+ * Validate JSON - Stubbed (Mock Mode)
  */
 async function validateJson(req, res) {
-    try {
-        const cli = path.join(__dirname, "..", "python-core", "cli_validate_json.py");
-
-        let validationResult;
-        if (req.body.elements) {
-            const payload = { elements: req.body.elements, metadata: req.body.metadata || {} };
-            const out = await spawnPythonJson({
-                scriptPath: cli,
-                args: ["--stdin"],
-                cwd: path.join(__dirname, "..", "python-core"),
-                stdinJson: payload,
-                timeoutMs: 5 * 60 * 1000,
-            });
-            validationResult = out.json;
-        } else if (req.body.json_path) {
-            const out = await spawnPythonJson({
-                scriptPath: cli,
-                args: ["--elements-json", req.body.json_path],
-                cwd: path.join(__dirname, "..", "python-core"),
-                timeoutMs: 5 * 60 * 1000,
-            });
-            validationResult = out.json;
-        } else {
-            return res.status(400).json({ error: 'Either "json_path" or "elements" required' });
-        }
-
-        res.json({
-            schema_pass: validationResult.schema_pass,
-            article_11_results: validationResult.article_11_results || [],
-        });
-    } catch (error) {
-        res.status(500).json({ error: error.message, schema_pass: false, article_11_results: [] });
-    }
+    return res.json({
+        schema_pass: true,
+        article_11_results: [],
+        note: "Backend is running in mock mode (Python decoupled)"
+    });
 }
 
 /**
- * Validate Full - complete validation with summary
+ * Validate Full - Stubbed (Mock Mode)
  */
 async function validateFull(req, res) {
-    try {
-        const cli = path.join(__dirname, "..", "python-core", "cli_validate_json.py");
-
-        let validationResult;
-        if (req.body.elements) {
-            const payload = { elements: req.body.elements, metadata: req.body.metadata || {} };
-            const out = await spawnPythonJson({
-                scriptPath: cli,
-                args: ["--stdin"],
-                cwd: path.join(__dirname, "..", "python-core"),
-                stdinJson: payload,
-                timeoutMs: 10 * 60 * 1000,
-            });
-            validationResult = out.json;
-        } else if (req.body.json_path) {
-            const out = await spawnPythonJson({
-                scriptPath: cli,
-                args: ["--elements-json", req.body.json_path],
-                cwd: path.join(__dirname, "..", "python-core"),
-                timeoutMs: 10 * 60 * 1000,
-            });
-            validationResult = out.json;
-        } else {
-            return res.status(400).json({ error: 'Either "json_path" or "elements" required' });
-        }
-
-        res.json(validationResult);
-    } catch (error) {
-        res.status(500).json({ error: error.message, schema_pass: false, summary: null, element_results: [] });
-    }
+    return res.json({
+        schema_pass: true,
+        summary: { score: 100 },
+        element_results: [],
+        note: "Backend is running in mock mode (Python decoupled)"
+    });
 }
 
 /**
- * Validate DWG - Municipality-grade upload + versioning + validation
+ * Validate DWG - Mocked Validation (No Python/ODA)
  */
 async function validateDwg(req, res) {
     if (!req.file) {
@@ -194,6 +143,8 @@ async function validateDwg(req, res) {
 
     let versionDoc = null;
     let groupDoc = null;
+
+    // We still keep the file in a permanent path, but no DXF conversion happens
     let finalDwgPath = null;
 
     const session = db.client?.startSession ? db.client.startSession() : null;
@@ -342,56 +293,35 @@ async function validateDwg(req, res) {
         });
 
         // Processing / Validation (outside transaction)
+        // MOCK IMPLEMENTATION: Load data from JSON instead of running Python
+
         await db.collection("file_versions").updateOne(
             { _id: versionDoc._id },
             { $set: { processing_status: "processing" } }
         );
 
-        if (!fs.existsSync(ODA_PATH)) throw new Error(`ODA converter not found: ${ODA_PATH}`);
+        // Simulation delay
+        await new Promise(resolve => setTimeout(resolve, 1500));
 
-        const vDir = artifactDir({
-            projectId,
-            groupType,
-            versionNumber: versionDoc.version_number,
-        });
+        // Load mock data
+        const mockDataPath = path.join(__dirname, "..", "data", "mock_validation_result.json");
+        let validationResult = {};
 
-        // DWG -> DXF conversion
-        const dwgConverterScript = path.join(__dirname, "..", "python-core", "dwg_converter.py");
-        const conv = await spawnPython({
-            scriptPath: dwgConverterScript,
-            args: [ODA_PATH, finalDwgPath, vDir],
-            cwd: path.join(__dirname, ".."),
-            timeoutMs: 10 * 60 * 1000,
-        });
-
-        if (!conv.success) {
-            await db.collection("file_versions").updateOne(
-                { _id: versionDoc._id },
-                { $set: { processing_status: "failed", processing_error: conv.stderr || conv.stdout } }
-            );
-            throw new Error(`DWG->DXF conversion failed: ${conv.stderr || conv.stdout || ""}`);
+        try {
+            if (fs.existsSync(mockDataPath)) {
+                const raw = fs.readFileSync(mockDataPath, "utf-8");
+                validationResult = JSON.parse(raw);
+            } else {
+                validationResult = {
+                    summary: { schema_pass: true, score: 99 },
+                    schema_pass: true,
+                    note: "Mock data file not found, using fallback object"
+                };
+            }
+        } catch (e) {
+            console.error("Failed to load mock data:", e);
+            validationResult = { schema_pass: true, error: "Mock load failed" };
         }
-
-        // Locate newest DXF in vDir
-        const dxfs = fs
-            .readdirSync(vDir)
-            .filter((f) => f.toLowerCase().endsWith(".dxf"))
-            .map((f) => ({ p: path.join(vDir, f), m: fs.statSync(path.join(vDir, f)).mtimeMs }))
-            .sort((a, b) => b.m - a.m);
-        if (!dxfs.length) throw new Error("No DXF produced by conversion");
-
-        const dxfPath = dxfs[0].p;
-
-        // Validate
-        const standaloneCli = path.join(__dirname, "..", "python-core", "cli_validate_json.py");
-        const out = await spawnPythonJson({
-            scriptPath: standaloneCli,
-            args: ["--dxf", dxfPath],
-            cwd: path.join(__dirname, "..", "python-core"),
-            timeoutMs: 15 * 60 * 1000,
-        });
-
-        const validationResult = out.json || {};
 
         // Save validation result
         const valRes = await db.collection("validation_results").insertOne({
@@ -403,6 +333,7 @@ async function validateDwg(req, res) {
             schema_pass: validationResult.schema_pass ?? null,
             payload: validationResult,
             run_at: new Date(),
+            is_mock: true
         });
 
         // Link validation to version
@@ -414,8 +345,9 @@ async function validateDwg(req, res) {
                     latest_validation_result_id: valRes.insertedId.toString(),
                     artifacts: {
                         dwg_path: finalDwgPath,
-                        dxf_path: dxfPath,
-                        artifact_dir: vDir,
+                        // No DXF generated in mock mode
+                        dxf_path: null,
+                        artifact_dir: path.dirname(finalDwgPath),
                     },
                 },
             }
@@ -428,7 +360,9 @@ async function validateDwg(req, res) {
             file_version: versionDoc.version_number,
             file_version_id: versionDoc._id.toString(),
             validation_result_id: valRes.insertedId.toString(),
+            mock_mode: true
         });
+
     } catch (error) {
         console.error("[validate-dwg] ERROR:", error);
 
@@ -461,14 +395,7 @@ async function validateDwg(req, res) {
  */
 async function getConfig(req, res) {
     try {
-        const script = path.join(__dirname, "..", "python-core", "cli_dump_config_json.py");
-        const out = await spawnPythonJson({
-            scriptPath: script,
-            args: [],
-            cwd: path.join(__dirname, "..", "python-core"),
-            timeoutMs: 60 * 1000,
-        });
-        return res.json(out.json);
+        return res.json(get_all_articles());
     } catch (error) {
         return res.status(500).json({ error: error.message, status: "error" });
     }
@@ -478,7 +405,7 @@ async function getConfig(req, res) {
  * Health Check
  */
 function healthCheck(req, res) {
-    res.json({ status: "ok", service: "Architectural Schema Validator", version: "1.0.0" });
+    res.json({ status: "ok", service: "Architectural Schema Validator (Decoupled)", version: "1.0.0" });
 }
 
 module.exports = {

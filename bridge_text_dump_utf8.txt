@@ -1,0 +1,254 @@
+Source PDF: C:\Users\HP\Desktop\backend\mi3ar\miyar_frontend\src\images\TR-514.pdf
+
+=== TARGET PAGES ===
+
+--- PAGE 558 ---
+ROAD GEOMETRIC DESIGN MANUAL
+Figure 11-10: Multilane Roundabout
+11.4 Roundabout Considerations
+11.4.1 Planning
+At the planning stage, there are a variety of possible reasons or goals for considering a roundabout
+at a particular intersection. These may include:
+• improving safety or operations,
+• improving aesthetics,
+• assisting with access management, and
+• promoting redevelopment.
+Whatever the reasons for considering a roundabout, a number of common considerations should be
+addressed at the planning level:
+• Is a roundabout appropriate for this location?
+• How big should it be or how many lanes might be required?
+• What sort of impacts might be expected?
+• What public education and outreach might be appropriate?
+Page 546
+11-ROUNDABOUTS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 588 ---
+ROAD GEOMETRIC DESIGN MANUAL
+12 INTERCHANGES
+12.1 Overview
+An interchange is a system of interconnecting roadways in conjunction with one or more grade
+separations that provide for the movement of traffic between two or more roadways on different
+levels. The operational efficiency, capacity, safety, and cost of the roadway facility are largely
+dependent upon its design. Chapter 12 provides guidance in the design of interchanges including
+interchange types, selection, layout, operations, spacing, lane drops, freeway ramp terminals,
+ramps, and ramp/crossroad terminals. Information that is also applicable to interchanges is included
+in the following chapters:
+• Chapter 10 “Intersections” discusses intersection designs, including left-turn lanes,
+channelizing islands, turning radii, design vehicles, etc.
+• Chapter 7 “Rural and Urban Freeways” discusses freeway types, freeway design criteria,
+grade separations, and access control along the freeway.
+12.2 Warrants
+The need for an interchange will vary based on site-specific conditions. Consider the following
+guidelines when determining the need for an interchange:
+1. Access Control. The Abu Dhabi Access Management Policy and Procedures Manual
+(21) provides guidance on access control. The designer should note the following:
+a. Full Access Control. On all fully access-controlled facilities, intersecting crossroads
+must be terminated, rerouted, provided a grade separation, or provided an
+interchange. The importance of the continuity of the crossroad, the feasibility of an
+alternative route, traffic volumes, construction costs, environmental impacts, etc., are
+evaluated in order to determine which option is most practical. Interchanges generally
+are provided at:
+• all freeway-to-freeway crossings;
+• all major roads, unless determined inappropriate; and
+• other roads based on the anticipated demand for regional access.
+b. Partial Access Control. On facilities with partial access control (expressways),
+intersections with public roads will be accommodated by an interchange or with an
+intersection. Grade separations are rarely provided. Interchanges should be
+constructed or planned at most major crossroads.
+c. No Access Control. On a facility with no access control, the need for an interchange
+will be determined on a case-by-case basis emphasising cost effectiveness, safety,
+and operations. A road-user benefit analysis will generally be required to determine
+the economic feasibility of an interchange. See Item 5. However, this analysis alone
+is not sufficient justification for the provision of an interchange.
+Page 576
+12-INTERCHANGES SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 589 ---
+ROAD GEOMETRIC DESIGN MANUAL
+2. Congestion. Consider providing an interchange where the level of service (LOS) at an
+intersection is unacceptable and the intersection cannot be redesigned to operate at an
+acceptable LOS.
+3. Safety. In special cases, consider the crash reduction benefits of an interchange at an
+existing intersection that exhibits extremely high-crash frequencies and rates.
+4. Site Topography. Where access is necessary, the topography may dictate an interchange or
+a grade separation rather than an intersection.
+5. Road-User Benefits. If an analysis reveals that road-user benefits over the service life of the
+interchange will exceed costs, then an interchange may be considered. The designer must
+consider all costs including right-of-way, construction, maintenance, and user costs in the
+analysis. For additional guidance, the designer may refer to AASHTO User and Non-User
+Benefit Analysis for Highways (53).
+6. Access. An interchange may be required in an area where access availability from other
+sources is not practical, and the freeway is the only facility that serves the area.
+7. Traffic Volumes. Although there are no specific traffic volumes that warrant an interchange,
+consider providing an interchange where the traffic volumes at an intersection are at or near
+capacity, and where other improvements are not practical.
+8. Urban Streets. For urban grade separations, prior approval from DMT, DMT, and the local
+municipality is required. Ensure the separation does not adversely impact the surrounding
+urban context.
+12.3 General Design Considerations
+12.3.1 System and Service Interchanges
+Interchange configurations are divided into two general categories: system and service
+interchanges. System interchanges connect a freeway to another freeway or roadways, whereas
+service interchanges connect a freeway to an arterial, collector, or local roadway. Several
+configurations of system and service interchanges are shown on Figure 12-1. System interchanges
+include three- and four- leg directional and trumpet configurations. Service interchange
+configurations include full and partial clover-leafs, and diamonds.
+System interchange designs permit high-speed operation on ramps and typically include major
+merge and diverge areas on both intersecting roadways. Major merges and diverges typically
+operate with less turbulence than ramp merge or diverge areas. Service interchanges include lower
+speed ramp merge and diverge areas, and may include weaving segments on the freeway and
+crossroad, as well as signalised or unsignalised ramp-crossroad intersections. Table 12-1
+summarises the operational features for various interchange configurations. The number of
+operational features (e.g. diverge/merge areas, weaving areas, ramp/crossroad intersections) are
+noted for each configuration. For instance, a four-lane directional configuration has four major merge
+and four major diverge areas, as compared to a full cloverleaf that has two ramp merges, two ramp
+diverges, and two weave sections on the freeway and crossroad.
+Page 577
+12-INTERCHANGES SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 598 ---
+ROAD GEOMETRIC DESIGN MANUAL
+Figure 12-8: Auxiliary Lanes Within an Interchange
+Source: (1)
+Revised
+Page 586
+12-INTERCHANGES SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 610 ---
+ROAD GEOMETRIC DESIGN MANUAL
+12.4 Interchange Types and Layouts
+12.4.1 General
+The basic interchange types includes the diamond, cloverleaf, partial cloverleaf, trumpet, direct,
+semi-direct, and roundabout. These interchange types, and variations within each type, permit
+adaptation to traffic needs, available right-of-way, terrain, and cultural features. The following
+sections discuss these basic interchange types and design elements for laying out the interchange.
+Each interchange must be designed to fit the individual site considerations. The final design may be
+a minor or major modification of one of the basic types or may be a combination of two or more basic
+types. Sections 12.3, 12.5, 12.6, and 12.7 provide the general design criteria for the individual
+elements of the interchange.
+12.4.2 Diamond Interchange
+12.4.2.1 General
+The conventional diamond is the simplest and most common interchange type. Diamonds include
+one-way diagonal ramps in each quadrant and two intersections at the crossroad. With proper
+treatments at the crossroad, the diamond interchange can accommodate a wide variety of
+circumstances in urban areas where the crossroad operating speeds are 70 km/h or less. The
+diamond is usually the best interchange choice where the intersecting road is not access controlled.
+Figure 12-13 illustrates a typical diamond interchange. Some of its advantages and disadvantages
+include:
+Advantages
+• All exits from the mainline occur before reaching the crossroad structure and entrances occur
+after the structure. This conforms to driver expectancy and, therefore, minimises confusion.
+• All traffic can enter and exit the mainline at relatively high speeds.
+• At the crossroad, adequate sight distance can usually be provided and the operational
+manoeuvres are consistent with other intersections on the crossroad.
+• They require less right-of-way than other interchange types.
+• The diamond configuration easily allows modifications to provide greater ramp capacity, if
+needed in the future.
+Page 598
+12-INTERCHANGES SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 615 ---
+ROAD GEOMETRIC DESIGN MANUAL
+Additionally, the double roundabout diamond eliminates problems arising from the interaction of left
+turns. However, it has the disadvantage that queues may develop on the off-ramp as other traffic
+always has priority.
+12.4.2.5 Split Diamond
+A variation of the conventional diamond is a split diamond interchange. Split diamonds are normally
+used in urban areas where the designer desires to provide access to two crossing roadway facilities
+(desirably one-way pairs within 150 m of each other) that are spaced less than 1.5 km apart.
+Normally, separate interchanges cannot be located within this distance without creating substandard
+geometric conditions and/or weaving problems without the use of collector-distributor roadways. It
+is desirable to make the connecting roadways (between the two crossroads) one-way with control of
+access. Split diamonds have a very desirable feature in that traffic leaving the freeway can return at
+the same interchange point and continue in the same direction.
+Figure 12-15 shows a split diamond in conjunction with a pair of one-way cross streets and one-way
+frontage roads. The layout and operation of both the crossroad and the at-grade terminals are
+simplified. Traffic leaving the freeway is afforded easy access to return to the freeway and continue
+the journey in the same direction.
+Figure 12-15: Split Diamond Interchanges
+Page 603
+12-INTERCHANGES SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 715 ---
+ROAD GEOMETRIC DESIGN MANUAL
+13.2.4 Traffic Calming
+To manage vehicular speeds and to reduce exposure risk to all users, traffic calming methods may
+be required. Traffic calming measures are usually physical because of their proven effectiveness in
+reducing speeds, and collisions (e.g. raised crosswalks, see Section 13.2.3.4).
+Traffic calming can be either proactive or reactive. The street cross sections and junction details
+included in this Manual are meant to create streets that have been designed to keep speeds low and
+crossings short. At locations where pedestrian safety is of concern (e.g. near schools), designers
+should use traffic calming devices as part of the new street design process. After streets are built, if
+designers find that traffic speeds or volumes are excessive, or that safety is compromised, traffic
+calming devices should be retrofitted into the problem streets. In both scenarios, design and
+implementation are an iterative process that requires monitoring and adjustment. For guidance on
+traffic calming methods, see the DMT Abu Dhabi Urban Street Design Manual (4).
+13.3 Cyclists
+This section addresses cyclist (bicycle) facilities and provides guidance as to their intended use,
+location, and width. For additional guidance on cycle facilities, see the Abu Dhabi Urban Planning
+Council Urban Street Design Manual (4), Abu Dhabi Walking and Cycling Master Plan (23), and
+AASHTO Guide for the Development of Bicycle Facilities (58).
+13.3.1 Definitions
+The following terms and definitions apply to Section 13.2.4; see :
+1. Cycle Track. A facility reserved for cyclists and separated from motor vehicle traffic.
+2. Cycle Lane. A lane within the travelled way reserved for cyclists.
+Key principles for cycle lanes are as follows:
+• A Cycle lane is a one way cycle facility marked on a road surface.
+• Cyclists have exclusive use of the cycle lane.
+• Located on local roads with low volume and speed of traffic.
+• Corridor width should more than 11 metres with a minimum carriageway width of 6 metres.
+• Separation buffer should be used where cycle lanes are located alongside on street parking.
+• Where the carriageway is less than the corridor allowance then cyclists should make use of
+the shared lane proposal shown below.
+3. Shared Roadway. Any roadway upon which a separate cycle lane is not designated and
+which may be legally used by cyclists regardless of whether such facility is specifically
+designated as a cycle path (e.g., Avenue, Access Lane, frontage road).
+Key principles for shared and mixed traffic facilities are as follows:
+Page 703
+13-PEDESTRIAN & CYCLIST FACILITIES SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 760 ---
+ROAD GEOMETRIC DESIGN MANUAL
+All gates must have adequate locking devices to ensure that they are only used by authorised
+personnel. The responsible government agency must maintain a record of all personnel that possess
+keys to the locked gates.
+16.5.3 Pedestrian Fencing
+Pedestrian fencing may be used for the following purposes:
+• to prevent pedestrians from crossing road at high risk locations (e.g. mid-block crossing on
+major streets with medians);
+• to assist in directing pedestrians to safe road crossings (e.g. at roundabouts);
+• to prevent pedestrians from walking into the path of vehicular traffic, particularly at locations
+where pedestrian activity is high; and
+• to exclude pedestrians from high-volume, high-speed roads (e.g. freeways, expressways).
+There is wide range of fencing that may be used to constrain pedestrians. The designer should
+consider the following:
+• Fencing should be constructed principally from vertical members to make it difficult to climb.
+• Avoid ridged horizontal members to limit the possibility of components spearing through a
+vehicle in the event of a collision.
+• Fencing located in the clear zone must not be hazardous to either vehicle occupants or
+pedestrians when struck by a vehicle.
+• The area between the roadway and pedestrian fence should be designed using appropriate
+landscaping or surfacing to discourage its use by pedestrians.
+• Pedestrian fencing used to constrain pedestrians should be design to not resist penetration
+by a vehicle. If vehicle constraint is required, use an appropriate safety barrier; see the Abu
+Dhabi Roadside Design Guide (28).
+16.5.4 Protective Fencing on Roadway Overpasses
+16.5.4.1 General
+Protective fencing is generally provided:
+• where there is a potential hazard to roadway users resulting from objects being dropped,
+thrown, or dislodged from overhead crossings;
+• where there is a need to protect pedestrians who cross on the overpass (e.g. near schools,
+playgrounds, or other locations where children may be present);
+• where a cycle path is carried across the structure;
+• where problems with pedestrians cannot be easily kept under surveillance by police;
+• where experience from nearby structures indicate a need;
+Page 748
+16-ROADSIDE AMENITY SECOND EDITION -NOVEMBER 2021
+----------------

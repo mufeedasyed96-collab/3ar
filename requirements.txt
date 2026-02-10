@@ -1,9 +1,0 @@
-# Python dependencies for DWG/DXF processing
-# ODA File Converter must be installed separately
-
-# Required for automatic roof rule validation (Article 10)
-shapely>=2.0.0
-
-# Optional: For enhanced DXF parsing (if needed)
-# ezdxf>=1.0.0
-

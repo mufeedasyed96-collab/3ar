@@ -2,8 +2,7 @@
   "watch": [
     "index.js",
     "routes/**/*.js",
-    "services/**/*.js",
-    "python-core/**/*.py"
+    "services/**/*.js"
   ],
   "ext": "js,json",
   "ignore": [

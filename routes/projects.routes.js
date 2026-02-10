@@ -13,18 +13,30 @@ const { checkProjectLock } = require("../middleware/lock.middleware");
  * ----------------------------- */
 
 const PREFIX_MAP = {
-    VIL: ["villa", "all_villa", "alfalah_villa", "yas_villa"],
-    RES: ["resort"],
-    COM: ["commercial", "warehouse", "shopping_mall", "office_building"],
-    INF: ["infrastructure", "roads_bridges", "utilities", "drainage"],
-    FRM: ["farm"],
+    AV: ["villa", "all_villa", "villa_plan"],
+    AF: ["alfalah_villa"],
+    YV: ["yas_villa"],
+    BR: ["bridges"],
+    RD: ["roads", "roads_and_access"],
+    RB: ["roads_bridges"],
+    WH: ["warehouse"],
+    SM: ["shopping_mall"],
+    OB: ["office_building"],
+    RS: ["resort"],
+    ST: ["structural", "structural_plan"],
+    FS: ["fire_safety", "fire_safety_plan"],
+    FM: ["farm"],
+    UT: ["utilities"],
+    DR: ["drainage"],
+    CM: ["commercial"],
+    IN: ["infrastructure"],
 };
 
 function getPrefix(projectType) {
     for (const [prefix, types] of Object.entries(PREFIX_MAP)) {
         if (types.includes(projectType)) return prefix;
     }
-    return "OTH";
+    return "OT";
 }
 
 function col(name) {
@@ -489,7 +501,7 @@ router.post(
                 stats: req.body.stats || valResult?.summary || { total_rules: 0, passed_rules: 0, failed_rules: 0 },
                 structuralResult,
                 fireSafetyResult,
-                architecturalResults: valResult || null
+                architecturalResults: req.body.results || valResult || null
             };
 
             const { buffer, checksum } = await generateCertificatePdf(pdfData);
@@ -595,6 +607,17 @@ router.post("/", authMiddleware, async (req, res) => {
         if (existing) {
             const nextVersion = (existing.version || 1) + 1;
 
+            // --- VERSION SNAPSHOT LOGIC ---
+            // Archive the CURRENT state to 'project_versions' before overwriting
+            await col("project_versions").insertOne({
+                project_id: existing._id.toString(),
+                version_number: existing.version || 1,
+                snapshot_data: { ...existing },
+                archived_at: new Date(),
+                archived_by: createdBy
+            });
+            // ------------------------------
+
             await projects.updateOne(
                 { _id: existing._id },
                 {
@@ -614,7 +637,7 @@ router.post("/", authMiddleware, async (req, res) => {
                             changedBy: createdBy,
                             changedByEmail: createdByEmail,
                             changedAt: new Date(),
-                            reason: `Project updated with new version ${nextVersion}`,
+                            reason: `Project updated from v${existing.version || 1} to v${nextVersion}`,
                         },
                     },
                 }
@@ -691,6 +714,42 @@ router.post("/", authMiddleware, async (req, res) => {
         });
     } catch (err) {
         console.error("[Projects] Create error:", err);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+/**
+ * GET /api/projects/:projectId/versions
+ * List project history (snapshots)
+ */
+router.get("/:projectId/versions", authMiddleware, async (req, res) => {
+    const { projectId } = req.params;
+    const userId = req.user.userId;
+
+    try {
+        const projects = col("projects");
+        const projectVersions = col("project_versions");
+
+        const project = await resolveProject(projects, projectId, userId);
+        if (!project) return res.status(404).json({ error: "Project not found" });
+
+        const realProjectId = project._id.toString();
+
+        const history = await projectVersions
+            .find({ project_id: realProjectId })
+            .sort({ version_number: -1 })
+            .toArray();
+
+        return res.json({
+            current_version: project.version,
+            history: history.map(h => ({
+                version_number: h.version_number,
+                archived_at: h.archived_at,
+                snapshot: h.snapshot_data
+            }))
+        });
+    } catch (err) {
+        console.error("[Projects] Get versions error:", err);
         return res.status(500).json({ error: "Internal server error" });
     }
 });

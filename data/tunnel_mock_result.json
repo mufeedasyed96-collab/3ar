@@ -1,0 +1,317 @@
+{
+    "module": "tunnels",
+    "schema_version": "1.0",
+    "project_id": "INF-3000",
+    "overall_pass": false,
+    "summary": {
+        "articles_checked": 6,
+        "rules_checked": 17,
+        "rules_passed": 13,
+        "rules_failed": 4
+    },
+    "articles": [
+        {
+            "article_id": "T1",
+            "title_en": "Tunnel Vertical Clearances",
+            "title_ar": "الخلوص الرأسي للأنفاق",
+            "article_pass": false,
+            "rule_results": [
+                {
+                    "rule_id": "T1.1",
+                    "description_en": "Highway tunnels vertical clearance",
+                    "description_ar": "الخلوص الرأسي للأنفاق على الطرق السريعة",
+                    "status": "pass",
+                    "required": {
+                        "min_clearance_m": 6.5
+                    },
+                    "measured": {
+                        "vertical_clearance_m": 6.8
+                    },
+                    "checked_elements": 2
+                },
+                {
+                    "rule_id": "T1.2",
+                    "description_en": "Urban tunnels vertical clearance",
+                    "description_ar": "الخلوص الرأسي للأنفاق في المناطق الحضرية",
+                    "status": "fail",
+                    "required": {
+                        "min_clearance_m": 6.0
+                    },
+                    "measured": {
+                        "vertical_clearance_m": 5.8
+                    },
+                    "violations": [
+                        {
+                            "element_id": "tunnel_section_02",
+                            "measured_clearance_m": 5.8,
+                            "deficit_m": 0.2,
+                            "location": "Urban Tunnel A, STA 1+200 to 1+350"
+                        }
+                    ]
+                },
+                {
+                    "rule_id": "T1.3",
+                    "description_en": "Overhead signs/ventilation in tunnels vertical clearance",
+                    "description_ar": "الخلوص الرأسي للافتات والتهوية داخل الأنفاق",
+                    "status": "pass",
+                    "required": {
+                        "min_clearance_m": 6.5
+                    },
+                    "measured": {
+                        "vertical_clearance_m": 6.6
+                    },
+                    "checked_elements": 4
+                },
+                {
+                    "rule_id": "T1.4",
+                    "description_en": "Pedestrian tunnels vertical clearance",
+                    "description_ar": "الخلوص الرأسي لأنفاق المشاة",
+                    "status": "pass",
+                    "required": {
+                        "min_clearance_m": 3.5
+                    },
+                    "measured": {
+                        "vertical_clearance_m": 3.8
+                    },
+                    "checked_elements": 1
+                }
+            ]
+        },
+        {
+            "article_id": "T2",
+            "title_en": "Tunnel Cross Section",
+            "title_ar": "المقطع العرضي للنفق",
+            "article_pass": false,
+            "rule_results": [
+                {
+                    "rule_id": "T2.1",
+                    "description_en": "Roadway width between curbs in tunnel",
+                    "description_ar": "عرض الطريق بين الحواف داخل النفق",
+                    "status": "pass",
+                    "required": {
+                        "condition": "Approach width + 0.6m minimum",
+                        "approach_width_m": 11.0,
+                        "min_tunnel_width_m": 11.6
+                    },
+                    "measured": {
+                        "tunnel_roadway_width_m": 12.0
+                    }
+                },
+                {
+                    "rule_id": "T2.2",
+                    "description_en": "Minimum curb/sidewalk width each side",
+                    "description_ar": "الحد الأدنى لعرض الرصيف/الحافة على كل جانب",
+                    "status": "pass",
+                    "required": {
+                        "min_width_m": 0.6
+                    },
+                    "measured": {
+                        "left_curb_width_m": 0.7,
+                        "right_curb_width_m": 0.7
+                    }
+                },
+                {
+                    "rule_id": "T2.3",
+                    "description_en": "3-lane tunnel wall-to-wall minimum width",
+                    "description_ar": "العرض الكلي من الجدار إلى الجدار للنفق ثلاثي الحارات",
+                    "status": "fail",
+                    "required": {
+                        "min_width_m": 12.75
+                    },
+                    "measured": {
+                        "wall_to_wall_width_m": 12.5
+                    },
+                    "violations": [
+                        {
+                            "element_id": "tunnel_main_01",
+                            "measured_width_m": 12.5,
+                            "deficit_m": 0.25,
+                            "location": "Main Tunnel, Section A"
+                        }
+                    ]
+                },
+                {
+                    "rule_id": "T2.4",
+                    "description_en": "Desirable 3-lane tunnel section",
+                    "description_ar": "المقطع المفضل للنفق ثلاثي الحارات",
+                    "status": "pass",
+                    "required": {
+                        "lane_width_m": 3.65,
+                        "lane_count": 3,
+                        "shoulder_width_m": 3.0,
+                        "walkway_width_m": 0.9
+                    },
+                    "measured": {
+                        "lane_width_m": 3.65,
+                        "lane_count": 3,
+                        "shoulder_width_m": 3.0,
+                        "walkway_width_m": 0.9
+                    },
+                    "notes": "Individual lane dimensions meet requirements"
+                },
+                {
+                    "rule_id": "T2.5",
+                    "description_en": "Safety walkway width",
+                    "description_ar": "عرض ممر السلامة",
+                    "status": "pass",
+                    "required": {
+                        "width_m": 0.9
+                    },
+                    "measured": {
+                        "walkway_width_m": 0.95
+                    },
+                    "checked_elements": 2
+                }
+            ]
+        },
+        {
+            "article_id": "T3",
+            "title_en": "Tunnel Alignment",
+            "title_ar": "محاذاة النفق",
+            "article_pass": true,
+            "rule_results": [
+                {
+                    "rule_id": "T3.1",
+                    "description_en": "Tunnel horizontal alignment preference",
+                    "description_ar": "المحاذاة الأفقية المفضلة للنفق",
+                    "status": "pass",
+                    "verified": true,
+                    "measured": {
+                        "alignment_type": "Tangent",
+                        "curve_sections": 0
+                    },
+                    "notes": "Tunnel follows tangent alignment throughout"
+                },
+                {
+                    "rule_id": "T3.2",
+                    "description_en": "Horizontal sight distance on curves in tunnels",
+                    "description_ar": "مسافة الرؤية الأفقية على المنحنيات في الأنفاق",
+                    "status": "not_applicable",
+                    "notes": "No horizontal curves within tunnel"
+                },
+                {
+                    "rule_id": "T3.3",
+                    "description_en": "Tunnel grades for driver comfort",
+                    "description_ar": "ميول النفق لراحة السائق",
+                    "status": "pass",
+                    "verified": true,
+                    "measured": {
+                        "max_grade_percent": 3.5,
+                        "grade_change_rate": "acceptable"
+                    },
+                    "notes": "Grade profile reviewed for driver comfort"
+                },
+                {
+                    "rule_id": "T3.4",
+                    "description_en": "Grade effects on lighting and ventilation",
+                    "description_ar": "تأثير الميول على الإضاءة والتهوية",
+                    "status": "pass",
+                    "verified": true,
+                    "notes": "Mechanical ventilation designed to account for grade effects"
+                }
+            ]
+        },
+        {
+            "article_id": "T4",
+            "title_en": "Tunnel Traffic Operations",
+            "title_ar": "عمليات المرور في الأنفاق",
+            "article_pass": false,
+            "rule_results": [
+                {
+                    "rule_id": "T4.1",
+                    "description_en": "Exit ramps minimum distance from tunnel portal",
+                    "description_ar": "الحد الأدنى لمسافة مخارج الرامب من بوابة النفق",
+                    "status": "fail",
+                    "required": {
+                        "min_distance_m": 300,
+                        "direction": "downstream"
+                    },
+                    "measured": {
+                        "exit_ramp_distance_m": 250
+                    },
+                    "violations": [
+                        {
+                            "element_id": "exit_ramp_E1",
+                            "measured_distance_m": 250,
+                            "deficit_m": 50,
+                            "location": "Tunnel B, East Portal"
+                        }
+                    ]
+                },
+                {
+                    "rule_id": "T4.2",
+                    "description_en": "No weaving, merging, or diverging within tunnels",
+                    "description_ar": "لا نسج أو دمج أو تفرع داخل الأنفاق",
+                    "status": "pass",
+                    "verified": true,
+                    "checked_operations": {
+                        "weaving": false,
+                        "merging": false,
+                        "diverging": false,
+                        "exit_ramps_within": false,
+                        "entrance_ramps_within": false
+                    },
+                    "notes": "No prohibited traffic operations within tunnel limits"
+                }
+            ]
+        },
+        {
+            "article_id": "T5",
+            "title_en": "Tunnel Emergency and Maintenance",
+            "title_ar": "الطوارئ والصيانة في الأنفاق",
+            "article_pass": true,
+            "rule_results": [
+                {
+                    "rule_id": "T5.1",
+                    "description_en": "Emergency service vehicle provision",
+                    "description_ar": "توفير مركبات خدمات الطوارئ",
+                    "status": "pass",
+                    "verified": true,
+                    "notes": "Emergency vehicle stations located at both portals; shoulders provided throughout"
+                },
+                {
+                    "rule_id": "T5.2",
+                    "description_en": "Pedestrian access in tunnels for emergency and maintenance",
+                    "description_ar": "وصول المشاة في الأنفاق للطوارئ والصيانة",
+                    "status": "pass",
+                    "verified": true,
+                    "measured": {
+                        "walkway_width_m": 0.95,
+                        "emergency_exits_count": 4,
+                        "exit_spacing_m": 250
+                    },
+                    "notes": "Continuous walkway with emergency exits at 250m intervals"
+                }
+            ]
+        },
+        {
+            "article_id": "T6",
+            "title_en": "Special Tunnel Types",
+            "title_ar": "أنواع الأنفاق الخاصة",
+            "article_pass": true,
+            "rule_results": [
+                {
+                    "rule_id": "T6.1",
+                    "description_en": "Pedestrian tunnel minimum vertical clearance",
+                    "description_ar": "الحد الأدنى للخلوص الرأسي لأنفاق المشاة",
+                    "status": "pass",
+                    "required": {
+                        "min_clearance_m": 3.5
+                    },
+                    "measured": {
+                        "vertical_clearance_m": 3.8
+                    },
+                    "checked_elements": 1
+                },
+                {
+                    "rule_id": "T6.2",
+                    "description_en": "Separate tunnels for pedestrians/cyclists consideration",
+                    "description_ar": "أنفاق منفصلة للمشاة والدراجات",
+                    "status": "pass",
+                    "verified": true,
+                    "notes": "Separate pedestrian/cyclist tunnel provided adjacent to vehicular tunnel"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,1725 @@
+Source: C:\Users\HP\Desktop\backend\mi3ar\miyar_frontend\src\images\TR-514.pdf
+
+--- PAGE 120 ---
+ROAD GEOMETRIC DESIGN MANUAL
+2.5.5 Posted Speed Limit
+Posted speed limit is the legal speed limit for a road that is determined by statutes or based on an
+engineering and traffic investigation. Speed limits applied to roads have an effect on vehicular
+speeds and, in particular, tend to restrain the fastest drivers. These posted speeds are mandatory
+and are clearly displayed to road users. Nevertheless, it is important to provide a margin of safety
+for those vehicles whose drivers choose to travel faster than the speed limit. Table 2-7 indicates the
+posted speed that is appropriate for a given design speed. Posted speeds are typically 20 km/h
+below the design speed for high-design speeds (80 km/h or greater) and 10 km/h below the design
+speed for low-design speeds (60 km/h or less). If the 85th percentile speed is greater than the posted
+speed limit, this is considered an enforcement issue and is not a design issue.
+Table 2-7: Posted Speeds
+Design Speed Posted Speed
+(km/h) (km/h)
+30 – 40 30 – 40
+50 40
+60 50
+70 60
+80 80
+90 90
+100 100
+120 120
+140 140
+Note: As per the Executive Council resolution 1075/ECAS dated 19-07-2017, speed margin
+between the posted speed and the design is removed on the main roads where
+speed cameras to be located; therefore posted speeds on the main roads where
+speed cameras are installed shall be equal to the design speed.
+2.5.6 Truck/Car Speed Relationship
+Rural posted speed for trucks and other heavy-duty vehicles are less than the posted speed for
+passenger cars and other light vehicles (typically 80 km/h or less). The Highway Capacity Manual
+2010 (17) defines heavy vehicles as any vehicle with more than four wheels on the ground during
+normal operations. These vehicles are generally categorised as trucks, buses, and recreation
+vehicles. They typically have less acceleration and require more room for manoeuvring, lane
+changing, and braking.
+Trucks typically accelerate more slowly from a stop condition and experience greater difficulty in
+maintaining desirable speeds on long, steep upgrades than automobiles. Truck characteristics
+affecting speed on upgrades include mass, power, aerodynamic resistance, drive-train-to-gear
+ratios, and tires.
+The number heavy vehicles are converted to equivalent passage cars for capacity analysis
+purposes. The equivalent ratio is determined based on speed, terrain, power, etc., of the heavy
+vehicle. See the Highway Capacity Manual 2010 (17) for applicable equivalency ratios.
+Page 108
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 121 ---
+ROAD GEOMETRIC DESIGN MANUAL
+2.6 Design Vehicles
+2.6.1 Vehicle Dimensions
+The physical and operational characteristics of vehicles using the road are important controls in
+roadway design. Design criteria may vary according to the type of vehicle and the volume of each
+type of vehicle in the traffic stream. The design vehicle affects the radius returns, left-turn radii, lane
+widths, median openings, turning roadways, and sight distances at intersections.
+For urban areas, Design vehicles represent the vehicles which must be regularly accommodated at
+junctions without encroachment into the opposing traffic lanes. Design vehicles applicable to the
+USDM street family descriptions comprise WB-12 for Boulevards and Avenues and Single Unit
+Bus/Truck (SUM) for streets and access lanes. City-Bus M is applicable for streets with designated
+public bus routes and/or school bus routes at school zones. Bus routes need to be discussed and
+agreed with DMT and their requirements incorporated into the design. Other design vehicles may
+also need to be considered, including speed control vehicles, control vehicles and non-motorised
+vehicles, depending on specific project requirements. Reference is to be made to the USDM for
+further details.
+Urban streets shall be designed to accommodate the occasional use of emergency vehicles (such
+as a fire truck), although this is not considered the general design vehicle.
+Vehicular characteristics that impact design include:
+1. Size. Vehicular sizes determine lane and shoulder widths, vertical clearances and, indirectly,
+roadway capacity calculations.
+2. Off tracking. The design of intersection turning radii, travelled way widening for horizontal
+curves, and pavement widths for interchange ramps are usually controlled by the largest
+design vehicle likely to use the facility with some frequency.
+3. Storage Requirements. Turn-bay storage lengths, bus turnouts, and parking lot layouts are
+determined by the number and types of vehicles to be accommodated.
+4. Sight Distance. Eye height and braking distances vary for passenger cars and trucks, which
+can impact sight distance considerations.
+5. Acceleration and Deceleration. Acceleration and deceleration rates often govern the
+dimensioning of such design features as speed-change lanes at intersections or interchange
+ramps, climbing lanes, or passing lanes.
+6. Vehicular Stability. Certain vehicles with high centres of gravity may be prone to skidding or
+overturning, affecting design speed selection, and superelevation design elements.
+Table 2-8 and Table 2-9 present design vehicular dimensions and minimum turning radii for design
+vehicles used in Abu Dhabi. These tables can be used to input vehicle dimensions into turning
+template software (e.g. AutoTurn). Figure 2-2 and Figure 2-3 illustrate the application of the basic
+dimensions for combination trucks.
+Page 109
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 122 ---
+ROAD GEOMETRIC DESIGN MANUAL
+2.6.2 Turning Templates
+The design vehicle affects the radius returns, left-turn radii, lane widths, median openings, turning
+roadways, and sight distances at an intersection. Figure 2-4 provides turning characteristics of
+typical design vehicle. The designer should use the appropriate turning software programs to check
+their designs. Include a copy of swept path design when submitting plans to the DMT for review. The
+basic design vehicles used by Abu Dhabi for design include:
+• Passenger Car (P)
+• Single Unit Truck (SU-9 and SU-12)
+• City Transit Bus (CITY-BUS)
+• Semitrailer Intermediate (WB-12 and WB-15)
+• Interstate Semitrailer (WB-20)
+• Double Semitrailer/Trailer (WB-33D)
+Table 2-8: Minimum Turning Radii of Design Vehicles
+Minimum Design Centreline(1)
+Minimum Inside
+Design Vehicle Type Symbol Turning Radius Turning Radius
+Radius (m)
+(m) (CTR) (m)
+Passenger Car P 7.26 6.40 4.39
+Single Unit Truck SU-9 12.73 11.58 8.64
+Single Unit Truck SU-12 15.60 14.46 11.09
+City Transit Bus CITY-BUS 12.50(2) 11.52 5.30**
+Intermediate
+WB-12 12.16 10.97 5.88
+Semitrailer
+Intermediate
+WB-15 13.66 12.50 5.20
+Semitrailer(3)
+Interstate
+WB-20 13.66 12.50 0.59
+Semitrailer(3)
+Double Trailer
+WB-33D 18.25 17.04 4.19
+Combination(3)
+Source: (1) Revised
+(1) The turning radius assumed by a designer when investigating possible turning paths and is set at the
+centreline of the front axle of a vehicle. If the minimum turning path is assumed, the CTR approximately
+equals the minimum design turning radius minus one-half the front width of the vehicle.
+(2) Based on dimensions provided by the DMT Public Transport Division.
+(3) Only use this design vehicle in rural areas.
+For other design vehicles, see the AASHTO A Policy on Geometric Design of Highways and Streets (1). Note
+that the other design vehicles generally have better performance (e.g. off tracking) than the design vehicles
+listed above.
+Page 110
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 123 ---
+ROAD GEOMETRIC DESIGN MANUAL
+Table 2-9: Design Vehicle Dimensions
+Dimens Typical kingpin to
+ions center of rear axle
+— — — 7.77 11.40 13.87 12.34
+(m)
+WB — — — — — 12.19
+3
+T — — — — — 3.05(4)
+Wheelba S — — — — — 1.37(4)
+ses
+WB — — — 8.38 10.80 13.84 12.19
+2
+WB 3.10 6.10 7.62 7.00(5) 3.81 4.50 6.58 3.72
+1
+Rear 1.10 1.83 3.20 2.44 0.76(2) 0.60(2) 1.44(3) 1.37(3)
+Overhan
+g
+Front 0.80 1.22 1.22 2.87(5) 0.91 0.91 1.22 0.71
+Lengt
+5.00(1) 9.14 12.04 13.70(5) 13.87 16.80 22.40 34.75
+h
+Overall Width 2.13 2.44 2.44 2.50(5) 2.44 2.59 2.59 2.59
+3.35- 3.35-
+Height 1.30 3.20 4.11 4.11 4.11 4.11
+4.11 4.11
+CITY
+Symbol P SU-9 SU-12 WB-12 WB-15 WB-20(2) WB-33D(2)
+BUS
+Pa Sin Sin
+City Interme Interme
+sse gle- gle- Combi Interstate Double-
+Bus Tran diate diate
+Design Vehicle Type ng unit unit nation semitrailer/t semitrailer/t
+es: sit semitrai semitrai
+er truc truc trucks: railer(6) railer(6)
+Bus ler ler(6)
+car k k
+Source: (1) Revised
+Notes:
+WB1, WB2 and WB3 are the effective vehicle wheelbases or distances between axle groups, starting
+at the front and working towards the back of each unit.
+S is the distance from the rear effective axle to the hitch point or point of articulation.
+T is the distance from the hitch point or articulation measured back to the center of the next axle or
+center of tandem axle assembly.
+(1) Passenger cars may range from 5.0 m (Austroads Design Vehicles and Turning Path Templates)
+to 5.79 m (AASHTO).
+(2) Design vehicle with 16.15-m trailer.
+(3) Combined dimension is typically 3.81 m. This is overhang from the back axle of the tandem axle
+assembly.
+(4) Combined dimension is typically 3.81 m.
+(5) Public Transport Division bus dimensions.
+(6) Only use this design vehicle in rural areas.
+Page 111
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 124 ---
+ROAD GEOMETRIC DESIGN MANUAL
+Figure 2-2: Basic Dimension of Tractor–Semitrailer Vehicle
+Page 112
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 125 ---
+ROAD GEOMETRIC DESIGN MANUAL
+Figure 2-3: Basic Dimension of Tractor–Semitrailer Vehicle/
+Trailer Vehicle (Double Trailer)
+.y .y
+lb lb
+m m
+e e
+s s
+s
+a
+s
+a
+e e
+lx lx
+a a
+m m
+e e
+d
+n
+d
+n
+a a
+t
+fo
+t
+fo
+e e
+r r
+tn tn
+e e
+c c
+r r
+o o
+e e
+lx lx
+a a
+tx tx
+e e
+n n
+n
+o
+e
+h
+t
+fo
+n
+o
+e
+h
+t
+fo
+ita
+e
+ita
+e
+lu
+c
+r
+tn
+lu
+c
+r
+tn
+itr e
+c
+itr e
+c
+a
+fo
+e
+h
+a
+fo
+e
+h
+tn
+t
+o tn
+t
+o
+io t
+k
+io t
+k
+p c p c
+r a r a
+o b o b
+tn
+io
+d
+e r
+tn
+io
+d
+e r
+p u p u
+h
+s
+a h
+s
+a
+c e c e
+tih m tih m
+e n e n
+h o h o
+t
+o
+ita t
+o
+ita
+t
+e
+lu
+c
+t
+e
+lu
+c
+lx
+a
+itr
+a
+lx
+a
+itr
+a
+e r e r
+v o v o
+itc tn itc tn
+e
+ffe
+r a
+e
+r
+io
+p
+h c
+tih
+e
+ffe
+r a
+e
+r
+io
+p
+h c
+tih
+e e e e
+h h h h
+t
+m
+t
+m
+t
+m
+t
+m
+o o o o
+r f
+e
+r f
+e
+r f
+e
+r f
+e
+c c c c
+n n n n
+a
+ts
+a
+ts
+a
+ts
+a
+ts
+iD iD iD iD
+= = = =
+S T S T
+Page 113
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 126 ---
+ROAD GEOMETRIC DESIGN MANUAL
+Figure 2-4: Turning Characteristics of a Typical Semitrailer Design Vehicle
+Definitions:
+1. Turning Radius. The circular arc formed by the turning path radius of the front outside tire of a vehicle. This
+radius is also described by vehicular manufacturers as the “turning curb radius.”
+2. CTR. The turning radius assumed by a designer when investigating possible turning paths. It is set at the
+centre of the front axle of a vehicle.
+3. Off tracking. The difference in the paths of the front and rear wheels of a vehicle as it negotiates a turn.
+The path of each rearward tire of a turning vehicle does not coincide with that of the corresponding forward
+tire. This phenomenon is shown in the drawing above.
+4. Swept Path Width. The amount of roadway width that a vehicle covers in negotiating a turn equal to the
+amount of off tracking, plus the width of the vehicle. The most significant dimension affecting the swept
+path width of a tractor/semitrailer is the distance from the kingpin to the rear trailer axle or axles. The
+greater this distance, the greater the swept path width.
+5. Steering Angle. The maximum angle of turn built into the steering mechanism of the front wheels of a
+vehicle. This maximum angle controls the minimum turning radius of the vehicle.
+6. Tractor/Trailer Angle. The angle between adjoining units of a tractor/semitrailer when the combination unit
+is placed into a turn. This angle is measured between the longitudinal axes of the tractor and trailer as the
+vehicle turns. The maximum tractor/trailer angle occurs when a vehicle makes a 180° turn at the minimum
+turning radius and is reached slightly beyond the point where a maximum swept path width is achieved.
+Source: (1)
+Page 114
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 127 ---
+ROAD GEOMETRIC DESIGN MANUAL
+2.6.3 Acceleration and Deceleration Rates
+Acceleration and deceleration rates of trucks are often critical parameters in determining the road
+design. These rates often govern the dimensions of such design features as intersections, freeway
+ramps, climbing or passing lanes, and turnout bays for buses. Trucks typically accelerate more
+slowly from a stop condition and experience greater difficulty in maintaining desirable speeds on
+long, steep upgrades than passenger cars. Based on their acceleration performance, the passenger
+cars seldom control design.
+Trucks generally require longer deceleration distances than passenger cars. On vertical curves, the
+higher eye height for trucks often compensates for this longer distance. However, at locations with
+lateral sight distance restrictions (inside of horizontal curves), the benefits of the higher eye level
+may be lost. Therefore, truck deceleration considerations or other remedial measures (e.g. signing
+and higher friction surfaces) may be required.
+The AASHTO A Policy on Geometric Design of Highways and Streets (1) provides passenger car
+deceleration and acceleration rates. Chapter 6 “Vertical Alignment” provides data on truck
+acceleration and deceleration rates.
+2.7 Transportation Demand
+To properly design the roadway facility, the road designer must determine the appropriate
+transportation/traffic related parameters to use for the design of the facility. Selection of the
+appropriate parameter is dependent upon several factors. The designer must ensure the parameter
+value is appropriate for their design. For additional guidance on selection of the applicable
+parameters, see the Highway Capacity Manual 2010 (HCM) (17).
+2.7.1 Traffic Volume Demand Parameters
+Traffic volume demand parameters are necessary to produce traffic demand estimates for use in
+planning, project alternative evaluation, and selection, environmental studies, designs that lead to
+construction, transportation network improvement, and pavement design. In order to determine
+traffic volume demand parameters, it is important to identify the different road network facility types
+(i.e. definitions and attributes) that currently exist. The different types of road network facilities in Abu
+Dhabi are classified in Section 2.4. The designer also needs to consider all user types (e.g.,
+pedestrians, transit users, cyclists, motor vehicles) in determining the demand.
+2.7.2 Design Year Selection
+The geometric design of a road should be designed to accommodate the expected user volumes
+predicted to occur during the life of the facility, assuming reasonable maintenance. This involves
+projecting the volumes to a selected future year. The forecasts for the farthest horizon year available
+in the STEAM model of DMT is to be utilized. In case it is not available for a particular area, the
+design year is 20 years from the expected construction completion date for new construction and
+reconstruction projects.
+2.7.3 User Characteristics
+Forecasting future demand volumes requires understanding of future land use, demographics, and
+changes in the transportation system. It is usually completed by using STEAM as described in the
+Page 115
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 128 ---
+ROAD GEOMETRIC DESIGN MANUAL
+previous section. Current user data is used to predict the future ADT, peak hour(s), directional
+distribution, and traffic composition. These characteristics are discussed in the following sections.
+Forecasts of future activity levels should include estimates of pedestrian and cyclist activity.
+Particular care must be used when forecasting pedestrian and cyclist volumes. Many times there is
+latent demand above observed pedestrian and cyclist volumes because pedestrian and cyclist
+facilities do not yet exist in the project area, are substandard, or do not provide complete connectivity
+to attractions. It is important to evaluate future land development, including any potential attractors
+(e.g. transit stops, schools, parks, retail uses) that may be located near moderate and high-density
+residential development.
+2.7.3.1 Average Daily Traffic
+The design of a road and its features should be based upon the traffic volumes and characteristics
+to be served. Information on traffic volume serves to establish the loads for the geometric road
+design. The data collected by agencies include traffic volumes for days of the year and time of day,
+as well as the distribution of vehicles by type and weight. This data also includes information on
+trends from which the designer may estimate the traffic to be expected in the future.
+The basic measure of the traffic demand for a road is the average daily traffic (ADT) volume. The
+ADT is defined as the total volume during a given time period (in whole days), greater than one day
+and less than one year, divided by the number of days in that time period. The current ADT volume
+for a road can be readily determined when continuous traffic counts are available. When only periodic
+counts are taken, the ADT volume can be estimated by adjusting the periodic counts according to
+the season, month, or day of week.
+2.7.3.2 Peak Hour Traffic
+Capacity and other traffic analysis typically focus on the peak-hour volume as it represents the most
+critical period of operations and has the highest capacity requirements. The travel pattern on any
+road varies during hours of the day, day of the week, or time of year. Rural and recreational routes
+often show a wide variation in peak hour volumes. Urban streets, on the other hand, show less
+variation in peak-hour traffic.
+A key design decision involves determining which hourly volume should be used for design. The
+selected design hourly volume (DHV) should not be so low that it is often exceeded, or so high that
+users would rarely be sufficient to make full use of the resulting facility. The selection of an
+appropriate hour for planning, design, and operational purposes is a compromise between providing
+an adequate level of service for all users for nearly every hour of the year and providing economic
+efficiency. For rural and recreational routes, the 30th highest hour is typically used for the DHV. For
+urban areas, the 100th hour is often used as the DHV. The designer should review the resulting
+conditions from the selected design hour to ensure the acceptability of the design (i.e. meets the
+needs of drivers, pedestrians, cyclists, and transit.).
+2.7.3.3 Peak Hour Factor
+Peak hour traffic volumes are critical in evaluating capacity and other parameters because they
+represent the most critical time period. It is the period during which demand is at its highest. The
+analysis of level of service is based on peak rates of flow occurring within the peak hour because
+substantial short-term fluctuations typically occur during an hour. Common practice is to use a peak
+Page 116
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 129 ---
+ROAD GEOMETRIC DESIGN MANUAL
+15-minute rate of flow. Flow rates are usually expressed in vehicles per hour, not vehicles per 15
+minutes. The relationship between the peak 15-minute flow rate and the full hourly volume is given
+by the peak-hour factor (PHF) as shown in Equation 2.1:
+PHF = Hourly Volume/Peak Rate of Flow (within the hour)
+Equation 2.1: Peak Hour Factor
+If 15-minute periods are used, the PHF is computed as:
+PHF = V/(4 x V )
+15
+Equation 2.2: Peak Hour Factor (based on 15-minute period)
+where: PHF = Peak Hour Factor
+V = Peak Hour Volume (vph)
+V = Volume during the peak 15 minutes of flow (veh/15 minutes)
+15
+The following example illustrates the application of the PHF:
+Example 2.7–1
+Given: One hour traffic count (7:00 – 8:00) along a rural freeway:
+7:00 - 7:15: 170
+7:15 - 7:30: 200
+7:30 - 7:45: 220
+7:45 - 8:00: 180
+Problem: Compute the peak hour factor (PHF).
+Solution: Determine the peak hour factor:
+PHF = 770/(4  220) = 770/880 = 0.875
+Typical peak-hour factors for freeways range between 0.80 and 0.95. Lower factors are more typical
+for rural freeways or off-peak conditions. Higher factors are typical of urban peak-hour conditions.
+2.7.3.4 Directional Distribution
+For two-lane rural roads, the DHV is the total traffic in both directions of travel. In the design of roads
+with more than two lanes, on two-lane roads where important intersections are encountered, or
+where additional lanes are to be provided later, knowledge of the hourly traffic volume for each
+direction of travel is important.
+A dual carriageway with a high percentage of traffic in one direction during the peak hours may need
+more lanes than a road having the same ADT, but an equal percentage of directional traffic. During
+peak hours on most rural roads, 55% to 70% of the traffic is travelling in the peak direction, with up
+to as much as 80% occasionally. Directional distributions of traffic vary enough between sites that
+two dual carriageways carrying equal traffic may have significantly different peak direction volumes.
+Page 117
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 130 ---
+ROAD GEOMETRIC DESIGN MANUAL
+Some studies have shown that urban radial routes may have up to 66% of the traffic travelling in the
+same direction during the peak hour. Unfortunately, this peak occurs in one direction in the morning
+and the opposite direction in the evening. Consequently, both directions of the facility must have
+capacity for the peak directional flow. Urban circumferential routes often have a 50/50 split during
+the peak hours for a more balanced flow.
+The directional distribution of traffic during the DHV should be determined by making field
+measurements on the facility under consideration or on parallel and similar facilities.
+In designing intersections and interchanges, the volumes of all movements occurring during the
+design hour is required. This information is necessary for both the morning and evening peak periods
+because the traffic pattern may change significantly from one peak hour to the other.
+2.7.3.5 Traffic Composition
+Vehicles of different sizes and weights have different operating characteristics and should be
+considered in road design. Trucks are generally slower, occupy more roadway space, and have a
+greater individual effect on traffic operations than do passenger vehicles. The effect on traffic
+operation of one truck is often equivalent to several passenger cars. The number of equivalent
+passenger cars equalling the effect of one truck is dependent on the roadway gradient and, for two-
+lane roads, on the available passing sight distance. Therefore, the larger the proportion of trucks in
+a traffic stream, the greater the equivalent traffic demand and the greater the road capacity needed.
+For geometric design, it is essential to have traffic data on the types of vehicles expected for the
+roadway facility. These data generally indicate the major types of trucks and buses as percentages
+of all traffic expected to use the road. At intersections, the percentage of trucks during the morning
+and evening peak hours should be determined separately. Variations in truck traffic between the
+various traffic movements at intersections may be substantial and may influence the appropriate
+geometric layout.
+2.7.3.6 Traffic Growth Rate
+In studies that do not require running the regional travel demand forecasting model to estimate future
+traffic demands, the growth factor method can be used to estimate these demands. To establish
+future year forecasts, the growth factor method relies on the use of projected growth factors to
+existing year traffic data. The method assumes that the recent percentage of growth in traffic will
+continue in the future. These trend-line forecasts are most reliable for relatively short periods of time
+(5 years or less). Ideally, the growth factors are obtained based on traffic counts taken in the past
+few years. To estimate the growth factors, Equation 2.3 should be used.
+EFD = BD*(1+i)n
+Equation 2.3: Future Demand
+where: FD = Future demand
+BD = Base year demand
+I = growth rate
+n = number of years between base year and future year
+Page 118
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 131 ---
+ROAD GEOMETRIC DESIGN MANUAL
+2.7.4 Capacity and Operational Analyses
+2.7.4.1 Highway Capacity Manual
+Capacity is the maximum sustainable hourly flow rate at which persons or vehicles reasonably can
+be expected to transverse a point, or a uniform section of roadway during a given time period under
+prevailing road, environmental, traffic, and control conditions. The goal of the designer is to ensure
+the expected capacity of road reasonably meets the demand for all users of the facility (pedestrian,
+transit users, cyclists, motor vehicular users, trucks). There are several documents available to assist
+the designer in determining the capacity of a facility (e.g. United Kingdom’s Design Manual for Roads
+and Bridges). In Abu Dhabi, the designer should follow the guidance provided in the Highway
+Capacity Manual 2010 (HCM) (17).
+The HCM was developed considering the following analysis areas:
+• levels of analysis (operations, design, preliminary engineering, and planning);
+• travel modes (automobile and other motorised vehicles, pedestrians, cyclists, and transit
+where it is part of a multimodal urban street facility);
+• spatial coverage (points, segments, and facilities); and
+• temporal coverage (undersaturated and oversaturated conditions).
+The HCM provides tools to assist in estimating performance measures for individual elements of a
+multimodal transportation system, as well as guidance on combining those elements to evaluate
+larger portions of the system. Table 2-10 provides the system elements and the service
+measurements used in the HCM.
+To more accurately determine roadway capacities, capacity methodologies have grown in
+complexity and cannot be reasonably documented (e.g. some methodologies require several
+iterations to reach a solution). Consequently, commercial software (e.g. Synchro, PASSER II,
+PASSER IV, CORSIM) is available to assist the road designer in running the complex methodologies
+presented in the HCM.
+The HCM was developed for the conditions in North America and, in particular, the United States.
+Consequently, the designer should carefully evaluate the default values provided in the HCM to
+ensure they are accurate for the conditions in Abu Dhabi. The Abu Dhabi Transportation Impact
+Study Guidelines (18) provides the performance measures and criteria to be used in Abu Dhabi. The
+applicable performance measures are also provided in Chapter 7 “Rural and Urban Freeways,”
+Chapter 8 “Rural Roads,” Chapter 9 “Urban Streets,” and Chapter 10 “Intersections.”
+Page 119
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 132 ---
+ROAD GEOMETRIC DESIGN MANUAL
+Table 2-10: HCM Service Measures
+Systems
+HCM Service Measure(s)
+System Element Analysis
+Chapter
+Automobile Pedestrian Bicycle Transit Measure
+Freeway Facility 10 Density — — — Speed
+Basic freeway
+11 Density — — — Speed
+segment
+Freeway weaving
+12 Density — — — Speed
+segment
+Freeway Merge and
+13 Density — — — Speed
+Diverge Segments
+Multilane Road 14 Density — LOS Score — Speed
+Percent
+time spent
+Two-Lane Road 15 — LOS Score — Speed
+following,
+speed
+Urban Street Facility 16 Speed LOS Score LOS Score LOS Score Speed
+Urban Street
+17 Speed LOS Score LOS Score LOS Score Speed
+Segment
+Signalised
+18 Delay LOS Score LOS Score — Delay
+Intersection
+Two-Way Stop 19 Delay Delay — — Delay
+All-Way Stop 20 Delay — — — Delay
+Roundabout 21 Delay — — — Delay
+Interchange Ramp
+22 Delay — — — Delay
+Terminal
+Off-Street Pedestrian-
+23 — Space events LOS Score — Speed
+Bicycle Facility
+Source: (17)
+2.7.4.2 Performance Measures
+The performance measures and standards intended to be used for the purpose of evaluating and
+assessing the perception of roadway users’ quality/level of service and capacity at planning,
+preliminary/detailed engineering design, and operation levels. They also provide an integrated
+multimodal approach to the analysis and evaluation of roadway transportation facilities from the
+points of view of automobile drivers, transit passengers, bicyclists, and pedestrians. Further, they
+provide thresholds for estimating and predicting acceptable performance levels in Abu Dhabi.
+1. Quality of Service. Quality of service is a user based perception of how well a transportation
+service or facility operates. In other words, how the existing and potential users perceive the
+overall quality of service provided to them. It is a qualitative measure describing operational
+conditions within a traffic stream, based on service measures (e.g. speed and travel time,
+freedom to manoeuvre, traffic interruptions, comfort, safety, and convenience).
+2. Level of Service. Level of service (LOS) is a quantitative stratification of quality of service.
+LOS reflects the quality of service as measured by a scale of user satisfaction and is
+applicable to each of the following modes that use roadways: automobiles and trucks,
+cyclists, pedestrians, and buses. LOS is given a letter of designation from A to F, with LOS
+A, representing the best operating condition while LOS F, represents an over-saturated and
+Page 120
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 133 ---
+ROAD GEOMETRIC DESIGN MANUAL
+heavily congested condition. Table 2-11 shows the typical operating conditions represented
+by these LOS. Each facility type generally has its own specific definitions for LOS.
+Procedures for computing operational and roadway factors to define for conditions that are
+other than ideal are applied through the level of service (LOS) concept.
+In general, the designer should strive to provide the highest LOS practical. However, in urban
+environments, the designer needs to consider other factors (e.g. pedestrians, cyclists, transit
+users, level of development). In these cases, it may be more desirable to accept a lower LOS
+than otherwise may have been provided.
+Table 2-11: General LOS Definitions of Automobiles
+Level of Service General Operating Conditions
+A Free flow
+B Reasonably free flow
+C Stable flow
+D Approaching unstable flow
+E Unstable flow
+F Breakdown flow
+Note: Specific definitions of LOS A – F vary by facility type and are presented in the HCM.
+Source: (17)
+2.7.4.3 Principles and Categories of Planning and Operational
+Measures of Performance
+• The performance measures should be measurable and expressed quantitatively over time to
+determine if the performance toward a goal is getting better or worse.
+• The target for each performance indicator should be attainable and the desired result must
+be acceptable.
+• The performance measures should be relevant and specific to each transportation facility.
+The following categories of performance measures are considered inclusive and appropriate for Abu
+Dhabi transportation facilities. The proposed LOS criteria and thresholds for each roadway facility
+correspond to the relevant performance categories.
+• volume-based measures
+• delay-based measures
+• density-based measures
+• index-based measures
+• speed and frequency-based measures
+2.7.4.4 Principles for Acceptable Level of Performance
+While determining the acceptable LOS threshold for Abu Dhabi, special and distinguished focus
+should be paid to how LOS thresholds relate to the following:
+Page 121
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 134 ---
+ROAD GEOMETRIC DESIGN MANUAL
+• greenhouse gas emissions and air quality
+• energy consumption and vehicle operating costs
+• network performance variations
+• safety
+• quality of life
+• traffic congestion
+• travel time reliability and costs
+• vehicle operating costs
+On the basis of the findings of the above relationships, the performance measures and LOS criteria
+for various transportation facilities are provided elsewhere in the applicable chapters of this Manual.
+However, it should be noted that the methodologies and procedures employed in determining the
+LOS standards for different transportation facilities are specified and described within the HCM.
+2.7.4.5 Posted Speed
+One of the important parameters used in capacity analysis is speed. Posted speeds are to be used
+in traffic capacity analysis (modelling).
+2.7.4.6 Uninterrupted Roadway Capacity
+Vehicle capacity of uninterrupted roadway facility is the maximum number of vehicles that can pass
+a given point during a specified period under prevailing roadway and traffic conditions. It is normally
+expressed in passenger cars/hour/lane. In the capacity and level of service analysis, heavy vehicles
+have to be converted to their passenger car equivalents. In general, the capacity analysis procedures
+that are used identify capacity values for a set of standard ideal or base conditions. A link capacity
+analysis is required for all links within the study area. Lane capacities for each link type in Abu Dhabi
+are provided in Table 2-12.
+Table 2-12: Typical Lane Capacities in Abu Dhabi
+Link Type Lane Capacity (pc/hr/ln)
+Freeway 2200
+Expressway 2000
+Arterial/Boulevard/Avenue (signalised, non-CBD) 1000
+Arterial/Boulevard (signalised, CBD) 700
+Collector/Avenue/Street 700
+Ramp 1500
+Rural Single Carriageway (1+1) 1100
+Local Road/Street 600
+Source: (18)
+The results of the capacity analysis for links on arterial or collector roads with signal, stop, give-way,
+or roundabout control need to be discussed comparing to the relevant intersection analysis results.
+Free-flow links (e.g. freeways) may also be affected by weaving and merging. Critical results
+therefore need to be discussed and agreed upon with the Client.
+For local (or residential) roads, a maximum traffic flow of 600 vehicles per direction per lane per peak
+hour applies. Traffic flows exceeding this value suggest other through-traffic using this road. A
+Page 122
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 135 ---
+ROAD GEOMETRIC DESIGN MANUAL
+different function, for example as collector road demanding different designs and dimensions may
+be more appropriate. For a local road, other criteria (e.g. safety improvements, reduction of noise
+and pollution) are of higher importance and should guide design and dimensioning of the road, rather
+than capacity.
+2.7.4.7 Saturation Flow Rate at Signalised Intersections
+For signalised intersections, capacity is calculated as the product of saturation flow rate and effective
+green divided by the cycle length. Saturation flow rate is the maximum flow rate of vehicles that can
+be sustained across a signal stop line, assuming 100% green time and is expressed in passenger
+cars per hour green per lane. The value of saturation flow rate is required to estimate signalised
+intersection capacities and other associated performance measures using analytical procedures and
+microscopic simulation models.
+To determine the lost-time at signalised intersections, the capacity of a signalised intersection
+movement is calculated as the product of saturation flow rate and the effective green divided by
+cycle length. The effective green for a given movement is calculated as the sum of the green and
+yellow times for the movement minus the total lost time. The lost time consists of two components:
+• start-up lost time due to drivers’ perception-reaction time at the beginning of green and,
+• clearance (yellow) interval lost time at the end of yellow.
+The default value for the start-up lost time is 2.0 seconds. The default value of the number of seconds
+used by vehicles during the yellow (sec.) is 3.0 seconds in the Emirate, even at intersections that
+have flashing green. The applicable All Red time is 2 seconds.
+2.7.4.8 Pedestrian and Cyclist Speeds
+Pedestrian and Cyclist’s speeds are the most important capacity characteristics that need to be
+considered when designing pedestrian and cycle facilities. Walking speed is influenced by
+pedestrian density, gender, size of platoon, percentage of elderly population, disabled pedestrian
+population, and child pedestrian population. A walking speed of 1.2 m/s can be used as the design
+speed. However, use 0.9 m/s to 1.05 m/s at locations with high proportions of elderly and slower
+pedestrians.
+The typical speed of cyclists is about 24 km/h for segregated cycle tracks and 16 km/h for shared
+facilities. Among the factors that affect cycle speed are the type of cycle, the cycle track, pavement
+surface type, weather conditions, the grade of the track, and the mix of other non-motorized users
+on the cycle track.
+2.8 Environmental Considerations
+Roads have wide-ranging effects in addition to providing traffic service to users. It is important that
+roads be considered as an element of the total environment. The term “environment” as used here,
+refers to the totality of humankind’s surroundings (social, physical, natural, and synthetic). It includes
+the human, animal, and plant communities, and the forces that act on all three. The road can and
+should be located and designed to complement its environment and serve as a catalyst to
+environmental improvement.
+Page 123
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 136 ---
+ROAD GEOMETRIC DESIGN MANUAL
+The area surrounding a proposed road is an interrelated system of natural (e.g. wind, sand),
+synthetic, and sociologic variables. Changes in one variable within this system cannot be made
+without some effect on other variables. The consequences of some of these effects may be
+negligible, but others may have a strong and lasting impact on the environment, including the
+sustenance and quality of human life. Because road location and design decisions have an effect on
+the development of adjacent areas, it is important that environmental variables be given full
+consideration, as listed below:
+• To present managers and decision makers with a clear assessment of potential impacts that
+a project may have on the overall environment;
+• To apply to a project a methodology that assesses and predicts impacts and provides the (a)
+means for impact prevention and mitigation, (b) enhancement of project benefits, and (c)
+minimization of long-term impacts; and
+• To provide a specific forum in which consultation is systematically undertaken in a manner
+that allows stakeholders to have a direct input to the environmental management process.
+Also, exercise care to ensure that all applicable environmental requirements are met. For example,
+see Chapter 3 “Cross Section Elements” for guidance on blowing sand.
+For additional guidance on environmental considerations, review the Abu Dhabi Planning Council
+ESTIDAMA website (12), Abu Dhabi Environmental, Health, and Safety Manual for Main Roads (19),
+and Abu Dhabi Environmental Assessment for Road Projects Manual (20).
+2.9 Right-of-Way Considerations
+The provision of right-of-way widths that accommodate construction, adequate drainage, and proper
+maintenance of a road is an important part of the overall design. Wide rights-of-way permit the
+construction of gentle slopes, resulting in greater safety for the motorist and providing for easier and
+more economical maintenance. The procurement of sufficient right-of-way at the time of the initial
+improvement permits the widening of the roadway and the widening and strengthening of the
+pavement at a reasonable cost as traffic volumes increase.
+The minimum right-of-way width for all functional classifications will be the sum of the travel lanes,
+outside shoulders, and median width, if applicable, plus the necessary width for fill and cut slopes,
+or for roadside clear zones, whichever is greater. Desirably, the right-of-way width will accommodate
+the anticipated ultimate development of the roadway and utility services corridors. The geometric
+design tables in Chapter 7 “Rural and Urban Freeways,” Chapter 8 “Rural Roads,” and Chapter 9
+“Urban Streets” provide the minimum right-of-way widths for roadways in Abu Dhabi. Determination
+of the final right-of-way width must be coordinated with the Client.
+The right-of-way width should be uniform, where practical. In urban areas, variable widths may be
+necessary due to existing development; varying side slopes and embankment heights may make it
+desirable to vary the right-of-way width; and right-of-way limits will likely have to be adjusted at
+intersections and freeway interchanges.
+In developed areas, it may be desirable to limit the right-of-way widths. However, the right-of-way
+width should not be less than that required for all the elements of the design cross sections, utility
+accommodation, and appropriate border areas. The client will review all official written requests, with
+Page 124
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 137 ---
+ROAD GEOMETRIC DESIGN MANUAL
+justification, for departures from the minimum right-of-way requirements. For additional guidance on
+determining right-of-way widths in urban environments, see the Abu Dhabi Urban Street Design
+Manual (4).
+Generally, embankment height between 1.5m-2.0m is used and can be more than 3.0m at drainage
+facilities and utility locations or Sabkha areas. Embankment heights shall be studied and minimized
+as much as possible unless any special cases such as Sabkha areas. Utility providers’ requirements
+for existing/proposed networks shall be optimized. Drainage facilities shall be provided in natural
+stream/depressed areas in order to minimize their negative impacts on the road elevation, where
+applicable.”
+2.10 Access Control and Access Management
+Access management is the careful consideration of the location, type, and design of vehicular access
+points to serve land development in a manner that helps minimise negative impacts while still
+providing sufficient accessibility to the land. It is a systematic and strategic response to the
+recognition that vehicular manoeuvres and volumes at each access point will have specific and
+accumulative consequences to the flow and safety of the road for all user types. It also involves
+roadway design applications (e.g. median treatments, auxiliary lanes), the design of intersections,
+and the appropriate spacing of traffic signals.
+In its simplest form, access management is conflict management. In the flow of traffic from origin to
+destination, the fewer conflicts that occur during the driving experience, the less the delay and the
+lower the probability of a crash. When the speed of the vehicle or the frequency of access conflicts
+increases, the rate of conflict and the average frequency of crashes increase. Access management
+techniques work to reduce both the frequency and severity of traffic conflicts.
+Access management is applied in a hierarchical manner. Freeways have the highest level of control
+where access is only allowed using well-spaced, well-designed directional ramps. The entire freeway
+has a non-traversable median to prohibit cross movements. As the functional hierarchy steps down,
+to expressway then arterial, more access is allowed, but must be well spaced and include design
+elements (e.g. turn lanes) and well-designed transitions. See Figure 2-1.
+Access management in Abu Dhabi is a governmental program that sets standards for the location,
+type, and design of all access points to any public road in the entire Emirate. The program has been
+created and is implemented to help preserve the functional integrity of public roads to ensure that
+the mobility, efficiency, and safety of public roads are maintained for today and future generations.
+The Abu Dhabi Access Management Policy and Procedures Manual (21) defines 13 access
+categories based on the facility’s functional classification and whether the facility is in an urban or
+rural environment. See the Abu Dhabi Access Management Policy and Procedures Manual for
+definitions and design requirements for each access category.
+2.11 Non-Road Design Controls
+The characteristics of drivers and vehicles significantly influence the selected design criteria. Where
+the driver and vehicle are properly accommodated, the safety and serviceability of the road system
+are enhanced. When they are not accommodated, inefficient operation may result.
+Page 125
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 138 ---
+ROAD GEOMETRIC DESIGN MANUAL
+2.11.1 Drivers
+There are two types of drivers — typical and elderly drivers. The following provides guidance on
+these drivers:
+1. Typical Driver. The appropriate considerations for drivers are already built into the applicable
+geometric design values (e.g. stopping sight distance, horizontal curvature, superelevation,
+roadway widths). Typical drivers vary widely in their operating skills, experience, intelligence,
+and physical condition. The road should be as forgiving as practical to minimise the adverse
+effects of driver errors. The following discusses certain principles and driver traits that should
+be incorporated into the roadway design:
+a. Information Processing. Drivers are limited in how quickly they can gather
+information, make a decision, and take action. They must process information related
+to lane placement, speed, traffic control devices, road alignment, roadside conflicts,
+and weather. If the amount, complexity, or clarity of the information is inappropriate
+or excessive, this may lead to driver error.
+b. Primacy. Certain driving functions are more important than others. In order of
+importance they are:
+i. Control. Activities related to the physical control of the vehicle via the steering
+wheel, brake, or accelerator.
+ii. Guidance. Activities related to selecting a safe speed and vehicular path on
+the road.
+iii. Navigation. Activities related to planning and executing a trip from point of
+origin to destination.
+The designer must be aware of the relative importance of these activities and ensure
+that the more important road information is properly conveyed to the driver. This could
+result in the decision to remove or relocate lower priority information, if it is likely to
+interfere with the higher priority information.
+c. Expectancy. Drivers are conditioned through experience and training to expect and
+anticipate what lies ahead on the road. If this driver expectancy is violated, it will
+increase the time needed by the driver to assess the situation and make the correct
+decision. These violations should be avoided. Where they are unavoidable, the
+designer should allow for increased warning time.
+d. Speed. Speed must be considered when accommodating the driver. Higher speeds
+reduce the visual field and restrict peripheral vision.
+2. Elderly Driver. In general, the median age of drivers is increasing. This reality greatly
+emphasises the criticality of the relationship between the driver and the roadway
+environment. Although the opinions are not unanimous, there is general agreement that
+advancing age has an effect on an individual’s perceptual, mental, and motor skills. It is
+important for the designer to be aware of the needs of the elderly driver and, where desirable,
+factor these needs into the roadway design.
+Page 126
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 139 ---
+ROAD GEOMETRIC DESIGN MANUAL
+2.11.2 Pedestrians and Cyclists
+Roads throughout the Emirate are to be designed to emphasise family, hospitality, inclusiveness,
+and pedestrian access to neighbourhood facilities, including mosques and schools. All streets should
+be designed to accommodate pedestrians, transit users, cyclists, and motorists so that all modes
+offer an attractive choice.
+Do not include provisions for pedestrians and cyclists along freeways. However, consider providing
+provisions for pedestrians and cyclists to safely cross the freeway at appropriate locations (e.g.
+pedestrian bridges).
+Abu Dhabi Walking and Cycling Master Plan, Chapter 13 “Pedestrian and Cyclist Facilities”, and the
+Abu Dhabi Urban Street Design Manual (4) provide guidance on the design criteria for pedestrians
+and cyclists accommodations.
+2.12 Road Safety
+Highways should be designed to minimize driver decisions and to reduce unexpected situations. The
+number of crashes increases with an increase in the number of decisions required of the driver.
+Uniformity in highway design features and traffic control devices plays an important role in reducing
+the number of required decisions, and by this means, the driver becomes aware of what to expect
+on a certain type of highway.
+The most significant design factor contributing to safety is the provision of full access control. Full
+access control reduces the number, frequency, and variety of events to which drivers must respond.
+The beneficial effect of this element has been documented in several reports. One of the principal
+findings of these studies is that highways without access control invariably had higher crash rates
+than those with access control.
+The principle of full access control is invaluable as a means for preserving the capacity of arterial
+highways and of minimizing crash potential; however, this principle does not have universal
+application. Highways without control of access are essential as land service facilities, and the
+design features and operating characteristics of these highways need to be carefully planned so that
+they will reduce conflicts and minimize the interference between vehicles and still meet the needs of
+highway users.
+Speed is often a contributing factor in crashes, but its role must be related to actual conditions at a
+crash site to be understood. It is improper to conclude that any given speed is safer than another for
+all combinations of the many kinds of drivers, vehicles, highways, and local conditions. For a highway
+with particularly adverse roadway conditions, a relatively low speed may result in fewer crashes than
+a high speed, but this does not necessarily mean that all potential crashes can be eliminated by low
+speeds. Likewise, vehicles traveling on good roads at relatively high speed may have lower crash
+involvement rates than vehicles traveling at lower speeds, but it does not necessarily follow that yet
+a higher speed would be even safer
+When designing a highway, consideration should be given to the type and characteristics of the
+drivers expected to use the highway. Trip purposes (such as recreation, commuting to work, and
+through travel) are factors affecting the design to some extent. Trip purposes are related to the mix
+of vehicle types likely to use the highway, ranging from all passenger vehicles to a high percentage
+of heavy commercial vehicles. Where trips of one type predominate, the facility should be designed
+to fit the specific needs of that type of trip.
+Page 127
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 140 ---
+ROAD GEOMETRIC DESIGN MANUAL
+A highway with a median width of 15 m [50 ft] or more has a very low incidence of head-on collisions
+caused by vehicles crossing the median. With narrower medians, median barriers will eliminate
+head-on collisions, but at the cost of some increase in same-direction crashes because recovery
+space is decreased. Properly designed median barriers minimize vehicle damage and lessen the
+crash severity. However, if a narrow median with a median barrier is proposed on a high-speed
+highway, the design should include adequate shoulder widths in the median for emergency stops
+and emergency vehicle use.
+Another study relating crashes to shoulder width, alignment, and grade found that crash rates on
+sections with curves or grades were much higher than on level tangent highway sections. Crashes
+are likely to occur where drivers are called upon to make decisions under circumstances where their
+vehicles are unable to respond properly, for example, where a truck is descending a grade. It would
+be logical to expect more crashes on grades and curves than on level tangent highways where driver
+decisions are needed less frequently and vehicles are fully responsive. However, design with tangent
+alignment can be overdone.
+On extremely long tangents, drivers have a tendency to completely relax, especially after driving on
+a congested highway before entering a freeway. On some freeways, there has been concern over
+the number of crashes that occur when the driver apparently goes to sleep. It is considered highly
+desirable to provide gentle curvature and to avoid a fixed cross section for long tangent sections of
+roadway. This can be achieved by varying the median width, using independent roadway alignments,
+and taking advantage of the terrain, wherever practical. In addition, rumble strips can be added to
+shoulders to reduce run-off-the-road crashes caused by drivers falling asleep at the wheel. As the
+design of alignment, grade, and traveled-way cross section has improved, roadside design has also
+become increasingly important. Crashes involving single vehicles running off the road constitute
+more than one-half of all fatal crashes on freeways.
+Basic to the concept of the forgiving roadside is the provision of a clear recovery area. Studies have
+indicated that on high-speed highways, a relatively level traversable width of approximately 9 m from
+the edge of the traveled way permits about 80 percent of the vehicles leaving the highway to safely
+stop or return to the roadway. Even though the 9-m width is not a “magic number” and the application
+of engineering judgment is necessary, the 9-m width has been used extensively as a guide for
+recovery zones.
+In roadside design, two major elements should be controlled by the designer: roadside slopes and
+unyielding obstacles. On existing highways, the following priorities for treatment of roadside
+obstacles are recommended:
+• Remove the obstacle or redesign it so it can be safely traversed.
+• Relocate the obstacle to a point where it is less likely to be struck.
+• Reduce severity of impacts with the obstacle by using an appropriate breakaway device.
+• Redirect a vehicle by shielding the obstacle with a longitudinal traffic barrier and/or crash cushion.
+• Delineate the obstacle if the above alternatives are not appropriate.
+The design of guardrails and barrier systems has become a subject of considerable research. DMT’s
+Roadside Design Guide (TR-518) is one of many published reports that deal with this subject. These
+publications note that the treatment of end sections on guardrail or a barrier is of particular concern.
+The design team should assess their design against TR-518, the Emirate of Abu Dhabi Roadside
+Design Guide to ensure roadside safety is properly considered.
+Page 128
+02-GENERAL DESIGN CRITERIA SECOND EDITION - NOVEMBER 2021
+----------------
+
+--- PAGE 340 ---
+ROAD GEOMETRIC DESIGN MANUAL
+7.3.2.3 Typical Cross Section
+Cross sections of depressed freeways may vary through urban areas, in particular, the number of
+traffic lanes required. Another important factor is availability of right-of-way, which depends on the
+type and value of urban development, topography, soil and drainage conditions, and the frequency
+and type of interchanges to be used. The cross section should meet the design criteria presented in
+Sections 3 and 7.7 for urban and rural freeways, respectively. Where there are physical or economic
+constraints, it may be appropriate to vary certain design elements to fit the cross section within the
+available right-of-way. Figure 7-8(a) shows a depressed freeway with adequate right-of-way.
+Figure 7-8(b) illustrates a depressed freeway with retaining walls in restricted right-of-way. Although
+the restricted cross section shown is acceptable, it should be used only where additional right-of-
+way would be extremely costly or where this type of cross section is necessary to preserve the
+surrounding environment.
+Figure 7-8: Cross Sections for Depressed Freeways
+Note: For cross section widths, see the geometric design tables in Sections 7.6 and 7.7.
+Source: (1)
+Page 328
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 341 ---
+ROAD GEOMETRIC DESIGN MANUAL
+7.3.3 Elevated Freeways
+7.3.3.1 General Characteristics
+In urban areas, elevated freeways should only be considered where restricted right-of-way, high-
+water table, extensive underground utilities, close pattern of streets to be retained, terrain, or other
+circumstances make construction of a depressed freeway undesirable and/or uneconomical. An
+elevated freeway may be constructed on either a viaduct or an embankment. Consider the following:
+1. Viaduct. Viaduct designs are influenced by traffic demands, right-of-way, topography,
+foundation conditions, urban development, interchange needs, availability of materials,
+and economic considerations. Figure 7-9 shows a freeway on viaduct. Because of
+these multiple considerations, viaducts are the most difficult of all freeway types to fit
+harmoniously into the environment.
+Support columns for viaducts are positioned to provide clearance on each side and to leave
+the ground-level area free for other use. This design has the following advantages:
+• practically all cross streets can be left open with little or no added expense;
+• existing utilities that cross the freeway right-of-way are minimally disturbed; and
+• surface traffic on cross streets usually can be maintained during construction with
+few, if any, detours.
+Figure 7-9: Freeway on a Viaduct (Al Wahda Street – Sharjah)
+The space under the structure can be used for surface-street traffic, for parking, or for a tram
+or transit line. The area under the viaduct may also have a high potential value to the
+community for joint development or other use, which may range from playgrounds to major
+buildings. The disadvantages with the viaduct design include high costs for maintaining the
+Page 329
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 342 ---
+ROAD GEOMETRIC DESIGN MANUAL
+structure and its closed drainage system, difficulty in obtaining a pleasant appearance, and
+need for added police protection in the undeveloped space beneath the structure.
+2. Embankment. Freeways on embankments are feasible in outer urban areas where
+crossing streets are widely spaced and where wide right-of-way and fill material are
+available. An elevated freeway on an earth embankment should be of sufficient height
+to permit intersecting surface roads to pass under it. Usually, an embankment section
+occurs on a combination-type freeway in rolling terrain where excavation material from
+depressed portions is used for the embankment. A roadside barrier generally will be
+warranted when the embankment slopes are greater than 1V:3H. The sloped areas
+may be planted to improve the appearance of the freeway.
+Where appropriate, the fill may be confined by partial- or full-height retaining walls on one or
+both sides. With retaining walls, the total width may be reduced to widths comparable to
+elevated structures on viaducts. Special wall treatment or planting of trees and shrubs may
+make retaining walls aesthetically pleasing.
+7.3.3.2 Typical Cross Section
+The total widths of elevated freeway sections can vary considerably. For elevated freeways on
+embankments, the total width is about the same as the total width needed for depressed freeways.
+Elevated freeways on structures may be cantilevered over parallel roadways or sidewalks.
+Figure 7-10 illustrates an elevated viaduct freeway, where:
+• Figure 7-10(a) shows the elevated freeway supported by columns on each side with at-grade
+service roads on the outsides of the columns.
+• Figure 7-10(b) displays a cross section for a stacked freeway with the opposing traffic on top
+of each other. Due to the high cost and inability to expand the freeway in the future, this
+design should only be considered in very constrained right-of-way.
+• Figure 7-10(c) illustrates where it may desirable to include separated special use lanes (e.g.,
+HOV lanes, transit lanes) within a restricted right-of-way. The special use lanes are
+cantilevered over the through lanes for the freeway.
+• Figure 7-10(d) shows typical cross section for where the through lanes are elevated on
+separate structures. It also shows ramps transiting in height between the elevated freeway
+and at-grade service roads.
+Figure 7-11(a) shows a typical cross section for an elevated freeway on an embankment with at-
+grade service roads. Figure 7-11(b) shows the use a retaining wall for restricted conditions.
+Page 330
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 343 ---
+ROAD GEOMETRIC DESIGN MANUAL
+Figure 7-10: Typical Viaduct Cross Sections for Elevated Freeways
+Source: (1)
+Figure 7-11: Typical Embankment Cross Sections for Elevated Freeways
+Note: For cross section widths, see the geometric design tables in Sections 7.6 and 7.7.
+Source: (1)
+Page 331
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 344 ---
+ROAD GEOMETRIC DESIGN MANUAL
+7.3.4 Combination-Type Freeways
+7.3.4.1 General Characteristics
+Typical, urban freeways will incorporate some combination of depressed, elevated, or ground level
+designs. Combination-type freeways result from variations in profile or cross section.
+7.3.4.2 Profile Control
+The terrain will generally determine the type profile control required. The designer should consider
+the following:
+1. Rolling Terrain. The typical profile of a combination-type freeway in rolling terrain is
+shown in Figure 7-12. The best profile is usually developed by underpassing some
+cross streets and overpassing others. The facility is neither generally depressed nor
+elevated, although for short lengths it incorporates the design principles for fully
+depressed or fully elevated roadways. For example, in Figure 7-12, at A and C the
+facility is depressed, at B it is elevated on an earth embankment, and at each end at
+ground level.
+Figure 7-12: Combination Freeway in Rolling Terrain
+Source: (1)
+2. Level Terrain. Figure 7-13 shows a variation of a combination-type freeway in level
+terrain. The roadway profile closely follows the existing ground between the grade
+separation structures. The freeway also overpasses important cross streets by rolling
+the gradeline to the appropriate height above the surface streets; where practical, cross
+streets are carried over the freeway (as at A in Figure 7-13). This combination-type
+freeway design is suitable for level terrain where soil and groundwater conditions or
+underground utilities preclude depressing the freeway mostly below the existing
+ground, or continuous viaduct construction is too costly or is otherwise objectionable.
+The freeway may be carried over a cross street on an earth embankment with a
+conventional grade separation structure (as at B in Figure 7-13) or on a relatively long
+structure (as at C in Figure 7-13). The factors that control the profile design are the
+availability of fill material and the soil conditions. This freeway design permits parallel
+or diagonal ramps to be provided between the grade separations
+Figure 7-13: Profile Control — Combination-Type Freeway in Level Terrain
+Source: (1)
+Page 332
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 345 ---
+ROAD GEOMETRIC DESIGN MANUAL
+One of the disadvantages of this design is that a roller coaster-type of profile results where
+several successive cross streets are overpassed at close intervals. This situation is more
+pronounced on horizontal tangents where drivers can see two or more grade separations
+ahead. A moving vehicle that is ahead of a driver may disappear into dips and reappear again
+as the grade rises to a crest. Therefore, designer should design the profile to eliminate dips
+that would limit the sight distance. Ensure adequate sight distance is provided to the exit
+ramps. Where truck traffic is heavy, maximum grades of approximately 2% are desirable to
+prevent queuing at the base of the grade.
+To minimise the overall rise and fall and make the rolling profile less pronounced, the cross
+streets may be depressed several meters below the ground surface and the freeway grade
+may be raised several meters above the ground level between grade separation structures.
+The profile may be further improved by raising some cross streets to overpass the freeway.
+Minimum governing distances for grade separation design are discussed in Section 7.5.2.3.
+7.3.4.3 Cross-Section Control
+The examples in Figure 7-14 are also considered combination-type freeways, but the primary
+influence on their design is the cross section. These special designs usually apply to relatively short
+lengths of roadway to meet specific conditions.
+7.3.5 Special Freeway Designs
+7.3.5.1 Reverse-Flow Freeways
+Special conditions may warrant the use of a reverse-flow roadway as a part of the freeway design.
+This is usually accomplished by placing a separate reversible roadway within the normal median
+area, as shown in Figure 7-15. Reverse-flow roadways are advantageous in that they may have
+unused capacity much of the time because of the limited numbers of access points. The costs of
+construction, maintenance, and operation of a freeway with a reverse-flow roadway may also differ
+considerably from those of a conventional freeway.
+A separate reverse-flow roadway may be considered where:
+• the directional distribution during peak hours is substantially unbalanced (e.g. a 65:35 split)
+and capacity analysis indicates a need for a conventional facility more than eight lanes (4+4)
+wide;
+• design controls and right-of-way limitations are such that providing two or more parallel
+facilities on separate rights-of-way is not practical; and
+• a sizable portion of traffic in the predominant direction during peak hours is destined for an
+area between the central portions of the city or another area of concentrated development
+and the outlying area (i.e. a large percentage of peak-hour traffic travels a long distance
+between principal points of origin and destination with little or no need for intermediate
+interchanges).
+In some areas, demand may be sufficiently great to justify the use of a reversible roadway exclusively
+for buses or other high-occupancy vehicles.
+Page 333
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 346 ---
+ROAD GEOMETRIC DESIGN MANUAL
+Figure 7-14: Combination-Type Freeways with Restricted Right-of-Way
+Note: For cross section widths, see the geometric design tables in Sections 7.6 and 7.7.
+Figure 7-15: Typical Cross Sections for Reverse-Flow Operation
+Source: (1)
+Page 334
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 347 ---
+ROAD GEOMETRIC DESIGN MANUAL
+7.3.5.2 Dual-Divided Freeways
+Where more than a 4+4 design is required and the directional distribution of traffic is sufficiently
+balanced so that a reversible roadway is not appropriate, a dual-divided freeway made up of two-
+one-way carriageways in each direction of travel may provide the optimum facility. See Figure 7-16
+and Figure 7-17. All four roadways are within the control-of-access lines. This type of cross section
+is sometimes referred to as “dual-dual.” The outer freeway roadways usually serve the local
+interchange traffic, but they may also serve a substantial portion of the through traffic. For example,
+all trucks might be required to use the outer roadways only. Various arrangements are possible,
+depending on the character of traffic and crossroad conditions.
+Figure 7-16: Typical Cross Sections for Dual-Divided Operation
+Figure 7-17: Dual-Divided Freeway
+Dual-divided freeways usually function smoothly and carry extremely high volumes of traffic
+efficiently. Motorists using the inner roadways are removed from the weaving movement at
+frequently spaced interchanges, and disabled vehicles in either the inner or the outer roadway can
+quickly be moved to a shoulder.
+Page 335
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 348 ---
+ROAD GEOMETRIC DESIGN MANUAL
+Where the future need can be anticipated and sufficient right-of-way can be reserved, it may be
+practical to develop a dual-divided facility in two stages. Dual-divided construction may be the most
+practical solution to widening an existing freeway where the present traffic volumes are so great that
+the disruption in traffic during complete reconstruction cannot be tolerated.
+Dual-divided facilities have great flexibility in their operation and maintenance. For example, during
+maintenance or reconstruction operations, one of the directional roadways may be temporarily
+closed during off-peak hours. Crash potential is greatly reduced by eliminating traffic conflicts with
+construction or maintenance work. Another advantage of dual-divided design is that the affected
+roadway can also be closed in case of a crash or other emergency, thereby facilitating clean-up
+operations.
+Disadvantages of dual-divided facilities are the wide expanse of pavement and heavy traffic volumes
+that may disrupt an established community and tend to limit the continuity of the surrounding area.
+The dual-roadway system reduces the flexibility of traffic distribution, resulting in uneven distribution
+among lanes. The costs for right-of-way, construction, and maintenance may be greater than those
+on a normal divided facility with an equal number of lanes.
+7.3.5.3 Freeways with Collector-Distributor Roadways
+An arrangement having cross-sectional elements similar to the dual-divided freeway is a freeway
+with a collector-distributor (C-D) roadway system. The purpose of a C-D road is to eliminate weaving
+on the mainline freeway lanes and reduce the number of entrance and exit points on the through
+roadways while satisfying the demand for access to and from the freeway. C-D roadways may be
+provided within a single interchange (as discussed in Section 12.5.2), through two adjacent
+interchanges, or continuously through several interchanges of a freeway segment. See Figure 7-18
+and Figure 7-19. Continuous C-D roads are similar to continuous service roads except that access
+to abutting property is not permitted.
+The inside lanes are for the high-speed through traffic and the outside slower speed roadways are
+identified as C-D roads. Usually, the traffic volumes on the C-D system are less than those
+encountered on the dual-divided freeway, with fewer lanes. The minimum lane arrangement for a C-
+D system is two C-D lanes, 2+2 dual carriageway, and two C-D lanes. Other combinations may be
+developed as capacity needs warrant. Continuous C-D roadways should be integrated into a basic
+lane design to develop an overall system. Conduct a capacity analysis and basic lane determination
+for the overall system rather than just for the separate roadways.
+Connections between the through roadways and C-D roadways are called “transfer roads.” Transfer
+roads may be either one or two lanes in width. The principle of lane balance applies to the design of
+transfer roads on both the through and C-D roadways. Both transfer and C-D roads should have
+shoulders equal in width to those of the through roadway. The outer separation should be as wide
+as practical with an appropriate barrier. Terminals of transfer roads should be designed in
+accordance with guidelines for ramp terminals, as presented in Section 12.6.
+The design speed of C-D roadways is usually less than that of the through roadway because most
+of the turbulence caused by weaving occurs on the C-D roadways. A reduction in design speed of
+no more than 20 km/h is preferable for continuous C-D roadway systems.
+Page 336
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 349 ---
+ROAD GEOMETRIC DESIGN MANUAL
+Figure 7-18: Abu Dhabi Freeway with C-D Roadway
+Figure 7-19: Dubai Freeway with C-D Roadways
+Page 337
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 350 ---
+ROAD GEOMETRIC DESIGN MANUAL
+7.4 General Design Considerations
+7.4.1 Design Speed
+As a general consideration, the design speed should be consistent with the anticipated operating
+speed of the freeway during both peak and non-peak hours, but the design speed should not be so
+high as to exceed the limits of prudent construction, right-of-way, and socioeconomic costs. For rural
+freeways, the design speed should be 120 km/h to 140 km/h and, for urban freeways, 100 km/h to
+120 km/h. In mountainous terrain, a design speed of 80 km/h to 100 km/h is consistent with driver
+expectancy.
+On many urban freeways, particularly in developing areas, a design speed of 100 km/h or higher
+can be provided with little additional cost. Where the freeway corridor is relatively straight, the
+character of the roadway and location of interchanges may be consistent with a higher design speed.
+Under these conditions, a design speed 120 km/h is desirable, because higher design speeds are
+closely related to the overall quality of a facility.
+7.4.2 Design Traffic Volumes
+Both rural and urban freeways should normally be designed to accommodate traffic projections for
+a 20-year period into the future, particularly for new construction. However, some elements of
+freeway reconstruction may be based on a shorter design period. Specific capacity needs should be
+determined from directional design hourly volumes (DDHV) for the appropriate design period. In
+large metropolitan areas, the selection of appropriate design traffic volumes and design periods may
+be influenced by system planning. Segments of freeways may be constructed or reconstructed to be
+commensurate with either intermediate traffic demands or with traffic based on the completed
+system, whichever may be more appropriate.
+7.4.3 Capacity Analysis
+Procedures for traffic operational analyses for freeways, including appropriate adjustments for
+operational and roadway factors, are presented in the Highway Capacity Manual 2010 (17).
+7.4.3.1 Freeway Segments
+Freeways are composed of the following segments that are analysed to determine the overall
+capacity and level of service (LOS) freeway:
+1. Freeway Merge and Diverge Segments. These are segments in which two or more
+traffic streams combine to form a single traffic stream (merge) (entrance ramps) or
+where a single traffic stream divides to form two or more separate traffic streams
+(diverge) (exit ramps). Section 12.6.3 provides guidance on capacity analyses for
+merge and diverge segments.
+2. Freeway Weaving Segments. These are segments in which two or more traffic streams
+travelling in the same general direction cross paths along a significant length of freeway
+without the aid of traffic control devices (except for guide signs). Weaving segments
+are formed where a diverge segment closely follows a merge segment or where a one-
+lane exit ramp closely follows a one-lane entrance ramp and the two are connected by
+a continuous auxiliary lane. Section 12.3.13 provides guidance on capacity analyses
+for weaving segments.
+Page 338
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 351 ---
+ROAD GEOMETRIC DESIGN MANUAL
+3. Basic Freeway Segments. These segments are between the merge, diverge, or
+weaving segments.
+7.4.3.2 Influence Areas
+It is important that the definition of freeway segments and their influence areas be clearly understood.
+The influence areas of merge, diverge, and weaving segments are as follows:
+1. Weaving Segment. This influence area includes the base length of the weaving
+segment plus 150 m upstream of the entry point to the weaving segment and 150 m
+downstream of the exit point from the weaving segment; entry and exit points are
+defined as the points where the appropriate edges of the merging and diverging lanes
+meet. See Figure 12-7.
+2. Merge Segment. This influence area is measure from the point where the edges of the
+travel lanes of the merging roadways meet to a point 450 m downstream from that point.
+See Figure 12-7.
+3. Diverging Segment. This influence area is measure from the point where the edges of
+the travel lanes of the merging roadways meet to a point 450 m upstream from that
+point. See Figure 12-7
+7.4.3.3 Base Capacity
+The base capacity represents the capacity of the facility, assuming that there are no heavy vehicles
+in the traffic stream and that all drivers are regular users of the segment. The base capacity for all
+freeway segments varies with the free-flow speed. See Figure 7-20 shows a sample speed-flow
+curves for a basic freeway section in the United States. The base lane capacity in Abu Dhabi for a
+freeway segment is assumed 2200 pc/h/ln. Note that this is less than the base capacity of 2400
+pc/h/ln provided in the Highway Capacity Manual (17). To determine the actual lane capacity, use
+base capacity 2200 pc/h/ln and the methodologies as presented in the Highway Capacity Manual
+2010 (17).
+7.4.3.4 Level of Service
+Because LOS for basic, weaving, merge, and diverge segments on a freeway is defined in terms of
+density, LOS for a freeway facility is also defined based on density. A facility analysis will result in a
+density determination and LOS for each component segment. The facility LOS will be based on the
+weighted average density for all segments with the defined facility. Weighting is done based on
+segment length and the number of lanes in each segment.
+The LOS densities for a freeway facility and basic freeway segments are shown in Table 7-1.
+Guidance for merge and diverge segments, weaving areas, and ramps is provided in Chapter 12
+“Interchanges.”
+Freeways should generally be designed so that acceptable levels of congestion are not exceeded;
+desirably LOS B, with minimum LOS C. Freeway auxiliary facilities (i.e. ramps, mainline weaving
+sections, collector-distributor (C-D) roads) may be design with a LOS one level lower than the
+freeway segment if the overall freeway still meets the design LOS. In heavily developed sections of
+metropolitan areas, achieving level of service C may not be practical and the use of level of service
+D may be appropriate.
+Page 339
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 352 ---
+ROAD GEOMETRIC DESIGN MANUAL
+Figure 7-20: Sample Speed-Flow Curves for Basic Freeway Section
+Source: (36)
+Table 7-1: LOS Criteria for Freeway Facilities
+LOS Density (PC/mi/ln)
+A ≤ 11
+B > 11 – 18
+C > 18 – 26
+D > 26 – 35
+E > 35 – 45
+F > 45 or any component v /c ratio > 1.00
+d
+Note: 1 Mile = 1.6 Km Sources: (17) / (36)
+7.4.4 Travelled Way and Shoulders
+The minimum freeway design should be a 2+2 dual carriageway. Through-traffic lanes should be
+3.65 m wide. Freeway roadways should have a paved surface with adequate skid resistance and
+structural capacity. Pavement cross slopes should be 2% sloping away from the median. Guidance
+for ramp travelled-way widths are provided in Section 12.5.6.
+Page 340
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 353 ---
+ROAD GEOMETRIC DESIGN MANUAL
+Paved shoulders should be continuous on both the right and left sides of all freeway facilities.
+Shoulder widths on freeways are as follows:
+1. 2+2. The median (or left) shoulder is normally 1.8 m wide (only if the ultimate design is
+a 2+2 freeway), at least 1.2 m of which should be paved and the remainder stabilized.
+The paved width of the right shoulder should be at least 3.0 m. Where the DDHV for
+truck traffic exceeds 250 veh/h, provide a paved right shoulder width of 3.65 m.
+2. 3+3 or More. The paved width of the right and left shoulder should be 3.0 m. Where the
+DDHV for truck traffic exceeds 250 veh/h, provide a paved right shoulder width of 3.65
+m.
+3. Ramps. Guidance for ramp shoulder widths is provided in Section 12.5.6. Ramp
+shoulder widths are usually provided adjacent to acceleration and deceleration lanes
+with transitions to the freeway shoulder width at the taper ends.
+7.4.5 Curbs
+Caution should be exercised in the use of curbs on freeways. Where curbs are provided in special
+cases, they should not be closer to the travelled way than the outer edge of shoulder and should be
+easily traversable. An example of a special case in which shoulder curbs are used on freeways is at
+locations where curbs are provided to control drainage and reduce erosion. For more information,
+refer to the discussion on curb types and their placement in Section 3.2.6 and the Abu Dhabi
+Roadside Design Guide (28).
+7.4.6 Superelevation
+The desirable superelevation rate on freeways is 4%, with a maximum rate of 6%. See Section 5.3
+for further guidance.
+7.4.7 Grades
+Maximum grades for freeways are presented in Table 7-2 for combinations of design speed and
+terrain type. Grades on urban freeways should be comparable to those on rural freeways of the
+same design speed. Steeper grades may be tolerated in urban areas, but the closer spacing of
+interchange facilities and the need for frequent speed changes make it desirable to use flatter grades
+wherever practical. On sustained upgrades, the need for climbing lanes should be investigated, as
+discussed in Section 6.3.
+Table 7-2: Maximum Grades for Rural and Urban Freeways
+Design Speeds (km/h)
+Type of
+80 90 100 110 120 130 140*
+Terrain
+Grades (%)*
+Level 4 4 3 3 3 3 3
+Rolling 5 5 4 4 4 4 4
+Mountainous 6 6 6 5 — — —
+* Grades 1% steeper than the value shown may be provided in urban areas with right-of-way constraints or
+where needed in mountainous terrain.
+* Estimated by DMT. Source: (1)
+Page 341
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 354 ---
+ROAD GEOMETRIC DESIGN MANUAL
+7.4.8 Structures
+The design of bridges, culverts, walls, tunnels, and other structures should be in accordance with
+the principles in the Abu Dhabi Road Structures Design Manual (29).
+The clear width on bridges carrying freeway traffic should be as wide as the approach roadway. On
+bridges longer than 60 m, some economy in substructure costs may be gained by building a single
+structure rather than twin parallel structures. In such cases, the approach shoulder widths are
+provided and a median barrier is extended across the bridge.
+Structures carrying ramps should provide a clear width equal to the ramp width and paved shoulders.
+The structure width and lateral clearance of roadways overpassing or underpassing the freeway are
+dependent on the roadway classifications as discussed in Chapter 8 “Rural Roads” and Chapter 9
+“Urban Streets.”
+7.4.9 Vertical Clearance
+The vertical clearance to roadway structures, sign trusses, and pedestrian overpasses over freeways
+should be at least 6.5 m over the entire roadway width, including auxiliary lanes and the usable width
+of shoulders with consideration for future resurfacing. Where the freeway passes over a railroad,
+provide a vertical clearance of 7.5 m.
+7.4.10 Roadside Design
+Urban freeways at ground level and rural freeways should have clear zone widths consistent with
+their operating speed, traffic volume, and side slopes. Detailed discussions of clear zones and lateral
+offsets are discussed in the Abu Dhabi Roadside Design Guide (28).
+Depressed freeways in urban areas have more restrictive rights-of-way, which may require retaining
+walls or bridge piers to be placed within the clear zone. Retaining walls and piers should not be
+located on the shoulder and preferably should be at least 0.6 m beyond the outer edge of shoulder.
+Retaining walls and pier crash walls should incorporate an integral concrete barrier shape, or offset
+from the shoulder to permit shielding with a separate barrier. Where walls are located beyond the
+clear zone or are not required, back slopes should be traversable and fixed objects within the clear
+zone should be of a breakaway design or shielded.
+Elevated freeways on embankments generally warrant roadside barriers where slopes are steeper
+than 1V:3H or where the area beyond the toe of slope that remains within the clear zone is not
+traversable. The tops of retaining walls used in conjunction with embankment sections should be
+located no closer to the roadway than the outer edge of the shoulder, and the walls should
+incorporate the concrete barrier shape or be appropriately shielded.
+7.4.11 Ramps and Terminals
+The design of ramps and connections for all freeway types is covered in Section 12.5 and Section
+12.6, respectively.
+7.4.12 Outer Separations and Borders
+An outer separation is defined as the area between the travelled way of the main lanes and a service
+(frontage) road or local street. A border is defined as the area between the service road or local
+Page 342
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 355 ---
+ROAD GEOMETRIC DESIGN MANUAL
+street and the private development along the road. Where there are no service roads or local streets
+functioning as service roads, the area between the travelled way of the main lanes and the right-of-
+way limit should be referred to as the border. Because of the dense development along urban
+freeways, service roads are often necessary to maintain local service and to collect and distribute
+ramp traffic entering and leaving the freeway. Where the freeway occupies a full block, the adjacent
+parallel streets are usually retained as service roads.
+The outer separation or border provides space for shoulders, verges, side slopes, drainage, access-
+control fencing, service areas, and in urban areas, retaining walls and ramps. In sensitive areas, the
+outer separation or border may also provide space for noise abatement measures. Usually, the outer
+separation is the most flexible element of an urban freeway section. Adjustment in width of right-of-
+way, as may be needed through developed areas, ordinarily is made by varying the width of the
+outer separation.
+The outer separation or border should be as wide as economically practical to provide a buffer zone
+between the freeway and its adjacent area. The border should extend beyond the construction limits,
+where practical, to facilitate maintenance operations and encourage an effective roadside design.
+Wide outer separations also permit well-designed ramps between the freeway and the service road.
+The typical range in widths of outer separations is 25 m to 50 m, but much narrower widths may be
+used in urban areas if retaining walls are employed.
+7.4.13 Access Control
+A freeway should have no disruptions or traffic stopped at crossroads anywhere along the route. All
+opposing traffic movements are separated by physical constraints (e.g. grade separations, non-
+traversable median separators). Access to the freeway is by directional ramps. All ramps should be
+suitably spaced and designed to provide the minimum differential between the speed of the through
+traffic stream and the speed of the merging or diverging vehicles.
+Private direct access to a freeway is prohibited. Abutting property must access the freeway via a
+secondary roadway network. Any direct access for construction activity must be within the authorised
+project construction zone and in accordance with approved traffic control plans.
+For interchanges in rural areas, a spacing of 8 km is preferred, with an interchange minimum spacing
+distance of 4 km. See the Abu Dhabi Access Management Policy and Procedures Manual (21) for
+further guidance. The separation between on on-ramps and the next downstream off-ramp is the
+most critical distance in consideration of spacing. Interchange centreline spacing criteria cannot
+anticipate how topography and other conditions may result in ramps too closely spaced. A traditional
+cloverleaf is undesirable as the ramp activity overlaps. On rural roadways, there should be over 2000
+m between gore points.
+A minimum spacing of 2 km between interchanges is preferred in urban areas. Where there is a
+heavy on-ramp volume followed by a high off-ramp volume, a greater spacing is desirable.
+Sequential off-ramps can be closer together, but not for sequential on-ramps. Where there is a high
+frequency of trucks and buses, acceleration lanes should be twice the normal distance.
+Right-turn-only ramps are allowed when there is a necessity for a low-volume isolated access (e.g.
+official utility installation) or traveller service area (e.g. gas station, rest area) directly related to the
+right-of-way use or travel support.
+Page 343
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 356 ---
+ROAD GEOMETRIC DESIGN MANUAL
+Parking is not permitted along freeway roadways or in the roadside area.
+Official stopping areas including rest stops, filling stations with public facilities and shops must be
+outside the roadway limits (i.e. beyond the roadway right of way). The ramps for these facilities must
+be spaced and designed in the same manner as interchange ramps; see Section 12.3.3. Where
+practical, public facilities should be on both sides of the road; otherwise, there may be incidents of
+vehicles crossing the median. Design the freeway median to discourage crossover activities.
+Public facilities for public transport stops, pedestrian crossings, footways, and cycle lanes must be
+grade separated or there must be a physical barrier between the freeway roadway and the other
+public facility.
+Within the general corridor area of the freeway, there should always be a parallel secondary route
+for non-freeway travel. This can be in the form of service roads and other secondary classifications.
+In extremely low population areas, secondary systems may be isolated ending at freeway access
+points; see Figure 7-21.
+Figure 7-21: Isolated Freeway Access
+Page 344
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 357 ---
+ROAD GEOMETRIC DESIGN MANUAL
+7.5 Grade Separation Design
+On fully access-controlled facilities, each intersecting roadway must be terminated, rerouted, or
+provided with a grade separation or interchange. The importance of the continuity of the crossing
+road, the feasibility of alternative routes, traffic volumes, construction costs, environmental impacts,
+etc., must be evaluated to determine the option that is the most cost effective.
+7.5.1 Justification
+Section 12.2 provides guidelines that must be considered in determining whether an interchange
+should be provided. In general, interchanges are provided at all freeway-to-freeway crossings and
+at other roadways based on the anticipated demand for access.
+For each crossroad along the freeway, which is not an interchange, a determination must be made
+whether the crossroad should be closed, rerouted, or provided with a grade separation. This
+justification is made primarily by comparing the respective cost and social factors for each
+alternative. Figure 7-22 shows a grade separated crossing. Although cost is a primary factor, also
+consider the following:
+Figure 7-22: Grade Separated Freeway Crossing
+1. Operations. Grade separations should be of sufficient number and adequate capacity
+to accommodate crossroad traffic, traffic diverted to crossroads from other roads and
+streets terminated by the freeway, and the traffic generated by access connections to
+and from the mainline.
+2. Rural/Urban Locations. In rural areas, the location of grade separation structures is
+determined by an access and feasibility study. For urban areas, usually grade
+separation structures are provided every three to four blocks for continuity.
+3. Local Considerations. Closing the crossroad can have a significant effect on local users
+and the overall local road system integrity, due primarily to changes in travel patterns.
+These may include:
+Page 345
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 358 ---
+ROAD GEOMETRIC DESIGN MANUAL
+a. Emergency Personnel. The financial effect of the longer detour route on emergency
+vehicles is generally not a concern. However, the extra response time could adversely
+affect the health and safety of local citizens.
+b. Businesses. Evaluate access to businesses to ensure that these operations can
+continue without severe economic hardship. Road closures can significantly affect
+their deliveries and the number of customers they receive (e.g. customers may be
+unwilling to travel the extra distance).
+c. Social Factors. Parks, mosques, cemeteries, public facilities, and other areas or
+buildings of social concern generally cannot be relocated. Limited access to these
+facilities may create undue hardship if a specific road is closed.
+d. Land Use Planning. Consider future land use within an urban environment to ensure
+adequate access and reciprocation factors are available.
+7.5.2 Design
+7.5.2.1 Structure Type
+Varieties of structures are used for grade separation of intersections highways. Similar to an
+overcrossing roadway, the full roadway approach width should be carried through the undercrossing,
+including roadside barriers. Figure 7-23 illustrates several variations for carrying the freeway cross
+section through the underpass:
+Figure 7-23: Typical Cross Sections for Underpasses
+Source: (36)
+Page 346
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 359 ---
+ROAD GEOMETRIC DESIGN MANUAL
+• Figure 7-23(a) shows a bridge with solid abutments. The left side fits a walled section on the
+roadway approach; the right side intercepts the side slope.
+• Figure 7-23(b) shows a structure with open-end spans.
+• Figure 7-23(c) illustrates where the side slopes of partial height pass through the structures.
+This design provides the approaching driver a greater degree of openness with la less
+constricting and safer roadside.
+• Figure 7-23(d) is an extension of Figure 7-23(c) where the entire cross section of the freeway
+is spanned. A greater sense of openness is produce.
+7.5.2.2 Over Versus Under
+A thorough study should be completed for each proposed roadway grade separation to conclude
+whether the major roadway should be over or under the other road(s). The main issues that dictate
+whether a road should be carried over or under usually fall into one of the following:
+• topography predominates, which should lead to a design that is fitted to it;
+• the topography does not help one design; and
+• the grade-line and alignment of one roadway predominate, and so the final design should
+accommodate that roadway’s alignment instead of the site topography.
+Figure 7-24 illustrates roundabout interchanges with the freeway above and below the roundabout.
+Figure 7-24: Roundabout Interchanges with Freeway Over and Under
+Typically, a design that is in line with the existing topography is also the most economical and
+aesthetically pleasing. This factor should usually be considered first. Otherwise, it is appropriate to
+study the following secondary factors:
+1. The Whole Interchange. For the most part, designers are governed by the need for economy,
+which is obtained by designs that fit existing topography, not only along the intersecting
+highways but also for the whole of the area to be used for ramps and slopes. Thus, it is
+Page 347
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------
+
+--- PAGE 360 ---
+ROAD GEOMETRIC DESIGN MANUAL
+appropriate to consider alternatives in the interchange area as a whole to decide whether the
+major road should go over or under the crossroad.
+2. Approach View. An undercrossing highway has a general advantage in that an approaching
+interchange may be easily seen by drivers. As a driver approaches, the structure appears
+ahead, making the presence of the upper-level crossroad obvious, and providing advance
+warning of the likely presence of interchange ramps.
+3. Aesthetics. Through traffic is given aesthetic preference by a layout in which the more
+important road is the overpass. A wide overlook can be provided from the structure and its
+approaches, giving drivers a minimum feeling of restriction.
+4. Turning Traffic. Where turning traffic is significant, the ramp profiles are best fitted when the
+major road is at the lower level. The ramp grades then assist turning vehicles to decelerate
+as they leave the major roadway and to accelerate as they approach it, rather than the
+reverse. In addition, for diamond interchanges the ramp terminal is visible to drivers as they
+leave the major roadway.
+5. Terrain. In rolling topography or in rugged terrain, major-road overcrossings may be
+attainable only by a forced alignment and rolling gradeline. Where there otherwise is no
+pronounced advantage to the selection of an underpass or overpass, the design that provides
+the better sight distance on the major road should be preferred.
+6. Stage Construction. An overpass offers the best possibility for stage construction, both in the
+roadway and structure, with minimum impairment of the original investment. The initial
+development of only part of the ultimate width is a complete structure and roadway in itself.
+By lateral extension of both or construction of a separate structure and roadway for a dual
+carriageway, the ultimate development is reached without loss of the initial facility.
+7. Drainage. Drainage challenges may be reduced by carrying the major roadway over the
+crossroad without altering the crossroad grade. In some cases, the drainage concerns alone
+may be sufficient reason for choosing to carry the major roadway over rather than under the
+crossroad.
+8. Economics. The cost of bridges and approaches may determine whether the major roadway
+underpasses or overpasses the minor facility. A cost analysis that takes into account the
+bridge type, span length, roadway cross section, angle of skew, soil conditions, and cost of
+approaches will determine which of the two intersecting roadways should be placed on
+structure.
+9. Earthwork. An underpass may be more advantageous where the major road can be built
+close to the existing ground, with continuous gradient and with no pronounced grade
+changes. Where the widths of the roads differ greatly, the quantity of earthwork makes this
+arrangement more economical. Because the minor road usually is built to less generous
+design criteria than the major road, grades on it may be steeper and sight distances shorter,
+with resultant economy in grading volume and pavement area on the shorter length of road
+to be rebuilt above the general level of the surrounding country.
+10. Freeway System. Frequently, the choice of an underpass at a particular location is
+determined not by conditions at that location, but by the design of the freeway as a whole.
+Page 348
+07-RURAL & URBAN FREEWAYS SECOND EDITION -NOVEMBER 2021
+----------------

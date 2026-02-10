@@ -1,0 +1,208 @@
+{
+    "module": "bridges_and_structures",
+    "schema_version": "1.0",
+    "project_id": "INF-2000",
+    "overall_pass": false,
+    "summary": {
+        "articles_checked": 5,
+        "rules_checked": 11,
+        "rules_passed": 9,
+        "rules_failed": 2
+    },
+    "articles": [
+        {
+            "article_id": "B1",
+            "title_en": "Bridge Vertical Clearances",
+            "title_ar": "الخلوص الرأسي للجسور",
+            "article_pass": true,
+            "rule_results": [
+                {
+                    "rule_id": "B1.1",
+                    "description_en": "Highway overhead structures vertical clearance",
+                    "description_ar": "الخلوص الرأسي للمنشآت العلوية على الطرق السريعة",
+                    "status": "pass",
+                    "required": {
+                        "min_clearance_m": 6.5
+                    },
+                    "measured": {
+                        "vertical_clearance_m": 6.8
+                    },
+                    "checked_elements": 3
+                },
+                {
+                    "rule_id": "B1.2",
+                    "description_en": "Railroad overpasses vertical clearance",
+                    "description_ar": "الخلوص الرأسي لجسور السكك الحديدية",
+                    "status": "pass",
+                    "required": {
+                        "min_clearance_m": 7.5
+                    },
+                    "measured": {
+                        "vertical_clearance_m": 7.8
+                    },
+                    "checked_elements": 1
+                },
+                {
+                    "rule_id": "B1.3",
+                    "description_en": "Sign trusses/gantries vertical clearance",
+                    "description_ar": "الخلوص الرأسي لهياكل اللافتات",
+                    "status": "pass",
+                    "required": {
+                        "min_clearance_m": 6.5
+                    },
+                    "measured": {
+                        "vertical_clearance_m": 6.6
+                    },
+                    "checked_elements": 4
+                }
+            ]
+        },
+        {
+            "article_id": "B2",
+            "title_en": "Bridge Horizontal Clearances",
+            "title_ar": "الخلوص الأفقي للجسور",
+            "article_pass": false,
+            "rule_results": [
+                {
+                    "rule_id": "B2.1",
+                    "description_en": "Retaining walls/piers horizontal clearance from shoulder edge",
+                    "description_ar": "الخلوص الأفقي للدعامات والجدران الاستنادية",
+                    "status": "fail",
+                    "required": {
+                        "min_clearance_m": 0.6
+                    },
+                    "measured": {
+                        "horizontal_clearance_m": 0.45
+                    },
+                    "violations": [
+                        {
+                            "element_id": "pier_03",
+                            "measured_clearance_m": 0.45,
+                            "deficit_m": 0.15,
+                            "location": "Bridge B-02, West span"
+                        }
+                    ]
+                },
+                {
+                    "rule_id": "B2.2",
+                    "description_en": "Clear recovery area (Clear Zone)",
+                    "description_ar": "منطقة الاسترداد (Clear Zone) على الطرق السريعة",
+                    "status": "pass",
+                    "required": {
+                        "min_clearance_m": 9.0
+                    },
+                    "measured": {
+                        "clear_zone_width_m": 9.5
+                    },
+                    "checked_elements": 6
+                }
+            ]
+        },
+        {
+            "article_id": "B3",
+            "title_en": "Bridge Roadway Width",
+            "title_ar": "عرض طريق الجسر",
+            "article_pass": true,
+            "rule_results": [
+                {
+                    "rule_id": "B3.1",
+                    "description_en": "Bridge clear width must equal approach roadway width",
+                    "description_ar": "استمرارية عرض الجسر",
+                    "status": "pass",
+                    "required": {
+                        "condition": "Bridge width >= Approach width"
+                    },
+                    "measured": {
+                        "bridge_width_m": 14.6,
+                        "approach_width_m": 14.6
+                    },
+                    "checked_elements": 3
+                },
+                {
+                    "rule_id": "B3.2",
+                    "description_en": "Through-traffic lane width",
+                    "description_ar": "عرض حارة المرور",
+                    "status": "pass",
+                    "required": {
+                        "min_width_m": 3.65
+                    },
+                    "measured": {
+                        "lane_width_m": 3.65
+                    },
+                    "checked_elements": 8
+                },
+                {
+                    "rule_id": "B3.3",
+                    "description_en": "Right paved shoulder width",
+                    "description_ar": "عرض الكتف الأيمن المرصوف",
+                    "status": "pass",
+                    "required": {
+                        "min_width_m": 3.0
+                    },
+                    "measured": {
+                        "shoulder_width_m": 3.0
+                    },
+                    "checked_elements": 8
+                }
+            ]
+        },
+        {
+            "article_id": "B4",
+            "title_en": "Bridge Barriers",
+            "title_ar": "حواجز الجسور",
+            "article_pass": true,
+            "rule_results": [
+                {
+                    "rule_id": "B4.1",
+                    "description_en": "Barrier warranted if slope > 1V:3H",
+                    "description_ar": "متطلبات حاجز (انحدار شديد)",
+                    "status": "pass",
+                    "verified": true,
+                    "notes": "Barriers present on all slopes > 1V:3H"
+                }
+            ]
+        },
+        {
+            "article_id": "B5",
+            "title_en": "Bridge Grades & Superelevation",
+            "title_ar": "ميول الجسور",
+            "article_pass": false,
+            "rule_results": [
+                {
+                    "rule_id": "B5.1",
+                    "description_en": "Pavement cross slope",
+                    "description_ar": "الميل الجانبي (Cross Slope)",
+                    "status": "pass",
+                    "required": {
+                        "slope_percent": 2.0
+                    },
+                    "measured": {
+                        "cross_slope_percent": 2.0
+                    },
+                    "checked_elements": 4
+                },
+                {
+                    "rule_id": "B5.2",
+                    "description_en": "Superelevation Rate",
+                    "description_ar": "معدل الارتفاع الفائق (Superelevation)",
+                    "status": "fail",
+                    "required": {
+                        "min_percent": 4.0,
+                        "max_percent": 6.0
+                    },
+                    "measured": {
+                        "superelevation_percent": 7.2
+                    },
+                    "violations": [
+                        {
+                            "element_id": "curve_02",
+                            "measured_percent": 7.2,
+                            "excess_percent": 1.2,
+                            "location": "STA 1+850"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

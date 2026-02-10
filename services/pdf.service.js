@@ -213,6 +213,22 @@ const PROJECT_RULES_CONFIG = {
         showDetailedReport: true,
         type: 'bridges'
     },
+    bridges: {
+        showDetailedReport: true,
+        type: 'bridges'
+    },
+    bridges_and_structures: {
+        showDetailedReport: true,
+        type: 'bridges'
+    },
+    tunnels: {
+        showDetailedReport: true,
+        type: 'bridges'
+    },
+    tunnels_and_structures: {
+        showDetailedReport: true,
+        type: 'bridges'
+    },
     infrastructure: {
         showDetailedReport: true,
         type: 'roads'
@@ -357,14 +373,132 @@ function getCertificateHtml(data) {
             return String(v);
         };
 
-        // Static fallback for roads (matching 90% mock)
-        const rows = (articles.length > 0 ? articles : [
-            { article_id: "R1", title_en: "Roadway and Lane Geometry", title_ar: "هندسة الطريق وحارات المرور", rules: [{ description_en: "Minimum travel lane width", status: "pass", measured: "3.75m", requirements: "3.65m" }] },
-            { article_id: "R2", title_en: "Cross Slopes (Drainage)", title_ar: "الميول العرضية (تصريف المياه)", rules: [{ description_en: "Travel lane cross slope", status: "pass", measured: "1.8%", requirements: "1.5-2.0%" }] },
-            { article_id: "R3", title_en: "Rural Truck Routes", title_ar: "معايير طرق الشاحنات الريفية", rules: [{ description_en: "Shoulder width (right)", status: "pass", measured: "3.6m", requirements: "3.6m" }] },
-            { article_id: "R4", title_en: "Urban Streets", title_ar: "معايير الشوارع الحضرية", rules: [{ description_en: "Parking lane width", status: "pass", measured: "2.5m", requirements: "2.5m" }] },
-            { article_id: "R5", title_en: "Pedestrian & Cyclist Facilities", title_ar: "مرافق المشاة والدراجات", rules: [{ description_en: "Sidewalk clear width", status: "fail", measured: "1.8m", requirements: "Min 2.0m" }] }
-        ]).map(a => {
+        // Static fallback for roads – complete R1-R14 matching roads_detailed_mock_result.json
+        const ROADS_FALLBACK = [
+            {
+                article_id: "R1", title_en: "Road Type Classification", title_ar: "تصنيف أنواع الطرق", article_pass: true, rule_results: [
+                    { rule_id: "R1.1", description_en: "Rural Freeway: Design speed range 100-140 km/h", status: "pass", required: { min_speed_kmh: 100, max_speed_kmh: 140 }, measured: { design_speed_kmh: 120 } },
+                    { rule_id: "R1.2", description_en: "Urban Freeway: Design speed range 80-120 km/h", status: "pass", required: { min_speed_kmh: 80, max_speed_kmh: 120 }, measured: { design_speed_kmh: 100 } },
+                    { rule_id: "R1.3", description_en: "Boulevard: Design speed range 60-80 km/h", status: "pass", required: { min_speed_kmh: 60, max_speed_kmh: 80 }, measured: { design_speed_kmh: 70 } },
+                    { rule_id: "R1.4", description_en: "Avenue: Design speed range 50-70 km/h", status: "pass", required: { min_speed_kmh: 50, max_speed_kmh: 70 }, measured: { design_speed_kmh: 60 } },
+                    { rule_id: "R1.5", description_en: "Street: Design speed range 40-60 km/h", status: "pass", required: { min_speed_kmh: 40, max_speed_kmh: 60 }, measured: { design_speed_kmh: 50 } }
+                ]
+            },
+            {
+                article_id: "R2", title_en: "Lane Width", title_ar: "عرض الحارات", article_pass: false, rule_results: [
+                    { rule_id: "R2.1", description_en: "Minimum travel lane width for freeways: 3.65m", status: "pass", required: { min_width_m: 3.65 }, measured: { lane_width_m: 3.70 } },
+                    { rule_id: "R2.2", description_en: "Rural truck route lane width: 3.65-4.0m", status: "fail", required: { min_width_m: 3.65, max_width_m: 4.0 }, measured: { lane_width_m: 3.50 } },
+                    { rule_id: "R2.3", description_en: "Standard lane width for Boulevard/Avenue: 3.3m", status: "pass", required: { standard_width_m: 3.3 }, measured: { lane_width_m: 3.35 } },
+                    { rule_id: "R2.4", description_en: "Standard lane width for Streets/Access: 3.0m", status: "pass", required: { standard_width_m: 3.0 }, measured: { lane_width_m: 3.10 } },
+                    { rule_id: "R2.5", description_en: "Left turn lane width: 3.0-3.3m", status: "pass", required: { min_width_m: 3.0, desirable_width_m: 3.3 }, measured: { lane_width_m: 3.20 } },
+                    { rule_id: "R2.6", description_en: "Parking lane width: 2.5m", status: "pass", required: { standard_width_m: 2.5 }, measured: { lane_width_m: 2.60 } },
+                    { rule_id: "R2.7", description_en: "Single lane ramp width: 5.0-5.5m", status: "pass", required: { min_width_m: 5.0, max_width_m: 5.5 }, measured: { ramp_width_m: 5.20 } },
+                    { rule_id: "R2.8", description_en: "Cycle lane width (one-way): 1.2-2.5m", status: "pass", required: { min_width_m: 1.2, max_width_m: 2.5 }, measured: { cycle_lane_width_m: 1.50 } }
+                ]
+            },
+            {
+                article_id: "R3", title_en: "Shoulder Width", title_ar: "عرض الكتف", article_pass: true, rule_results: [
+                    { rule_id: "R3.1", description_en: "Right shoulder width for freeways: min 3.0m", status: "pass", required: { min_width_m: 3.0 }, measured: { shoulder_width_m: 3.20 } },
+                    { rule_id: "R3.2", description_en: "Left shoulder width for freeways: min 2.0m", status: "pass", required: { min_width_m: 2.0 }, measured: { shoulder_width_m: 2.50 } },
+                    { rule_id: "R3.3", description_en: "Shoulder width for rural truck routes", status: "pass", required: { right_width_m: 3.6, left_width_m: 3.0 }, measured: { right_shoulder_m: 3.70, left_shoulder_m: 3.10 } },
+                    { rule_id: "R3.4", description_en: "Ramp right shoulder width: min 3.0m", status: "pass", required: { min_width_m: 3.0 }, measured: { shoulder_width_m: 3.10 } },
+                    { rule_id: "R3.5", description_en: "Ramp left shoulder width: min 1.2m", status: "pass", required: { min_width_m: 1.2 }, measured: { shoulder_width_m: 1.50 } }
+                ]
+            },
+            {
+                article_id: "R4", title_en: "Median Width", title_ar: "عرض الجزيرة الوسطية", article_pass: false, rule_results: [
+                    { rule_id: "R4.1", description_en: "Depressed median width (no barrier): min 10.0m", status: "fail", required: { min_width_m: 10.0, recommended_width_m: 18.0 }, measured: { median_width_m: 8.50 } },
+                    { rule_id: "R4.2", description_en: "Flush median with concrete barrier: min 7.8m", status: "pass", required: { min_width_m: 7.8 }, measured: { median_width_m: 8.00 } },
+                    { rule_id: "R4.3", description_en: "Curbed median width for urban streets: 2.0-6.0m", status: "pass", required: { min_width_m: 2.0, max_width_m: 6.0 }, measured: { median_width_m: 4.00 } },
+                    { rule_id: "R4.4", description_en: "Minimum pedestrian refuge width in median: 2.0m", status: "pass", required: { min_width_m: 2.0 }, measured: { refuge_width_m: 2.50 } }
+                ]
+            },
+            {
+                article_id: "R5", title_en: "Curve Radius", title_ar: "نصف قطر المنحنى", article_pass: false, rule_results: [
+                    { rule_id: "R5.1", description_en: "Minimum horizontal curve radius by design speed", status: "pass", required: { min_radius_m: 305 }, measured: { curve_radius_m: 350 } },
+                    { rule_id: "R5.2", description_en: "Right turn radius for WB-12: R1=36m, R2=12m, R3=36m", status: "pass", required: { r1_m: 36, r2_m: 12, r3_m: 36 }, measured: { r1_m: 38, r2_m: 14, r3_m: 38 } },
+                    { rule_id: "R5.3", description_en: "Right turn radius for WB-15: R1=55m, R2=18m, R3=55m", status: "fail", required: { r1_m: 55, r2_m: 18, r3_m: 55 }, measured: { r1_m: 50, r2_m: 15, r3_m: 50 } },
+                    { rule_id: "R5.4", description_en: "Roundabout entry curve radius: 15-25m", status: "pass", required: { min_radius_m: 15, max_radius_m: 25 }, measured: { entry_radius_m: 20 } },
+                    { rule_id: "R5.5", description_en: "Roundabout exit curve radius: 20-40m", status: "pass", required: { min_radius_m: 20, max_radius_m: 40 }, measured: { exit_radius_m: 30 } }
+                ]
+            },
+            {
+                article_id: "R6", title_en: "Gradient", title_ar: "الميل الطولي", article_pass: true, rule_results: [
+                    { rule_id: "R6.1", description_en: "Maximum grade for freeways (flat terrain): 3.0%", status: "pass", required: { max_grade_percent: 3.0 }, measured: { grade_percent: 2.50 } },
+                    { rule_id: "R6.2", description_en: "Maximum grade for urban streets: 6.0%", status: "pass", required: { max_grade_percent: 6.0 }, measured: { grade_percent: 5.00 } },
+                    { rule_id: "R6.3", description_en: "Minimum grade for drainage: 0.3%", status: "pass", required: { min_grade_percent: 0.3 }, measured: { grade_percent: 0.50 } },
+                    { rule_id: "R6.4", description_en: "Maximum ramp upgrade: 5.0%", status: "pass", required: { max_grade_percent: 5.0 }, measured: { grade_percent: 4.50 } },
+                    { rule_id: "R6.5", description_en: "Maximum ramp downgrade: 6.0%", status: "pass", required: { max_grade_percent: 6.0 }, measured: { grade_percent: 5.50 } }
+                ]
+            },
+            {
+                article_id: "R7", title_en: "Sight Distance", title_ar: "مسافة الرؤية", article_pass: true, rule_results: [
+                    { rule_id: "R7.1", description_en: "Stopping sight distance by design speed", status: "pass", required: { min_ssd_m: 185 }, measured: { ssd_m: 200 } },
+                    { rule_id: "R7.2", description_en: "Passing sight distance for two-lane roads", status: "pass", required: { min_psd_m: 670 }, measured: { psd_m: 700 } }
+                ]
+            },
+            {
+                article_id: "R8", title_en: "Cross Slope", title_ar: "الميل العرضي", article_pass: false, rule_results: [
+                    { rule_id: "R8.1", description_en: "Travel lane cross slope: 1.5-2.5%", status: "pass", required: { min_slope_percent: 1.5, max_slope_percent: 2.5 }, measured: { cross_slope_percent: 2.00 } },
+                    { rule_id: "R8.2", description_en: "Paved shoulder cross slope: 2.0-5.0%", status: "pass", required: { min_slope_percent: 2.0, max_slope_percent: 5.0 }, measured: { cross_slope_percent: 3.00 } },
+                    { rule_id: "R8.3", description_en: "Maximum superelevation for rural freeways: 8.0%", status: "fail", required: { max_slope_percent: 8.0 }, measured: { superelevation_percent: 9.00 } },
+                    { rule_id: "R8.4", description_en: "Maximum superelevation for sand area roads: 5.0%", status: "pass", required: { max_slope_percent: 5.0 }, measured: { superelevation_percent: 4.50 } }
+                ]
+            },
+            {
+                article_id: "R9", title_en: "Pedestrian Facilities", title_ar: "مرافق المشاة", article_pass: true, rule_results: [
+                    { rule_id: "R9.1", description_en: "Minimum sidewalk clear width: 2.0m", status: "pass", required: { min_width_m: 2.0 }, measured: { sidewalk_width_m: 2.50 } },
+                    { rule_id: "R9.2", description_en: "Sidewalk width for Boulevard: 2.5-4.0m", status: "pass", required: { min_width_m: 2.5, max_width_m: 4.0 }, measured: { sidewalk_width_m: 3.00 } },
+                    { rule_id: "R9.3", description_en: "Maximum pedestrian ramp gradient: 8.3% (1:12)", status: "pass", required: { max_slope_percent: 8.3 }, measured: { ramp_gradient_percent: 8.00 } },
+                    { rule_id: "R9.4", description_en: "Maximum pedestrian ramp cross slope: 2.0%", status: "pass", required: { max_slope_percent: 2.0 }, measured: { cross_slope_percent: 1.50 } },
+                    { rule_id: "R9.5", description_en: "Maximum pedestrian crossing spacing: 150m", status: "pass", required: { max_spacing_m: 150 }, measured: { crossing_spacing_m: 120 } },
+                    { rule_id: "R9.6", description_en: "Kerb height for Boulevard/Avenue: 150mm", status: "pass", required: { height_mm: 150 }, measured: { kerb_height_mm: 150 } },
+                    { rule_id: "R9.7", description_en: "Kerb height for Streets/Access: 100mm", status: "pass", required: { height_mm: 100 }, measured: { kerb_height_mm: 100 } }
+                ]
+            },
+            {
+                article_id: "R10", title_en: "Intersection Design", title_ar: "تصميم التقاطعات", article_pass: false, rule_results: [
+                    { rule_id: "R10.1", description_en: "Corner radius for passenger car (90°): min 6.0m", status: "pass", required: { min_radius_m: 6.0 }, measured: { corner_radius_m: 7.00 } },
+                    { rule_id: "R10.2", description_en: "Corner radius for single unit truck (90°): min 12.0m", status: "fail", required: { min_radius_m: 12.0 }, measured: { corner_radius_m: 10.50 } },
+                    { rule_id: "R10.3", description_en: "Corner radius for WB-15 (90°): min 18.0m", status: "pass", required: { min_radius_m: 18.0 }, measured: { corner_radius_m: 20.00 } },
+                    { rule_id: "R10.4", description_en: "Intersection sight distance", status: "pass", required: { min_isd_m: 160 }, measured: { isd_m: 180 } }
+                ]
+            },
+            {
+                article_id: "R11", title_en: "Right-of-Way", title_ar: "حرم الطريق", article_pass: true, rule_results: [
+                    { rule_id: "R11.1", description_en: "ROW width for rural truck routes: min 36.0m", status: "pass", required: { min_width_m: 36.0 }, measured: { row_width_m: 40.00 } },
+                    { rule_id: "R11.2", description_en: "ROW width for Boulevard: min 40.0m", status: "pass", required: { min_width_m: 40.0 }, measured: { row_width_m: 50.00 } },
+                    { rule_id: "R11.3", description_en: "ROW width for Avenue: min 30.0m", status: "pass", required: { min_width_m: 30.0 }, measured: { row_width_m: 40.00 } },
+                    { rule_id: "R11.4", description_en: "ROW width for Street: min 20.0m", status: "pass", required: { min_width_m: 20.0 }, measured: { row_width_m: 25.00 } }
+                ]
+            },
+            {
+                article_id: "R12", title_en: "Ramp Design", title_ar: "تصميم الرامب", article_pass: true, rule_results: [
+                    { rule_id: "R12.1", description_en: "Deceleration lane length by highway speed", status: "pass", required: { min_length_m: 170 }, measured: { decel_length_m: 180 } },
+                    { rule_id: "R12.2", description_en: "Acceleration lane length by highway speed", status: "pass", required: { min_length_m: 415 }, measured: { accel_length_m: 450 } },
+                    { rule_id: "R12.3", description_en: "Exit ramp divergence angle: 2.0-5.0°", status: "pass", required: { min_angle_deg: 2.0, max_angle_deg: 5.0 }, measured: { divergence_angle_deg: 4.00 } },
+                    { rule_id: "R12.4", description_en: "Minimum deceleration lane length: 140m", status: "pass", required: { min_length_m: 140 }, measured: { decel_length_m: 150 } }
+                ]
+            },
+            {
+                article_id: "R13", title_en: "Roundabout Design", title_ar: "تصميم الدوار", article_pass: true, rule_results: [
+                    { rule_id: "R13.1", description_en: "Minimum central island radius (non-mountable): 10.0m", status: "pass", required: { min_radius_m: 10.0 }, measured: { island_radius_m: 12.00 } },
+                    { rule_id: "R13.2", description_en: "Truck apron width (if required): 2.0-3.0m", status: "pass", required: { min_width_m: 2.0, max_width_m: 3.0 }, measured: { apron_width_m: 2.50 } },
+                    { rule_id: "R13.3", description_en: "Minimum splitter island nose radius: 0.3m", status: "pass", required: { min_radius_m: 0.3 }, measured: { nose_radius_m: 0.50 } }
+                ]
+            },
+            {
+                article_id: "R14", title_en: "Parking Design", title_ar: "تصميم المواقف", article_pass: true, rule_results: [
+                    { rule_id: "R14.1", description_en: "90° parking stall: 2.5m × 5.5m, aisle 6.0m", status: "pass", required: { stall_width_m: 2.5, stall_length_m: 5.5, aisle_width_m: 6.0 }, measured: { stall_width_m: 2.60, stall_length_m: 5.60, aisle_width_m: 6.20 } },
+                    { rule_id: "R14.2", description_en: "60° parking stall: 2.5m × 5.5m, aisle 5.0m", status: "pass", required: { stall_width_m: 2.5, stall_length_m: 5.5, aisle_width_m: 5.0 }, measured: { stall_width_m: 2.55, stall_length_m: 5.55, aisle_width_m: 5.20 } },
+                    { rule_id: "R14.3", description_en: "45° parking stall: 2.5m × 5.5m, aisle 4.0m", status: "pass", required: { stall_width_m: 2.5, stall_length_m: 5.5, aisle_width_m: 4.0 }, measured: { stall_width_m: 2.55, stall_length_m: 5.55, aisle_width_m: 4.20 } },
+                    { rule_id: "R14.4", description_en: "Parallel parking stall: 2.5m × 6.5m, aisle 3.5m", status: "pass", required: { stall_width_m: 2.5, stall_length_m: 6.5, aisle_width_m: 3.5 }, measured: { stall_width_m: 2.55, stall_length_m: 6.60, aisle_width_m: 3.60 } },
+                    { rule_id: "R14.5", description_en: "Accessible parking stall: 3.6m × 5.5m, aisle 6.0m", status: "pass", required: { stall_width_m: 3.6, stall_length_m: 5.5, aisle_width_m: 6.0 }, measured: { stall_width_m: 3.70, stall_length_m: 5.60, aisle_width_m: 6.20 } }
+                ]
+            }
+        ];
+
+        const rows = (articles.length > 0 ? articles : ROADS_FALLBACK).map(a => {
             const rules = a.rule_results || a.rules || [];
             return {
                 title: `${a.article_id}: ${a.title_en || a.article_name || 'Infrastructure Article'}`,

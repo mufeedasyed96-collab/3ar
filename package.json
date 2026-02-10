@@ -1,15 +1,12 @@
 {
   "name": "dwg-schema-validator",
   "version": "1.0.0",
-  "description": "Backend system for validating DWG architectural schemas with Python + Node.js",
+  "description": "Backend system for validating DWG architectural schemas with Node.js",
   "main": "index.js",
   "scripts": {
-    "validate": "python-core\\venv\\Scripts\\python.exe python-core\\cli_validate_json.py",
     "api": "node index.js",
     "api:dev": "nodemon index.js",
-    "dev": "nodemon index.js",
-    "test": "python-core\\venv\\Scripts\\python.exe python-core\\tools\\test_sample_elements.py",
-    "validate:dxf": "python-core\\venv\\Scripts\\python.exe python-core\\cli_validate_json.py --dxf"
+    "dev": "nodemon index.js"
   },
   "keywords": [
     "dwg",
